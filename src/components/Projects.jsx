@@ -7,7 +7,15 @@ import { Section, SectionHeading } from "./ui/Section";
 
 function ProjectCard({ project }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_24px_70px_-40px_var(--c-glow)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_24px_70px_-40px_var(--c-glow)]">
+      {/* Capability demo, not client work — labelled so the two can't be
+          confused by someone scanning the grid. */}
+      {project.demo && (
+        <span className="absolute top-3 right-3 z-10 rounded-full border border-white/20 bg-black/70 px-2.5 py-1 font-display text-[11px] font-semibold tracking-wide text-white backdrop-blur-sm">
+          Demo
+        </span>
+      )}
+
       <ProjectThumb
         src={resolveProjectImage(project)}
         alt={project.title}

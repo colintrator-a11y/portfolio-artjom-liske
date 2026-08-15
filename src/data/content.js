@@ -39,6 +39,9 @@ export const award = "Preferred Freelancer of the Quarter";
  * `image`: optional explicit override, for a `/public` path or a remote URL.
  *          Leave `null` to use slug-based auto-discovery.
  * `tint`:  hue (0–360) for the generated placeholder shown until an image exists.
+ * `demo`:  true for capability demos built to show what's possible, rather
+ *          than work delivered for a client. Renders a "Demo" badge on the
+ *          card so the two are never confused. Delete the flag to drop it.
  */
 export const projects = [
   {
@@ -112,6 +115,40 @@ export const projects = [
     tint: 44,
     slug: "wordpress-design",
     image: null,
+  },
+
+  /* ── Chatbot demos ──────────────────────────────────────────────────────
+     Built to show what a messaging bot can do, not delivered for a client.
+     The `demo: true` flag puts a badge on the card so that stays obvious. */
+  {
+    title: "Telegram Order & Support Bot",
+    description:
+      "Tracks orders, starts returns, and hands off to a person — inline keyboards so customers tap instead of type.",
+    tags: ["Telegram Bot API", "Node.js"],
+    tint: 205,
+    slug: "telegram-order-bot",
+    image: null,
+    demo: true,
+  },
+  {
+    title: "WhatsApp Appointment Booking Bot",
+    description:
+      "Offers real availability, books the slot, and sets a reminder — the whole booking without leaving the chat.",
+    tags: ["WhatsApp Cloud API", "Node.js"],
+    tint: 145,
+    slug: "whatsapp-booking-bot",
+    image: null,
+    demo: true,
+  },
+  {
+    title: "Multi-Channel Bot with Live Agent Handover",
+    description:
+      "One inbox for Telegram and WhatsApp. The bot answers what it can and escalates the rest with the full transcript attached.",
+    tags: ["Telegram", "WhatsApp", "React.js"],
+    tint: 262,
+    slug: "chatbot-handover",
+    image: null,
+    demo: true,
   },
 ];
 

@@ -36,6 +36,18 @@ falls back to an openly-licensed stand-in photo in `src/assets/covers/`. See
 
 The portrait in the About section is `src/assets/avatar.webp`.
 
+#### Chatbot demos
+
+The last three cards are **capability demos, not client work** — chat interfaces
+built to show what a Telegram/WhatsApp bot can do. Their images are real
+screenshots of those interfaces, and each card carries a **"Demo"** badge so
+they can't be mistaken for delivered projects.
+
+The badge is driven by `demo: true` in `src/data/content.js`. Remove the flag to
+drop the badge, or delete the three entries to drop the demos entirely. The
+interface source lives outside the app; regenerate by re-screenshotting at
+1600x900 and dropping the result into `src/assets/projects/`.
+
 ### Replacing a project image
 
 Drop a file into `src/assets/projects/` named after the project's `slug`:
@@ -56,6 +68,9 @@ It replaces whatever was there — no code change, and the dev server hot-reload
 | `vassalli.*`         | Product Listing — Vassalli  *(no real shot yet)*    |
 | `ecommerce.*`        | eCommerce Website                                   |
 | `wordpress-design.*` | WordPress Website Design                            |
+| `telegram-order-bot.*`   | Telegram Order & Support Bot  *(demo)*          |
+| `whatsapp-booking-bot.*` | WhatsApp Appointment Booking Bot  *(demo)*      |
+| `chatbot-handover.*`     | Multi-Channel Bot, Live Agent Handover  *(demo)*|
 
 Accepts `.webp` `.jpg` `.jpeg` `.png` `.avif`. Recommended **1600x900**.
 Images go through Vite, so they get content-hashed filenames and long-lived
