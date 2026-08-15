@@ -3,13 +3,16 @@ import { AnimatePresence, m } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
 
 import { nav } from "../data/content";
+// Small dedicated crop — the header paints above the fold, so it shouldn't
+// pull the full-size About portrait just to fill a 36px circle.
+import logo from "../assets/avatar-logo.webp";
 import { useScrolled } from "../hooks/useScrolled";
 import { useActiveSection } from "../hooks/useActiveSection";
 import Button from "./ui/Button";
 
 const SECTION_IDS = nav.map((n) => n.id);
 
-/** Wordmark "AL" in a bordered square. */
+/** Portrait mark + name. */
 function Logo() {
   return (
     <a
@@ -17,9 +20,18 @@ function Logo() {
       aria-label="Artjom Liske — back to top"
       className="group flex items-center gap-2.5"
     >
-      <span className="grid h-9 w-9 place-items-center rounded-lg border border-line-strong font-display text-sm font-bold tracking-tight transition-colors duration-200 group-hover:border-accent group-hover:text-accent">
-        AL
-      </span>
+      {/* Decorative: the link's aria-label and the name beside it already
+          identify this, so an alt here would just repeat itself. */}
+      <img
+        src={logo}
+        alt=""
+        width={128}
+        height={128}
+        // Eager + high priority: it's the first thing painted in the header.
+        fetchPriority="high"
+        decoding="async"
+        className="h-9 w-9 shrink-0 rounded-full border border-line-strong object-cover transition-colors duration-200 group-hover:border-accent"
+      />
       <span className="font-display text-sm font-semibold tracking-tight max-sm:sr-only">
         Artjom Liske
       </span>
