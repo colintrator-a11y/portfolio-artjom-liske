@@ -1,32 +1,62 @@
 /**
- * Slug-based screenshot auto-discovery.
+ * Thumbnail resolution for project cards.
  *
- * Any image dropped into `src/assets/projects/` is picked up at build time and
- * matched to a project by filename. Drop `vassalli.jpg` in that folder and the
- * project whose `slug` is "vassalli" starts using it — no code change needed.
+ * Two folders, in priority order:
  *
- * Going through Vite (rather than `/public`) means these get content-hashed
- * filenames and long-lived cache headers for free.
+ *   src/assets/projects/  — real screenshots. Drop `<slug>.jpg` here and it
+ *                           wins over everything below. This is where your
+ *                           actual product shots go.
+ *   src/assets/covers/    — illustrated cover art shipped with the site, one
+ *                           per project. These are ILLUSTRATIONS of the kind
+ *                           of interface each project is, not screenshots of
+ *                           the real product. They exist so the grid looks
+ *                           finished until real shots replace them.
+ *
+ * Both go through Vite, so everything gets content-hashed filenames and
+ * long-lived cache headers.
  */
-const files = import.meta.glob(
+const screenshots = import.meta.glob(
   "../assets/projects/*.{jpg,jpeg,png,webp,avif}",
   { eager: true, query: "?url", import: "default" },
 );
 
-// "../assets/projects/vassalli.jpg" → "vassalli"
-const bySlug = Object.fromEntries(
-  Object.entries(files).map(([path, url]) => [
-    path.split("/").pop().replace(/\.[^.]+$/, ""),
-    url,
-  ]),
-);
+const covers = import.meta.glob("../assets/covers/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+// "../assets/projects/vassalli.jpg" → { vassalli: "/assets/vassalli-abc123.jpg" }
+function index(modules) {
+  return Object.fromEntries(
+    Object.entries(modules)
+      // Sort so a slug matched by two extensions resolves deterministically.
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([path, url]) => [
+        path.split("/").pop().replace(/\.[^.]+$/, ""),
+        url,
+      ]),
+  );
+}
+
+const bySlug = index(screenshots);
+const coverBySlug = index(covers);
 
 /**
  * Resolves a project's thumbnail, in priority order:
- *   1. an explicit `image` override (a /public path or remote URL)
- *   2. `src/assets/projects/<slug>.<ext>`, if that file exists
- *   3. null — the caller falls back to the generated placeholder
+ *   1. an explicit `image` override (a /public path or a remote URL)
+ *   2. a real screenshot at `src/assets/projects/<slug>.<ext>`
+ *   3. the illustrated cover at `src/assets/covers/<slug>.svg`
+ *   4. null — the caller falls back to the generated initial placeholder
  */
 export function resolveProjectImage({ image, slug }) {
-  return image ?? bySlug[slug] ?? null;
+  return image ?? bySlug[slug] ?? coverBySlug[slug] ?? null;
+}
+
+/**
+ * True when the thumbnail is illustrated cover art rather than a real
+ * screenshot. Used to keep the alt text honest about what's being shown.
+ */
+export function isIllustratedCover({ image, slug }) {
+  return !image && !bySlug[slug] && Boolean(coverBySlug[slug]);
 }

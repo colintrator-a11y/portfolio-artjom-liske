@@ -22,10 +22,28 @@ npm run lint
 | **Colours / typography** | `src/index.css` — the token block at the top        |
 | **Project screenshots**  | drop files in `src/assets/projects/` — see below    |
 
-### Adding a project screenshot
+### Project images
 
-Projects ship with a generated placeholder — a tinted 16:9 block carrying the
-project initial. To use a real screenshot, **just drop the file in**:
+Each project ships with an **illustrated cover** in `src/assets/covers/` — an
+abstract drawing of the *kind* of interface that project is (a booking flow, a
+CMS, a check-in app, a product listing). They are deliberately graphic rather
+than photoreal.
+
+> **These are illustrations, not screenshots.** They are not pictures of the
+> real shipped products. They exist so the grid looks finished until real
+> screenshots replace them, and the alt text says "illustrated cover" so
+> assistive tech isn't told otherwise. Replace them with real screenshots
+> before the site goes in front of clients.
+
+Regenerate or restyle them with:
+
+```bash
+python3 scripts/generate-covers.py
+```
+
+### Adding a real screenshot
+
+A real screenshot always beats the illustrated cover — **just drop the file in**:
 
 ```
 src/assets/projects/vassalli.jpg
@@ -49,9 +67,12 @@ Accepts `.jpg` `.jpeg` `.png` `.webp` `.avif`. Recommended **1600×900**, under
 ~300 KB (`.webp` compresses best). Images go through Vite, so they get
 content-hashed filenames and long-lived cache headers for free.
 
-Only add the ones you have. Projects without a file keep their placeholder, so
-the grid looks deliberate either way. The `<img>` is lazy-loaded inside a locked
-16:9 box, so adding one causes **no layout shift**.
+Only add the ones you have. Projects without a screenshot keep their illustrated
+cover, so the grid looks deliberate either way. The `<img>` is lazy-loaded inside
+a locked 16:9 box, so adding one causes **no layout shift**.
+
+Resolution order, per project: explicit `image` field → `assets/projects/<slug>`
+→ `assets/covers/<slug>.svg` → generated initial block.
 
 For an image you'd rather host elsewhere, set an explicit `image` field on the
 project (a `/public` path or a remote URL) — it takes priority over the
@@ -66,8 +87,12 @@ No contact details are hard-coded anywhere. Point `CONTACT_URL` in
 ## Structure
 
 ```
+scripts/
+└── generate-covers.py     Regenerates the illustrated project covers
 src/
-├── assets/projects/       Drop project screenshots here (named by slug)
+├── assets/
+│   ├── covers/            Illustrated cover art (shipped, not screenshots)
+│   └── projects/          Drop real screenshots here — these win
 ├── data/
 │   ├── content.js         Single source of truth for all copy
 │   └── projectImages.js   Slug-based screenshot auto-discovery

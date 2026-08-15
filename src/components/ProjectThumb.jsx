@@ -1,16 +1,17 @@
 /**
  * Project thumbnail, locked to 16:9 so nothing shifts while loading.
  *
- * With no `src` it renders an intentional-looking placeholder: a tinted block
- * carrying the project initial. Pass a real screenshot path through the
- * project's `image` field in `data/content.js` to replace it.
+ * `illustrated` marks the image as cover art rather than a real screenshot —
+ * it only changes the alt text, so assistive tech isn't told a drawing of a
+ * booking flow is a photo of the shipped product. Drop a real screenshot into
+ * `src/assets/projects/<slug>.jpg` and it takes over, flag included.
  */
-export default function ProjectThumb({ src, alt, initial, tint }) {
+export default function ProjectThumb({ src, alt, initial, tint, illustrated }) {
   if (src) {
     return (
       <img
         src={src}
-        alt={alt}
+        alt={illustrated ? `${alt} — illustrated cover` : alt}
         loading="lazy"
         decoding="async"
         width={1600}

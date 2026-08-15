@@ -1,5 +1,5 @@
 import { projects } from "../data/content";
-import { resolveProjectImage } from "../data/projectImages";
+import { isIllustratedCover, resolveProjectImage } from "../data/projectImages";
 import ProjectThumb from "./ProjectThumb";
 import AwardBadge from "./ui/AwardBadge";
 import Reveal from "./ui/Reveal";
@@ -11,6 +11,7 @@ function ProjectCard({ project }) {
       <ProjectThumb
         src={resolveProjectImage(project)}
         alt={project.title}
+        illustrated={isIllustratedCover(project)}
         initial={project.title.charAt(0)}
         tint={project.tint}
       />
