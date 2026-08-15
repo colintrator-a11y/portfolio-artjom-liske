@@ -1,4 +1,5 @@
 import { projects } from "../data/content";
+import { resolveProjectImage } from "../data/projectImages";
 import ProjectThumb from "./ProjectThumb";
 import AwardBadge from "./ui/AwardBadge";
 import Reveal from "./ui/Reveal";
@@ -8,7 +9,7 @@ function ProjectCard({ project }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_24px_70px_-40px_var(--c-glow)]">
       <ProjectThumb
-        src={project.image}
+        src={resolveProjectImage(project)}
         alt={project.title}
         initial={project.title.charAt(0)}
         tint={project.tint}

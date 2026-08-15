@@ -31,10 +31,14 @@ export const award = "Preferred Freelancer of the Quarter";
 /**
  * Projects.
  *
- * `image`: leave as `null` to render the built-in placeholder (a tinted block
- * carrying the project initial). To use a real screenshot, drop a 16:9 file in
- * `/public/projects/` and set e.g. `image: "/projects/travel-booking.jpg"`.
- * `tint` is the hue (0–360) used by that placeholder.
+ * Screenshots are picked up automatically — drop a 16:9 image into
+ * `src/assets/projects/` named after the project's `slug` below
+ * (e.g. `travel-booking.jpg`) and it replaces the placeholder on save.
+ * Accepts .jpg / .jpeg / .png / .webp / .avif. See `data/projectImages.js`.
+ *
+ * `image`: optional explicit override, for a `/public` path or a remote URL.
+ *          Leave `null` to use slug-based auto-discovery.
+ * `tint`:  hue (0–360) for the generated placeholder shown until an image exists.
  */
 export const projects = [
   {
@@ -43,7 +47,8 @@ export const projects = [
       "End-to-end booking experience for travel and aviation, built mobile-first and shipped on an automated pipeline.",
     tags: ["React Native", "DevOps"],
     tint: 262,
-    image: null, // ← swap in "/projects/travel-booking.jpg"
+    slug: "travel-booking",
+    image: null,
   },
   {
     title: "Premium Aquarium Management & Corporate Site",
@@ -51,7 +56,8 @@ export const projects = [
       "Corporate site with a tailored CMS so the team can manage premium aquarium services without touching code.",
     tags: ["WordPress", "CMS"],
     tint: 196,
-    image: null, // ← swap in "/projects/aquarium.jpg"
+    slug: "aquarium",
+    image: null,
   },
   {
     title: "Real-Time Event Management & Check-In Platform",
@@ -59,7 +65,8 @@ export const projects = [
       "Live attendee check-in with instant sync between staff devices and the event dashboard.",
     tags: ["React Native", "JavaScript"],
     tint: 152,
-    image: null, // ← swap in "/projects/event-checkin.jpg"
+    slug: "event-checkin",
+    image: null,
   },
   {
     title: "Enneagram Profile Analysis — Personality Assessment Tool",
@@ -67,7 +74,8 @@ export const projects = [
       "Interactive assessment flow that scores answers and renders a clear, readable personality profile.",
     tags: ["JavaScript", "Vue.js"],
     tint: 24,
-    image: null, // ← swap in "/projects/enneagram.jpg"
+    slug: "enneagram",
+    image: null,
   },
   {
     title: "Autonomous AI Agent for Workflow Automation",
@@ -75,7 +83,8 @@ export const projects = [
       "An agent that runs multi-step business workflows on its own, with a React dashboard for oversight.",
     tags: ["Python", "React.js"],
     tint: 288,
-    image: null, // ← swap in "/projects/ai-agent.jpg"
+    slug: "ai-agent",
+    image: null,
   },
   {
     title: "Product Listing — Vassalli",
@@ -83,7 +92,8 @@ export const projects = [
       "Clean, organized Shopify product listing showcasing apparel with detailed descriptions, size options, and stylish visuals.",
     tags: ["Shopify", "WordPress"],
     tint: 340,
-    image: null, // ← swap in "/projects/vassalli.jpg"
+    slug: "vassalli",
+    image: null,
   },
   {
     title: "eCommerce Website",
@@ -91,7 +101,8 @@ export const projects = [
       "Custom storefront with a hand-built product and checkout flow, designed and developed end to end.",
     tags: ["PHP", "Graphic Design"],
     tint: 218,
-    image: null, // ← swap in "/projects/ecommerce.jpg"
+    slug: "ecommerce",
+    image: null,
   },
   {
     title: "WordPress Website Design",
@@ -99,7 +110,8 @@ export const projects = [
       "Hand-coded WordPress theme built for fast loading, clean markup, and easy editing.",
     tags: ["HTML", "WordPress"],
     tint: 44,
-    image: null, // ← swap in "/projects/wordpress-design.jpg"
+    slug: "wordpress-design",
+    image: null,
   },
 ];
 

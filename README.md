@@ -20,21 +20,42 @@ npm run lint
 | **All copy**             | `src/data/content.js` — every string on the page    |
 | **Contact link**         | `src/components/Contact.jsx` → `CONTACT_URL`        |
 | **Colours / typography** | `src/index.css` — the token block at the top        |
-| **Project screenshots**  | `public/projects/` + the `image` field per project  |
+| **Project screenshots**  | drop files in `src/assets/projects/` — see below    |
 
 ### Adding a project screenshot
 
 Projects ship with a generated placeholder — a tinted 16:9 block carrying the
-project initial. To use a real screenshot:
+project initial. To use a real screenshot, **just drop the file in**:
 
-1. Drop a 16:9 image into `public/projects/`.
-2. Set that project's `image` field in `src/data/content.js`:
-   ```js
-   image: "/projects/vassalli.jpg",
-   ```
+```
+src/assets/projects/vassalli.jpg
+```
 
-The `<img>` is lazy-loaded with explicit `width`/`height`, so swapping a
-placeholder for a real image causes no layout shift.
+Name it after the project's `slug` in `src/data/content.js` and it replaces the
+placeholder automatically — no code change. The dev server hot-reloads it.
+
+| Filename             | Project                                             |
+| -------------------- | --------------------------------------------------- |
+| `travel-booking.*`   | Travel Booking & Digital Aviation Platform          |
+| `aquarium.*`         | Premium Aquarium Management & Corporate Site        |
+| `event-checkin.*`    | Real-Time Event Management & Check-In Platform      |
+| `enneagram.*`        | Enneagram Profile Analysis — Personality Assessment |
+| `ai-agent.*`         | Autonomous AI Agent for Workflow Automation         |
+| `vassalli.*`         | Product Listing — Vassalli                          |
+| `ecommerce.*`        | eCommerce Website                                   |
+| `wordpress-design.*` | WordPress Website Design                            |
+
+Accepts `.jpg` `.jpeg` `.png` `.webp` `.avif`. Recommended **1600×900**, under
+~300 KB (`.webp` compresses best). Images go through Vite, so they get
+content-hashed filenames and long-lived cache headers for free.
+
+Only add the ones you have. Projects without a file keep their placeholder, so
+the grid looks deliberate either way. The `<img>` is lazy-loaded inside a locked
+16:9 box, so adding one causes **no layout shift**.
+
+For an image you'd rather host elsewhere, set an explicit `image` field on the
+project (a `/public` path or a remote URL) — it takes priority over the
+filename lookup.
 
 ### The one thing to fill in
 
@@ -46,7 +67,10 @@ No contact details are hard-coded anywhere. Point `CONTACT_URL` in
 
 ```
 src/
-├── data/content.js        Single source of truth for all copy
+├── assets/projects/       Drop project screenshots here (named by slug)
+├── data/
+│   ├── content.js         Single source of truth for all copy
+│   └── projectImages.js   Slug-based screenshot auto-discovery
 ├── hooks/
 │   ├── useTheme.js        Dark/light in React state (no localStorage)
 │   ├── useScrolled.js     Drives the condensing sticky header
