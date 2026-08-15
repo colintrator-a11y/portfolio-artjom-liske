@@ -24,33 +24,27 @@ npm run lint
 
 ### Project images
 
-Each project ships with an **illustrated cover** in `src/assets/covers/` — an
-abstract drawing of the *kind* of interface that project is (a booking flow, a
-CMS, a check-in app, a product listing). They are deliberately graphic rather
-than photoreal.
+Seven of the eight cards use **real screenshots of the delivered work**, in
+`src/assets/projects/`. They were extracted from a screenshot of the Workana
+profile, so their source resolution is only ~166x100 — they read fine at card
+size but are visibly soft. **Replacing them with full-size exports is the single
+biggest visual upgrade available.**
 
-> **These are illustrations, not screenshots.** They are not pictures of the
-> real shipped products. They exist so the grid looks finished until real
-> screenshots replace them, and the alt text says "illustrated cover" so
-> assistive tech isn't told otherwise. Replace them with real screenshots
-> before the site goes in front of clients.
+`Product Listing — Vassalli` has no screenshot on the Workana profile, so it
+falls back to an openly-licensed stand-in photo in `src/assets/covers/`. See
+[src/assets/covers/CREDITS.md](src/assets/covers/CREDITS.md).
 
-Regenerate or restyle them with:
+The portrait in the About section is `src/assets/avatar.webp`.
 
-```bash
-python3 scripts/generate-covers.py
-```
+### Replacing a project image
 
-### Adding a real screenshot
-
-A real screenshot always beats the illustrated cover — **just drop the file in**:
+Drop a file into `src/assets/projects/` named after the project's `slug`:
 
 ```
 src/assets/projects/vassalli.jpg
 ```
 
-Name it after the project's `slug` in `src/data/content.js` and it replaces the
-placeholder automatically — no code change. The dev server hot-reloads it.
+It replaces whatever was there — no code change, and the dev server hot-reloads.
 
 | Filename             | Project                                             |
 | -------------------- | --------------------------------------------------- |
@@ -59,40 +53,32 @@ placeholder automatically — no code change. The dev server hot-reloads it.
 | `event-checkin.*`    | Real-Time Event Management & Check-In Platform      |
 | `enneagram.*`        | Enneagram Profile Analysis — Personality Assessment |
 | `ai-agent.*`         | Autonomous AI Agent for Workflow Automation         |
-| `vassalli.*`         | Product Listing — Vassalli                          |
+| `vassalli.*`         | Product Listing — Vassalli  *(no real shot yet)*    |
 | `ecommerce.*`        | eCommerce Website                                   |
 | `wordpress-design.*` | WordPress Website Design                            |
 
-Accepts `.jpg` `.jpeg` `.png` `.webp` `.avif`. Recommended **1600×900**, under
-~300 KB (`.webp` compresses best). Images go through Vite, so they get
-content-hashed filenames and long-lived cache headers for free.
-
-Only add the ones you have. Projects without a screenshot keep their illustrated
-cover, so the grid looks deliberate either way. The `<img>` is lazy-loaded inside
-a locked 16:9 box, so adding one causes **no layout shift**.
+Accepts `.webp` `.jpg` `.jpeg` `.png` `.avif`. Recommended **1600x900**.
+Images go through Vite, so they get content-hashed filenames and long-lived
+cache headers. The `<img>` is lazy-loaded inside a locked 16:9 box, so swapping
+one causes **no layout shift**.
 
 Resolution order, per project: explicit `image` field → `assets/projects/<slug>`
-→ `assets/covers/<slug>.svg` → generated initial block.
+→ `assets/covers/<slug>` → generated initial block.
 
-For an image you'd rather host elsewhere, set an explicit `image` field on the
-project (a `/public` path or a remote URL) — it takes priority over the
-filename lookup.
+#### Getting sharp originals
 
-### The one thing to fill in
-
-No contact details are hard-coded anywhere. Point `CONTACT_URL` in
-`src/components/Contact.jsx` at a mailto, booking page, or profile — every
-"Hire me" / "Get in touch" button on the site routes there.
+Workana serves portfolio images from `workana.s3.amazonaws.com` via time-limited
+signed URLs. On your own profile, right-click a portfolio image → **Copy image
+address**, and that URL downloads the full-resolution original (valid ~6 hours).
 
 ## Structure
 
 ```
-scripts/
-└── generate-covers.py     Regenerates the illustrated project covers
 src/
 ├── assets/
-│   ├── covers/            Illustrated cover art (shipped, not screenshots)
-│   └── projects/          Drop real screenshots here — these win
+│   ├── avatar.webp        Portrait used in the About section
+│   ├── covers/            Licensed stand-ins for projects with no screenshot
+│   └── projects/          Real screenshots — these win
 ├── data/
 │   ├── content.js         Single source of truth for all copy
 │   └── projectImages.js   Slug-based screenshot auto-discovery

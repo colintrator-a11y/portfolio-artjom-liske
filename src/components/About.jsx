@@ -1,6 +1,8 @@
 import { Languages, MessageSquare } from "lucide-react";
 
-import { about } from "../data/content";
+import { about, hero } from "../data/content";
+// Portrait lives in src/assets so Vite hashes and cache-busts it.
+import avatar from "../assets/avatar.webp";
 import Reveal from "./ui/Reveal";
 import { Section, SectionHeading } from "./ui/Section";
 
@@ -10,8 +12,18 @@ export default function About() {
       <SectionHeading eyebrow="About" title="Who you'd be working with." />
 
       <div className="grid gap-10 md:grid-cols-2 md:gap-14">
-        {/* Bio */}
+        {/* Portrait + bio */}
         <Reveal>
+          <img
+            src={avatar}
+            alt={`Portrait of ${hero.name}`}
+            width={640}
+            height={640}
+            loading="lazy"
+            decoding="async"
+            className="mb-7 h-24 w-24 rounded-full border border-line object-cover sm:h-28 sm:w-28"
+          />
+
           <p className="font-display text-xl leading-relaxed font-medium tracking-tight sm:text-2xl">
             {about.bio}
           </p>

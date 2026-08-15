@@ -1,17 +1,17 @@
 /**
  * Project thumbnail, locked to 16:9 so nothing shifts while loading.
  *
- * `illustrated` marks the image as cover art rather than a real screenshot —
- * it only changes the alt text, so assistive tech isn't told a drawing of a
- * booking flow is a photo of the shipped product. Drop a real screenshot into
- * `src/assets/projects/<slug>.jpg` and it takes over, flag included.
+ * `illustrated` marks the image as a stand-in stock photo rather than a real
+ * screenshot — it only changes the alt text, so assistive tech isn't told a
+ * photo of an aeroplane wing is the booking product itself. Drop a real
+ * screenshot into `src/assets/projects/<slug>.jpg` and it takes over.
  */
 export default function ProjectThumb({ src, alt, initial, tint, illustrated }) {
   if (src) {
     return (
       <img
         src={src}
-        alt={illustrated ? `${alt} — illustrated cover` : alt}
+        alt={illustrated ? `${alt} — representative image, not a screenshot` : alt}
         loading="lazy"
         decoding="async"
         width={1600}
