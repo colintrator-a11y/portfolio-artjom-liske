@@ -17,7 +17,8 @@ npm run lint
 
 | What                     | Where                                              |
 | ------------------------ | -------------------------------------------------- |
-| **All copy**             | `src/data/content.js` — every string on the page    |
+| **All copy**             | `src/i18n/{en,pt,es}.js` — one file per language     |
+| **Structure**            | `src/data/content.js` — slugs, tags, icons, levels   |
 | **Contact link**         | `src/components/Contact.jsx` → `CONTACT_URL`        |
 | **Colours / typography** | `src/index.css` — the token block at the top        |
 | **Project screenshots**  | drop files in `src/assets/projects/` — see below    |
@@ -86,6 +87,32 @@ Workana serves portfolio images from `workana.s3.amazonaws.com` via time-limited
 signed URLs. On your own profile, right-click a portfolio image → **Copy image
 address**, and that URL downloads the full-resolution original (valid ~6 hours).
 
+## Languages
+
+The site ships in **English, Portuguese and Spanish**, switched by the EN/PT/ES
+control in the header (and inside the mobile drawer). Like the theme, the choice
+lives in React state only — no `localStorage`.
+
+Switching also updates `<html lang>`, `document.title` and the meta description,
+so assistive tech and shared links get the right language.
+
+Copy and structure are kept apart on purpose:
+
+- `src/data/content.js` — everything identical across languages: project slugs,
+  tech tags, icon names, skill levels, placeholder hues.
+- `src/i18n/en.js`, `pt.js`, `es.js` — every translatable string, keyed by those
+  same ids. `en.js` is the reference; the other two mirror its shape.
+
+`useContent()` merges the two. So adding a project means one entry in
+`content.js` plus one block in each locale file — and a forgotten translation
+shows up as an undefined title rather than silently falling back to English.
+
+To add a language: drop in `src/i18n/<code>.js` copied from `en.js`, then
+register it in `src/i18n/locales.js`. The switcher picks it up automatically.
+
+Product names (JavaScript, WordPress, React Native…) are deliberately left
+untranslated.
+
 ## Structure
 
 ```
@@ -94,15 +121,21 @@ src/
 │   ├── avatar.webp        Portrait used in the About section
 │   ├── covers/            Licensed stand-ins for projects with no screenshot
 │   └── projects/          Real screenshots — these win
+├── i18n/
+│   ├── en.js pt.js es.js  Translatable copy, one file per language
+│   ├── locales.js         Language registry used by the switcher
+│   ├── context.js         useI18n() + useContent() merge hook
+│   └── I18nProvider.jsx   Holds the active language in state
 ├── data/
-│   ├── content.js         Single source of truth for all copy
+│   ├── content.js         Language-independent structure
 │   └── projectImages.js   Slug-based screenshot auto-discovery
 ├── hooks/
 │   ├── useTheme.js        Dark/light in React state (no localStorage)
 │   ├── useScrolled.js     Drives the condensing sticky header
 │   └── useActiveSection.js  IntersectionObserver nav highlighting
 ├── components/
-│   ├── Header.jsx         Sticky nav, theme toggle, mobile drawer
+│   ├── Header.jsx         Sticky nav, theme + language toggles, drawer
+│   ├── LanguageSwitcher.jsx  EN / PT / ES segmented control
 │   ├── Hero.jsx           Name, tagline, availability badge, stats
 │   ├── Projects.jsx       Project grid + award badge
 │   ├── ProjectThumb.jsx   Real screenshot or generated placeholder
@@ -119,6 +152,7 @@ src/
 
 - **Theme** — dark by default, toggled in React state and written to a `.dark`
   class on `<html>`. No `localStorage`/`sessionStorage` anywhere.
+- **Languages** — EN/PT/ES, also state-only; see the Languages section above.
 - **Accessibility** — skip link, keyboard-reachable nav, visible focus rings,
   `aria-current` on the active section, Escape/scroll-lock on the mobile drawer.
   Skill levels are visible labels rather than hover-only text. All text pairs

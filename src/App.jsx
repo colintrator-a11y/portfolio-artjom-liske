@@ -9,6 +9,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { useTheme } from "./hooks/useTheme";
+import I18nProvider from "./i18n/I18nProvider";
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
@@ -17,19 +18,21 @@ export default function App() {
     /* LazyMotion + the `m` component ships only the animation features this
        site actually uses, keeping the Framer Motion payload small.
        `strict` fails loudly in dev if a full `motion.*` component sneaks in. */
-    <LazyMotion features={domAnimation} strict>
-      <Header theme={theme} toggleTheme={toggleTheme} />
+    <I18nProvider>
+      <LazyMotion features={domAnimation} strict>
+        <Header theme={theme} toggleTheme={toggleTheme} />
 
-      <main id="main">
-        <Hero />
-        <Projects />
-        <Services />
-        <Skills />
-        <About />
-        <Contact />
-      </main>
+        <main id="main">
+          <Hero />
+          <Projects />
+          <Services />
+          <Skills />
+          <About />
+          <Contact />
+        </main>
 
-      <Footer />
-    </LazyMotion>
+        <Footer />
+      </LazyMotion>
+    </I18nProvider>
   );
 }

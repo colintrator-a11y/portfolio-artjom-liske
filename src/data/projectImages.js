@@ -33,7 +33,10 @@ function index(modules) {
       // Sort so a slug matched by two extensions resolves deterministically.
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([path, url]) => [
-        path.split("/").pop().replace(/\.[^.]+$/, ""),
+        path
+          .split("/")
+          .pop()
+          .replace(/\.[^.]+$/, ""),
         url,
       ]),
   );

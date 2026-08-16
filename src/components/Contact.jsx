@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import Button from "./ui/Button";
+import { useI18n } from "../i18n";
 import AwardBadge from "./ui/AwardBadge";
 import Reveal from "./ui/Reveal";
 import { Section } from "./ui/Section";
@@ -23,6 +24,8 @@ import { Section } from "./ui/Section";
 const CONTACT_URL = "#";
 
 export default function Contact() {
+  const { t } = useI18n();
+
   return (
     <Section id="contact">
       <Reveal>
@@ -39,25 +42,24 @@ export default function Contact() {
 
           <div className="relative">
             <p className="font-display text-xs font-semibold tracking-[0.2em] text-accent uppercase">
-              Contact
+              {t.sections.contact.eyebrow}
             </p>
 
             <h2 className="mx-auto mt-5 max-w-2xl text-3xl leading-[1.1] font-bold sm:text-4xl md:text-5xl">
-              Have a project in mind?
+              {t.sections.contact.title}
             </h2>
 
             <p className="mx-auto mt-5 max-w-lg leading-relaxed text-muted sm:text-lg">
-              Tell me what you're building and what it needs to do. I'll come
-              back with honest timings and a clear plan — no surprises.
+              {t.sections.contact.lead}
             </p>
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Button href={CONTACT_URL}>
-                Hire me
+                {t.ui.hireMe}
                 <ArrowUpRight size={16} aria-hidden="true" />
               </Button>
               <Button href="#work" variant="ghost">
-                See the work first
+                {t.ui.seeWorkFirst}
               </Button>
             </div>
 

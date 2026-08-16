@@ -1,10 +1,13 @@
 import { ArrowDown } from "lucide-react";
 
 import { hero } from "../data/content";
+import { useContent } from "../i18n";
 import Button from "./ui/Button";
 import Reveal from "./ui/Reveal";
 
 export default function Hero() {
+  const { t } = useContent();
+
   return (
     <section id="top" className="relative overflow-hidden">
       {/* Decorative grid + accent wash; purely visual. */}
@@ -23,11 +26,11 @@ export default function Hero() {
             <span aria-hidden="true" className="text-sm leading-none">
               {hero.flag}
             </span>
-            {hero.location}
+            {t.hero.location}
             <span aria-hidden="true" className="text-line-strong">
               ·
             </span>
-            {hero.availability}
+            {t.hero.availability}
           </p>
         </Reveal>
 
@@ -39,28 +42,28 @@ export default function Hero() {
 
         <Reveal delay={0.14}>
           <p className="mt-5 font-display text-lg font-medium tracking-tight text-muted sm:text-xl">
-            {hero.role}
+            {t.hero.role}
             <span aria-hidden="true" className="mx-2.5 text-accent">
               ·
             </span>
-            {hero.years}
+            {t.hero.years}
           </p>
         </Reveal>
 
         <Reveal delay={0.2}>
           <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg md:text-xl">
-            {hero.tagline}
+            {t.hero.tagline}
           </p>
         </Reveal>
 
         <Reveal delay={0.26}>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button href="#work">
-              View my work
+              {t.ui.viewWork}
               <ArrowDown size={16} aria-hidden="true" />
             </Button>
             <Button href="#contact" variant="ghost">
-              Get in touch
+              {t.ui.getInTouch}
             </Button>
           </div>
         </Reveal>
@@ -69,14 +72,14 @@ export default function Hero() {
         <Reveal delay={0.34}>
           <dl className="mt-16 grid max-w-2xl grid-cols-3 gap-px overflow-hidden rounded-2xl border border-line bg-line md:mt-20">
             {hero.stats.map((stat) => (
-              <div key={stat.label} className="bg-bg px-4 py-6 sm:px-6">
-                <dt className="sr-only">{stat.label}</dt>
+              <div key={stat.id} className="bg-bg px-4 py-6 sm:px-6">
+                <dt className="sr-only">{t.hero.stats[stat.id]}</dt>
                 <dd>
                   <span className="block font-display text-2xl font-bold tracking-tight sm:text-3xl">
                     {stat.value}
                   </span>
                   <span className="mt-1 block text-xs text-muted sm:text-sm">
-                    {stat.label}
+                    {t.hero.stats[stat.id]}
                   </span>
                 </dd>
               </div>

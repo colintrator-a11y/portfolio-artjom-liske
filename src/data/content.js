@@ -1,191 +1,109 @@
 /**
- * Single source of truth for every piece of copy on the site.
- * Edit here — components stay untouched.
+ * Language-independent structure.
+ *
+ * Everything here is the same in every language — ids, slugs, tech tags,
+ * placeholder hues, icon names, years of experience. All translatable copy
+ * lives in `src/i18n/{en,pt,es}.js`, keyed by the ids below, and the two are
+ * merged by `useContent()`.
+ *
+ * Adding a project = add an entry here + one block in each locale file.
  */
 
-export const nav = [
-  { id: "work", label: "Work" },
-  { id: "skills", label: "Skills" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
-];
+/** Nav order. Each id is both the section anchor and the key in `t.nav`. */
+export const navIds = ["work", "skills", "about", "contact"];
 
+/** Not translated — a name, a flag, and three numbers. */
 export const hero = {
   name: "Artjom Liske",
-  role: "Front-end Developer",
-  years: "10+ years",
-  tagline:
-    "I build websites and apps that are fast, beautiful, and easy to use — the kind that make your clients stay, come back, and buy.",
   flag: "🇩🇪",
-  location: "Germany",
-  availability: "Available for freelance",
   stats: [
-    { value: "10+", label: "years experience" },
-    { value: "20+", label: "projects delivered" },
-    { value: "4", label: "languages spoken" },
+    { id: "years", value: "10+" },
+    { id: "projects", value: "20+" },
+    { id: "languages", value: "4" },
   ],
 };
-
-export const award = "Preferred Freelancer of the Quarter";
 
 /**
  * Projects.
  *
  * Screenshots are picked up automatically — drop a 16:9 image into
- * `src/assets/projects/` named after the project's `slug` below
- * (e.g. `travel-booking.jpg`) and it replaces the placeholder on save.
- * Accepts .jpg / .jpeg / .png / .webp / .avif. See `data/projectImages.js`.
+ * `src/assets/projects/` named after the project's `slug` and it replaces
+ * whatever was there. See `data/projectImages.js`.
  *
  * `image`: optional explicit override, for a `/public` path or a remote URL.
- *          Leave `null` to use slug-based auto-discovery.
- * `tint`:  hue (0–360) for the generated placeholder shown until an image exists.
+ * `tint`:  hue (0–360) for the generated placeholder, if no image exists.
  * `demo`:  true for capability demos built to show what's possible, rather
  *          than work delivered for a client. Renders a "Demo" badge on the
  *          card so the two are never confused. Delete the flag to drop it.
  */
 export const projects = [
   {
-    title: "Travel Booking & Digital Aviation Platform",
-    description:
-      "End-to-end booking experience for travel and aviation, built mobile-first and shipped on an automated pipeline.",
+    slug: "travel-booking",
     tags: ["React Native", "DevOps"],
     tint: 262,
-    slug: "travel-booking",
     image: null,
   },
+  { slug: "aquarium", tags: ["WordPress", "CMS"], tint: 196, image: null },
   {
-    title: "Premium Aquarium Management & Corporate Site",
-    description:
-      "Corporate site with a tailored CMS so the team can manage premium aquarium services without touching code.",
-    tags: ["WordPress", "CMS"],
-    tint: 196,
-    slug: "aquarium",
-    image: null,
-  },
-  {
-    title: "Real-Time Event Management & Check-In Platform",
-    description:
-      "Live attendee check-in with instant sync between staff devices and the event dashboard.",
+    slug: "event-checkin",
     tags: ["React Native", "JavaScript"],
     tint: 152,
-    slug: "event-checkin",
     image: null,
   },
+  { slug: "enneagram", tags: ["JavaScript", "Vue.js"], tint: 24, image: null },
+  { slug: "ai-agent", tags: ["Python", "React.js"], tint: 288, image: null },
+  { slug: "vassalli", tags: ["Shopify", "WordPress"], tint: 340, image: null },
   {
-    title: "Enneagram Profile Analysis — Personality Assessment Tool",
-    description:
-      "Interactive assessment flow that scores answers and renders a clear, readable personality profile.",
-    tags: ["JavaScript", "Vue.js"],
-    tint: 24,
-    slug: "enneagram",
-    image: null,
-  },
-  {
-    title: "Autonomous AI Agent for Workflow Automation",
-    description:
-      "An agent that runs multi-step business workflows on its own, with a React dashboard for oversight.",
-    tags: ["Python", "React.js"],
-    tint: 288,
-    slug: "ai-agent",
-    image: null,
-  },
-  {
-    title: "Product Listing — Vassalli",
-    description:
-      "Clean, organized Shopify product listing showcasing apparel with detailed descriptions, size options, and stylish visuals.",
-    tags: ["Shopify", "WordPress"],
-    tint: 340,
-    slug: "vassalli",
-    image: null,
-  },
-  {
-    title: "eCommerce Website",
-    description:
-      "Custom storefront with a hand-built product and checkout flow, designed and developed end to end.",
+    slug: "ecommerce",
     tags: ["PHP", "Graphic Design"],
     tint: 218,
-    slug: "ecommerce",
     image: null,
   },
   {
-    title: "WordPress Website Design",
-    description:
-      "Hand-coded WordPress theme built for fast loading, clean markup, and easy editing.",
+    slug: "wordpress-design",
     tags: ["HTML", "WordPress"],
     tint: 44,
-    slug: "wordpress-design",
     image: null,
   },
 
-  /* ── Chatbot demos ──────────────────────────────────────────────────────
-     Built to show what a messaging bot can do, not delivered for a client.
-     The `demo: true` flag puts a badge on the card so that stays obvious. */
+  /* ── Chatbot demos ─────────────────────────────────────────────────────── */
   {
-    title: "Telegram Order & Support Bot",
-    description:
-      "Tracks orders, starts returns, and hands off to a person — inline keyboards so customers tap instead of type.",
+    slug: "telegram-order-bot",
     tags: ["Telegram Bot API", "Node.js"],
     tint: 205,
-    slug: "telegram-order-bot",
     image: null,
     demo: true,
   },
   {
-    title: "WhatsApp Appointment Booking Bot",
-    description:
-      "Offers real availability, books the slot, and sets a reminder — the whole booking without leaving the chat.",
+    slug: "whatsapp-booking-bot",
     tags: ["WhatsApp Cloud API", "Node.js"],
     tint: 145,
-    slug: "whatsapp-booking-bot",
     image: null,
     demo: true,
   },
   {
-    title: "Multi-Channel Bot with Live Agent Handover",
-    description:
-      "One inbox for Telegram and WhatsApp. The bot answers what it can and escalates the rest with the full transcript attached.",
+    slug: "chatbot-handover",
     tags: ["Telegram", "WhatsApp", "React.js"],
     tint: 262,
-    slug: "chatbot-handover",
     image: null,
     demo: true,
   },
 ];
 
-/** Section 4 — icon names map to the lookup in `components/Services.jsx`. */
+/** `icon` maps to the lookup in `components/Services.jsx`. */
 export const services = [
-  {
-    icon: "layout",
-    title: "WordPress, Shopify & custom CMS",
-    meta: "10+ years",
-  },
-  {
-    icon: "code",
-    title: "JavaScript, React.js, Node.js, HTML & CSS",
-  },
-  {
-    icon: "monitor",
-    title: "Responsive design that looks perfect on every screen",
-  },
-  {
-    icon: "smartphone",
-    title: "Mobile apps with React Native and Flutter",
-    meta: "Android & iOS",
-  },
-  {
-    icon: "database",
-    title: "Back-end with PHP, Python, MySQL & PostgreSQL",
-  },
-  {
-    icon: "plug",
-    title: "API integrations and chatbots",
-  },
+  { id: "cms", icon: "layout" },
+  { id: "frontend", icon: "code" },
+  { id: "responsive", icon: "monitor" },
+  { id: "mobile", icon: "smartphone" },
+  { id: "backend", icon: "database" },
+  { id: "api", icon: "plug" },
 ];
 
-/** Skills, grouped. `level` is years of experience. */
+/** Skill names are product names, so they read the same in every language. */
 export const skillGroups = [
   {
-    name: "Frontend",
+    id: "frontend",
     skills: [
       { name: "JavaScript", level: "10+" },
       { name: "HTML", level: "10+" },
@@ -196,7 +114,7 @@ export const skillGroups = [
     ],
   },
   {
-    name: "Mobile",
+    id: "mobile",
     skills: [
       { name: "React Native", level: "5–10" },
       { name: "Flutter", level: "3–5" },
@@ -205,7 +123,7 @@ export const skillGroups = [
     ],
   },
   {
-    name: "Backend",
+    id: "backend",
     skills: [
       { name: "Node.js", level: "5–10" },
       { name: "PHP", level: "10+" },
@@ -218,7 +136,7 @@ export const skillGroups = [
     ],
   },
   {
-    name: "CMS & Commerce",
+    id: "cms",
     skills: [
       { name: "WordPress", level: "10+" },
       { name: "Shopify", level: "5–10" },
@@ -227,7 +145,7 @@ export const skillGroups = [
     ],
   },
   {
-    name: "Other",
+    id: "other",
     skills: [
       { name: "Chatbots", level: "5–10" },
       { name: "Linux", level: "3–5" },
@@ -236,14 +154,5 @@ export const skillGroups = [
   },
 ];
 
-export const about = {
-  bio: "Hi, I'm Artjom — a front-end developer with over 10 years of experience. Since 2014 I've worked as a freelance UI/UX Designer & Full Stack Developer, designing and building high-quality digital solutions, specialized in React.js and Node.js.",
-  howIWork:
-    "Clear communication, honest deadlines, and no surprises. I ask the right questions before writing a single line of code, and I keep you updated at every step.",
-  languages: [
-    { name: "German", level: "Native" },
-    { name: "English", level: "High Intermediate" },
-    { name: "Spanish", level: "High Intermediate" },
-    { name: "Portuguese", level: "High Intermediate" },
-  ],
-};
+/** Display order for the languages-spoken row; names come from the locale. */
+export const spokenLanguages = ["german", "english", "spanish", "portuguese"];

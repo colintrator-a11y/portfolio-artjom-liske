@@ -6,12 +6,20 @@
  * photo of an aeroplane wing is the booking product itself. Drop a real
  * screenshot into `src/assets/projects/<slug>.jpg` and it takes over.
  */
-export default function ProjectThumb({ src, alt, initial, tint, illustrated }) {
+export default function ProjectThumb({
+  src,
+  alt,
+  initial,
+  tint,
+  illustrated,
+  illustratedLabel,
+  soonLabel,
+}) {
   if (src) {
     return (
       <img
         src={src}
-        alt={illustrated ? `${alt} — representative image, not a screenshot` : alt}
+        alt={illustrated ? `${alt} — ${illustratedLabel}` : alt}
         loading="lazy"
         decoding="async"
         width={1600}
@@ -24,7 +32,7 @@ export default function ProjectThumb({ src, alt, initial, tint, illustrated }) {
   return (
     <div
       role="img"
-      aria-label={`${alt} — screenshot coming soon`}
+      aria-label={`${alt} — ${soonLabel}`}
       className="relative grid aspect-video w-full place-items-center overflow-hidden"
       style={{
         // Per-project hue keeps the grid varied without adding image weight.

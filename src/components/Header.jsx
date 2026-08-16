@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
 
-import { nav } from "../data/content";
+import { useContent } from "../i18n";
+import LanguageSwitcher from "./LanguageSwitcher";
 // Small dedicated crop — the header paints above the fold, so it shouldn't
 // pull the full-size About portrait just to fill a 36px circle.
 import logo from "../assets/avatar-logo.webp";
@@ -10,14 +11,16 @@ import { useScrolled } from "../hooks/useScrolled";
 import { useActiveSection } from "../hooks/useActiveSection";
 import Button from "./ui/Button";
 
-const SECTION_IDS = nav.map((n) => n.id);
+import { navIds } from "../data/content";
+
+const SECTION_IDS = navIds;
 
 /** Portrait mark + name. */
-function Logo() {
+function Logo({ t }) {
   return (
     <a
       href="#top"
-      aria-label="Artjom Liske — back to top"
+      aria-label={t.ui.backToTopAria}
       className="group flex items-center gap-2.5"
     >
       {/* Decorative: the link's aria-label and the name beside it already
@@ -61,13 +64,13 @@ function NavLink({ id, label, active, onClick }) {
   );
 }
 
-function ThemeToggle({ theme, onToggle }) {
+function ThemeToggle({ theme, onToggle, t }) {
   const isDark = theme === "dark";
   return (
     <button
       type="button"
       onClick={onToggle}
-      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+      aria-label={isDark ? t.ui.toLightMode : t.ui.toDarkMode}
       aria-pressed={isDark}
       className="grid h-9 w-9 place-items-center rounded-lg border border-line text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
     >
@@ -81,6 +84,7 @@ function ThemeToggle({ theme, onToggle }) {
 }
 
 export default function Header({ theme, toggleTheme }) {
+  const { t, nav } = useContent();
   const scrolled = useScrolled(24);
   const active = useActiveSection(SECTION_IDS);
   const [open, setOpen] = useState(false);
@@ -108,7 +112,7 @@ export default function Header({ theme, toggleTheme }) {
         href="#main"
         className="sr-only rounded-full bg-accent-strong px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]"
       >
-        Skip to content
+        {t.ui.skipToContent}
       </a>
 
       <header
@@ -123,25 +127,30 @@ export default function Header({ theme, toggleTheme }) {
             scrolled ? "h-14" : "h-20"
           }`}
         >
-          <Logo />
+          <Logo t={t} />
 
-          <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+          <nav
+            aria-label={t.ui.navMain}
+            className="hidden items-center gap-8 md:flex"
+          >
             {nav.map((item) => (
               <NavLink key={item.id} {...item} active={active === item.id} />
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
-            <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            <LanguageSwitcher className="max-md:hidden" />
+
+            <ThemeToggle theme={theme} onToggle={toggleTheme} t={t} />
 
             <Button href="#contact" size="sm" className="max-md:hidden">
-              Hire me
+              {t.ui.hireMe}
             </Button>
 
             <button
               type="button"
               onClick={() => setOpen(true)}
-              aria-label="Open menu"
+              aria-label={t.ui.openMenu}
               aria-expanded={open}
               aria-controls="mobile-menu"
               className="grid h-9 w-9 place-items-center rounded-lg border border-line text-ink transition-colors duration-200 hover:border-accent hover:text-accent md:hidden"
@@ -164,7 +173,7 @@ export default function Header({ theme, toggleTheme }) {
           >
             <button
               type="button"
-              aria-label="Close menu"
+              aria-label={t.ui.closeMenu}
               tabIndex={-1}
               onClick={() => setOpen(false)}
               className="absolute inset-0 h-full w-full bg-black/60 backdrop-blur-sm"
@@ -174,7 +183,7 @@ export default function Header({ theme, toggleTheme }) {
               id="mobile-menu"
               role="dialog"
               aria-modal="true"
-              aria-label="Site menu"
+              aria-label={t.ui.siteMenu}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -182,19 +191,21 @@ export default function Header({ theme, toggleTheme }) {
               className="absolute inset-y-0 right-0 flex w-[min(20rem,85vw)] flex-col border-l border-line bg-surface p-6"
             >
               <div className="mb-10 flex items-center justify-between">
-                <span className="font-display text-sm font-semibold">Menu</span>
+                <span className="font-display text-sm font-semibold">
+                  {t.ui.menu}
+                </span>
                 <button
                   type="button"
                   autoFocus
                   onClick={() => setOpen(false)}
-                  aria-label="Close menu"
+                  aria-label={t.ui.closeMenu}
                   className="grid h-9 w-9 place-items-center rounded-lg border border-line text-ink transition-colors hover:border-accent hover:text-accent"
                 >
                   <X size={18} aria-hidden="true" />
                 </button>
               </div>
 
-              <nav aria-label="Mobile" className="flex flex-col gap-1">
+              <nav aria-label={t.ui.navMobile} className="flex flex-col gap-1">
                 {nav.map((item) => (
                   <a
                     key={item.id}
@@ -211,12 +222,14 @@ export default function Header({ theme, toggleTheme }) {
                 ))}
               </nav>
 
+              <LanguageSwitcher className="mt-8 w-full justify-center" />
+
               <Button
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-8 w-full"
+                className="mt-3 w-full"
               >
-                Hire me
+                {t.ui.hireMe}
               </Button>
             </m.div>
           </m.div>

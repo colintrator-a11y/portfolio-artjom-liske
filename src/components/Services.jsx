@@ -7,7 +7,7 @@ import {
   Smartphone,
 } from "lucide-react";
 
-import { services } from "../data/content";
+import { useContent } from "../i18n";
 import Reveal from "./ui/Reveal";
 import { Section, SectionHeading } from "./ui/Section";
 
@@ -22,12 +22,14 @@ const icons = {
 };
 
 export default function Services() {
+  const { t, services } = useContent();
+
   return (
     <Section id="services">
       <SectionHeading
-        eyebrow="Services"
-        title="What I can do for you"
-        lead="One developer for the whole build — design, front end, back end, and the app store."
+        eyebrow={t.sections.services.eyebrow}
+        title={t.sections.services.title}
+        lead={t.sections.services.lead}
       />
 
       <ul className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -36,7 +38,7 @@ export default function Services() {
           return (
             <Reveal
               as="li"
-              key={service.title}
+              key={service.id}
               delay={(i % 3) * 0.06}
               className="group bg-surface p-7 transition-colors duration-300 hover:bg-surface-2"
             >
