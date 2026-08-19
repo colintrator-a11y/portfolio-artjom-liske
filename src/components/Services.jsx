@@ -1,62 +1,48 @@
-import {
-  Code2,
-  Database,
-  LayoutGrid,
-  MonitorSmartphone,
-  Plug,
-  Smartphone,
-} from "lucide-react";
-
-import { useContent } from "../i18n";
-import Reveal from "./ui/Reveal";
-import { Section, SectionHeading } from "./ui/Section";
-
-/** Maps the icon names in `data/content.js` to lucide components. */
-const icons = {
-  layout: LayoutGrid,
-  code: Code2,
-  monitor: MonitorSmartphone,
-  smartphone: Smartphone,
-  database: Database,
-  plug: Plug,
-};
+import { useContent } from '../i18n/LanguageContext'
+import Icon from './ui/Icon'
+import Reveal from './ui/Reveal'
+import SectionHead from './ui/SectionHead'
+import './Services.css'
 
 export default function Services() {
-  const { t, services } = useContent();
+  const { services } = useContent()
 
   return (
-    <Section id="services">
-      <SectionHeading
-        eyebrow={t.sections.services.eyebrow}
-        title={t.sections.services.title}
-        lead={t.sections.services.lead}
-      />
+    <section className="section" id="services" aria-labelledby="services-title">
+      <div className="container">
+        <SectionHead
+          id="services-title"
+          center
+          eyebrow={services.eyebrow}
+          title={services.heading}
+          intro={services.intro}
+        />
 
-      <ul className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, i) => {
-          const Icon = icons[service.icon];
-          return (
-            <Reveal
-              as="li"
-              key={service.id}
-              delay={(i % 3) * 0.06}
-              className="group bg-surface p-7 transition-colors duration-300 hover:bg-surface-2"
-            >
-              <span className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-accent-soft text-accent transition-transform duration-300 group-hover:-translate-y-0.5">
-                <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+        <div className="services__grid">
+          {services.items.map((service, index) => (
+            <Reveal key={service.title} delay={(index % 3) * 100} className="card service">
+              <span className="service__index">{String(index + 1).padStart(2, '0')}</span>
+
+              <span className="service__icon">
+                <Icon name={service.icon} size={24} />
               </span>
 
-              <h3 className="mt-5 text-base leading-snug font-semibold">
-                {service.title}
-              </h3>
+              <h3 className="service__title">{service.title}</h3>
+              <p className="service__summary">{service.summary}</p>
+              <p className="service__description">{service.description}</p>
 
-              {service.meta && (
-                <p className="mt-2 text-sm text-muted">{service.meta}</p>
-              )}
+              <ul className="service__points">
+                {service.points.map((point) => (
+                  <li key={point}>
+                    <Icon name="check" size={13} strokeWidth={2.4} />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
-          );
-        })}
-      </ul>
-    </Section>
-  );
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }

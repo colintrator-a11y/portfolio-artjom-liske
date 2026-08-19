@@ -1,0 +1,167 @@
+/* The footer closes the page with a solid ink block — the one large
+   dark field in the layout, echoing the hero code window. */
+
+.footer {
+  position: relative;
+  margin-top: clamp(48px, 7vw, 96px);
+  padding-block: clamp(60px, 7vw, 90px) 32px;
+  background: var(--footer-bg);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer__top {
+  display: grid;
+  gap: clamp(38px, 4vw, 64px);
+}
+
+/* Brand ------------------------------------------------------------------ */
+
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer__mark {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 0 4px rgba(255, 255, 255, 0.06);
+}
+
+.footer__brand strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.footer__brand small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.footer__tagline {
+  margin-top: 28px;
+  max-width: 46ch;
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.9vw, 25px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+}
+
+.footer__blurb {
+  margin-top: 16px;
+  max-width: 56ch;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+.footer__expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+/* Chips need an inverted treatment on the ink block. */
+.footer__expertise .chip {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer__expertise .chip:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* Link columns ----------------------------------------------------------- */
+
+.footer__nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.footer__columnTitle {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.footer__column ul {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.footer__column a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14.5px;
+  transition: color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.footer__column a svg {
+  color: #7dd3fc;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.footer__column a:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.footer__column a:hover svg {
+  opacity: 1;
+  transform: none;
+}
+
+/* Bottom ----------------------------------------------------------------- */
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: clamp(44px, 5vw, 64px);
+  padding-top: 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+}
+
+.footer__built {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 12.5px;
+}
+
+@media (min-width: 900px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+
+  .footer__nav {
+    justify-items: end;
+  }
+}

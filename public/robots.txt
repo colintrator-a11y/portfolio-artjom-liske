@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://artjom-liske.vercel.app/sitemap.xml

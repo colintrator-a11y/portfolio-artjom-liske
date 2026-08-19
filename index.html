@@ -1,37 +1,101 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf9f6" />
 
-    <title>Artjom Liske — Front-end Developer</title>
+    <!--
+      Applies the saved theme before the first paint. Inline and synchronous on
+      purpose: loading it as a module would let the default paint first and the
+      page would flash the wrong theme on every visit.
+    -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme')
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.dataset.theme = saved
+          }
+        } catch (e) {
+          /* Private mode blocks storage; the light default in the tag stands. */
+        }
+      })()
+    </script>
+
+    <title>Artjom Liske | Full Stack, Mobile &amp; E-Commerce Developer</title>
     <meta
       name="description"
-      content="Front-end developer with 10+ years of experience building fast, beautiful, easy-to-use websites and apps. Available for freelance from Germany."
+      content="Artjom Liske — full stack developer in Germany with 10+ years of experience building web platforms, e-commerce stores, mobile apps and REST APIs. Freelancer expert in IT &amp; Programming."
     />
-    <meta name="theme-color" content="#0B0B0F" />
+    <meta
+      name="keywords"
+      content="Full Stack Developer Germany, React.js Developer, Next.js, Node.js, NestJS, Vue.js, TypeScript, PHP, Laravel, Python, MySQL, PostgreSQL, REST API Development, E-commerce Developer, WooCommerce, WordPress, Shopify, React Native, Flutter, Responsive Web Design, Chatbot, Process Automation, Freelance Developer"
+    />
+    <meta name="author" content="Artjom Liske" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://artjom-liske.vercel.app/" />
 
-    <!-- Open Graph / social preview -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Artjom Liske — Front-end Developer" />
+    <meta property="og:site_name" content="Artjom Liske" />
+    <meta property="og:title" content="Artjom Liske | Full Stack, Mobile &amp; E-Commerce Developer" />
     <meta
       property="og:description"
-      content="I build websites and apps that are fast, beautiful, and easy to use."
+      content="Building scalable web, mobile and e-commerce solutions for modern businesses. 10+ years of full stack development, freelancing from Germany."
     />
-    <!-- Swap in a real 1200x630 preview image here: <meta property="og:image" content="/og.png" /> -->
+    <meta property="og:url" content="https://artjom-liske.vercel.app/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="pt_PT" />
+    <meta property="og:locale:alternate" content="es_ES" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Artjom Liske | Full Stack, Mobile &amp; E-Commerce Developer" />
+    <meta
+      name="twitter:description"
+      content="Building scalable web, mobile and e-commerce solutions. 10+ years of full stack development, freelancing from Germany."
+    />
 
-    <!-- Fonts: Space Grotesk (display) + Inter (body). `display=swap` keeps first paint instant. -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Artjom Liske",
+        "jobTitle": "Full Stack Developer",
+        "description": "Full stack developer based in Germany with 10+ years of experience building web platforms, e-commerce stores, mobile apps and REST APIs.",
+        "url": "https://artjom-liske.vercel.app/",
+        "address": { "@type": "PostalAddress", "addressCountry": "DE" },
+        "knowsLanguage": ["German", "English", "Spanish", "Portuguese"],
+        "knowsAbout": [
+          "React.js", "Next.js", "Vue.js", "JavaScript", "TypeScript",
+          "Node.js", "NestJS", "PHP", "Laravel", "Python",
+          "MySQL", "PostgreSQL", "REST API Development",
+          "E-commerce Development", "WooCommerce", "WordPress", "Shopify",
+          "React Native", "Flutter", "Android", "iOS",
+          "Responsive Web Design", "Chatbot Development", "Process Automation"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      Artjom Liske — full stack developer in Germany with 10+ years of experience building
+      web, e-commerce, mobile and API solutions. Please enable JavaScript to view the full portfolio.
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

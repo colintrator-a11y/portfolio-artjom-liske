@@ -1,56 +1,94 @@
-import { Languages as LanguagesIcon } from "lucide-react";
-
-import { LANGUAGES, useI18n } from "../i18n";
+import { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
+import Icon from './ui/Icon'
+import './LanguageSwitcher.css'
 
 /**
- * Segmented EN / PT / ES control.
- *
- * A segmented group rather than a dropdown: with three options everything
- * stays visible and reachable in one tab stop each, with no popover to trap
- * focus or close on outside clicks.
- *
- * Rendered as a radiogroup so screen readers announce it as one control with
- * a current selection, instead of three unrelated buttons.
+ * Language menu. Renders as a dropdown in the navigation bar and, with
+ * `variant="inline"`, as a plain row of buttons inside the mobile drawer.
  */
-export default function LanguageSwitcher({ className = "", showIcon = true }) {
-  const { lang, setLang, t } = useI18n();
+export default function LanguageSwitcher({ variant = 'menu' }) {
+  const { lang, setLang, languages, content } = useLanguage()
+  const [open, setOpen] = useState(false)
+  const wrapRef = useRef(null)
+
+  const current = languages.find((item) => item.code === lang) ?? languages[0]
+
+  useEffect(() => {
+    if (!open) return undefined
+
+    const onPointer = (event) => {
+      if (wrapRef.current && !wrapRef.current.contains(event.target)) setOpen(false)
+    }
+    const onKey = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+
+    document.addEventListener('mousedown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  if (variant === 'inline') {
+    return (
+      <div className="langInline" role="group" aria-label={content.ui.chooseLanguage}>
+        <span className="langInline__label">{content.ui.languageLabel}</span>
+        <div className="langInline__options">
+          {languages.map((item) => (
+            <button
+              key={item.code}
+              type="button"
+              lang={item.code}
+              className={`langInline__btn ${item.code === lang ? 'is-active' : ''}`.trim()}
+              aria-pressed={item.code === lang}
+              onClick={() => setLang(item.code)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div
-      role="radiogroup"
-      aria-label={t.ui.language}
-      className={`inline-flex items-center gap-1 rounded-lg border border-line p-0.5 ${className}`}
-    >
-      {showIcon && (
-        <LanguagesIcon
-          size={14}
-          aria-hidden="true"
-          className="mx-1.5 shrink-0 text-muted"
-        />
-      )}
+    <div className="lang" ref={wrapRef}>
+      <button
+        type="button"
+        className="lang__trigger"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={`${content.ui.languageLabel}: ${current.label}`}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <Icon name="globe" size={16} />
+        <span className="lang__code">{current.short}</span>
+        <Icon name="chevronDown" size={13} className={`lang__caret ${open ? 'is-open' : ''}`.trim()} />
+      </button>
 
-      {LANGUAGES.map((l) => {
-        const active = l.code === lang;
-        return (
-          <button
-            key={l.code}
-            type="button"
-            role="radio"
-            aria-checked={active}
-            // The short code alone would read as "EN" letter-by-letter, so the
-            // accessible name carries the full language name.
-            aria-label={l.label}
-            onClick={() => setLang(l.code)}
-            className={`rounded-md px-2 py-1 font-display text-xs font-semibold tracking-wide transition-colors duration-200 ${
-              active
-                ? "bg-accent-soft text-accent"
-                : "text-muted hover:text-ink"
-            }`}
-          >
-            <span aria-hidden="true">{l.short}</span>
-          </button>
-        );
-      })}
+      <ul className={`lang__menu ${open ? 'is-open' : ''}`.trim()} role="listbox" aria-label={content.ui.chooseLanguage}>
+        {languages.map((item) => (
+          <li key={item.code} role="option" aria-selected={item.code === lang}>
+            <button
+              type="button"
+              lang={item.code}
+              className={`lang__option ${item.code === lang ? 'is-active' : ''}`.trim()}
+              tabIndex={open ? 0 : -1}
+              onClick={() => {
+                setLang(item.code)
+                setOpen(false)
+              }}
+            >
+              <span className="lang__optionShort">{item.short}</span>
+              {item.label}
+              {item.code === lang ? <Icon name="check" size={13} strokeWidth={2.4} /> : null}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
-  );
+  )
 }

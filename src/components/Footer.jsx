@@ -1,50 +1,76 @@
-import { ArrowUp } from "lucide-react";
-
-import { hero } from "../data/content";
-import { useContent } from "../i18n";
+import { useContent } from '../i18n/LanguageContext'
+import scrollToSection from '../utils/scrollToSection'
+import Icon from './ui/Icon'
+import './Footer.css'
 
 export default function Footer() {
-  const { t, nav } = useContent();
+  const { footer, profile, ui } = useContent()
+  const year = new Date().getFullYear()
+
+  const go = (id) => (event) => {
+    event.preventDefault()
+    scrollToSection(id)
+  }
 
   return (
-    <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-[1100px] flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="font-display font-semibold tracking-tight">
-            {hero.name}
-          </p>
-          <p className="mt-1 text-sm text-muted">
-            {t.hero.role}
-            <span aria-hidden="true" className="mx-2">
-              ·
-            </span>
-            {t.hero.location}
-          </p>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer__top">
+          <div className="footer__brandBlock">
+            <a className="footer__brand" href="#home" onClick={go('home')}>
+              <img
+                className="footer__mark"
+                src={profile.avatar}
+                alt=""
+                width="172"
+                height="172"
+                loading="lazy"
+                decoding="async"
+              />
+              <span>
+                <strong>{profile.name}</strong>
+                <small>{profile.title}</small>
+              </span>
+            </a>
+
+            <p className="footer__tagline">{footer.tagline}</p>
+            <p className="footer__blurb">{footer.blurb}</p>
+
+            <ul className="footer__expertise">
+              {footer.expertise.map((item) => (
+                <li key={item} className="chip">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer__nav">
+            {footer.columns.map((column) => (
+              <div className="footer__column" key={column.title}>
+                <h3 className="footer__columnTitle">{column.title}</h3>
+                <ul>
+                  {column.links.map((link) => (
+                    <li key={link.label}>
+                      <a href={`#${link.target}`} onClick={go(link.target)}>
+                        <Icon name="arrowRight" size={13} strokeWidth={2} />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <nav
-          aria-label={t.ui.navFooter}
-          className="flex flex-wrap gap-x-6 gap-y-2"
-        >
-          {nav.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className="text-sm text-muted transition-colors duration-200 hover:text-accent"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <a
-          href="#top"
-          className="inline-flex items-center gap-2 self-start text-sm text-muted transition-colors duration-200 hover:text-accent md:self-auto"
-        >
-          {t.ui.backToTop}
-          <ArrowUp size={14} aria-hidden="true" />
-        </a>
+        <div className="footer__bottom">
+          <p>
+            © {year} {profile.name}. {ui.rightsReserved}
+          </p>
+          <p className="footer__built">{ui.builtWith}</p>
+        </div>
       </div>
     </footer>
-  );
+  )
 }

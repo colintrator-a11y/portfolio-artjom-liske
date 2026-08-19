@@ -1,77 +1,114 @@
-import { Languages, MessageSquare } from "lucide-react";
-
-import { useContent } from "../i18n";
-// Portrait lives in src/assets so Vite hashes and cache-busts it.
-import avatar from "../assets/avatar.webp";
-import Reveal from "./ui/Reveal";
-import { Section, SectionHeading } from "./ui/Section";
+import { useContent } from '../i18n/LanguageContext'
+import Icon from './ui/Icon'
+import Reveal from './ui/Reveal'
+import SectionHead from './ui/SectionHead'
+import './About.css'
 
 export default function About() {
-  const { t, spokenLanguages } = useContent();
+  const { about, profile, ui } = useContent()
 
   return (
-    <Section id="about">
-      <SectionHeading
-        eyebrow={t.sections.about.eyebrow}
-        title={t.sections.about.title}
-      />
+    <section className="section section--alt" id="about" aria-labelledby="about-title">
+      <div className="container">
+        <SectionHead id="about-title" eyebrow={about.eyebrow} title={about.heading} />
 
-      <div className="grid gap-10 md:grid-cols-2 md:gap-14">
-        {/* Portrait + bio */}
-        <Reveal>
-          <img
-            src={avatar}
-            alt={t.ui.portraitAlt}
-            width={640}
-            height={640}
-            loading="lazy"
-            decoding="async"
-            className="mb-7 h-24 w-24 rounded-full border border-line object-cover sm:h-28 sm:w-28"
-          />
-
-          <p className="font-display text-xl leading-relaxed font-medium tracking-tight sm:text-2xl">
-            {t.about.bio}
-          </p>
-        </Reveal>
-
-        {/* How I work */}
-        <Reveal delay={0.1}>
-          <div className="glow rounded-2xl border border-line bg-surface p-7 sm:p-8">
-            <span className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-accent-soft text-accent">
-              <MessageSquare size={20} strokeWidth={1.75} aria-hidden="true" />
-            </span>
-
-            <h3 className="mt-5 text-lg font-semibold">
-              {t.about.howIWorkTitle}
-            </h3>
-
-            <p className="mt-3 leading-relaxed text-muted">
-              {t.about.howIWork}
-            </p>
-          </div>
-        </Reveal>
-      </div>
-
-      {/* Languages */}
-      <Reveal delay={0.15}>
-        <div className="mt-12 border-t border-line pt-8">
-          <h3 className="flex items-center gap-2 font-display text-sm font-semibold tracking-[0.14em] text-muted uppercase">
-            <Languages size={15} aria-hidden="true" />
-            {t.about.languagesTitle}
-          </h3>
-
-          <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-4">
-            {spokenLanguages.map((lang) => (
-              <div key={lang.name}>
-                <dt className="font-display font-semibold tracking-tight">
-                  {lang.name}
-                </dt>
-                <dd className="mt-0.5 text-sm text-muted">{lang.level}</dd>
-              </div>
+        <div className="about__grid">
+          <div className="about__main">
+            {about.paragraphs.map((text, index) => (
+              <Reveal as="p" key={index} delay={index * 80} className="about__paragraph">
+                {text}
+              </Reveal>
             ))}
-          </dl>
+
+            <div className="about__highlights">
+              {about.highlights.map((item, index) => (
+                <Reveal key={item.title} delay={index * 90} className="about__highlight">
+                  <span className="about__highlightIcon">
+                    <Icon name="check" size={15} strokeWidth={2.2} />
+                  </span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <Reveal className="about__aside" delay={120}>
+            <div className="card about__card">
+              <div className="about__identity">
+                <img
+                  className="about__avatar"
+                  src={profile.avatar}
+                  alt={`Portrait of ${profile.name}`}
+                  width="172"
+                  height="172"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div>
+                  <h3 className="about__name">{profile.name}</h3>
+                  <p className="about__title">{profile.title}</p>
+                </div>
+              </div>
+
+              <dl className="about__facts">
+                {about.facts.map((fact) => (
+                  <div className="about__fact" key={fact.label}>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="about__block">
+                <h4 className="about__blockTitle">{ui.certifications}</h4>
+                <ul className="about__certs">
+                  {about.certifications.map((cert) => (
+                    <li key={cert.name}>
+                      <span>{cert.name}</span>
+                      <strong>{cert.score}</strong>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="about__block">
+                <h4 className="about__blockTitle">{ui.languagesTitle}</h4>
+                <ul className="about__langs">
+                  {about.languages.map((lang) => (
+                    <li key={lang.name}>
+                      <strong>{lang.name}</strong>
+                      <span>{lang.level}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* A link only when a profile URL is configured; otherwise the
+                  same note as plain text, so the site can carry no outbound
+                  link at all. */}
+              {profile.profileUrl ? (
+                <a
+                  className="about__note"
+                  href={profile.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="globe" size={17} />
+                  <span>{ui.profileNote}</span>
+                </a>
+              ) : (
+                <p className="about__note about__note--static">
+                  <Icon name="globe" size={17} />
+                  <span>{ui.profileNote}</span>
+                </p>
+              )}
+            </div>
+          </Reveal>
         </div>
-      </Reveal>
-    </Section>
-  );
+      </div>
+    </section>
+  )
 }

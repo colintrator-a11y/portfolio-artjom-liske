@@ -1,27 +1,39 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react'
+
+const KEY = 'theme'
+const DARK = 'dark'
+const LIGHT = 'light'
+
+/** What the boot script in index.html already stamped on the document. */
+function current() {
+  if (typeof document === 'undefined') return LIGHT
+  return document.documentElement.dataset.theme === DARK ? DARK : LIGHT
+}
 
 /**
- * Dark/light theme held in React state only — no localStorage/sessionStorage.
- * Starts dark (the site's default look) and writes the `.dark` class onto
- * <html> so Tailwind's custom `dark:` variant picks it up.
+ * Reads and writes the theme the inline boot script has already applied.
+ *
+ * The document is the single source of truth rather than this state: the boot
+ * script sets it before React exists, precisely so the page never paints the
+ * wrong theme first, and duplicating the decision here would let the two drift.
  */
-export function useTheme() {
-  const [theme, setTheme] = useState("dark");
+export default function useTheme() {
+  const [theme, setTheme] = useState(current)
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("dark", theme === "dark");
+    document.documentElement.dataset.theme = theme
 
-    // Keeps the mobile browser chrome in sync with the page.
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "dark" ? "#0B0B0F" : "#FBFBFD");
-  }, [theme]);
+    // Keep the browser's own chrome - address bar, task switcher - in step.
+    const meta = document.querySelector('meta[name="theme-color"]')
+    if (meta) meta.setAttribute('content', theme === DARK ? '#0b1120' : '#faf9f6')
 
-  const toggleTheme = useCallback(
-    () => setTheme((t) => (t === "dark" ? "light" : "dark")),
-    [],
-  );
+    try {
+      localStorage.setItem(KEY, theme)
+    } catch {
+      // Private browsing refuses storage; the choice still holds for this visit.
+    }
+  }, [theme])
 
-  return { theme, toggleTheme };
+  const toggle = useCallback(() => setTheme((t) => (t === DARK ? LIGHT : DARK)), [])
+  return [theme, toggle]
 }

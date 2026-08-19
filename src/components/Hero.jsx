@@ -1,92 +1,89 @@
-import { ArrowDown } from "lucide-react";
+import { useContent } from '../i18n/LanguageContext'
+import scrollToSection from '../utils/scrollToSection'
+import Icon from './ui/Icon'
+import HeroVisual from './HeroVisual'
+import './Hero.css'
 
-import { hero } from "../data/content";
-import { useContent } from "../i18n";
-import Button from "./ui/Button";
-import Reveal from "./ui/Reveal";
-
-export default function Hero() {
-  const { t } = useContent();
+function Headline({ headline, accent }) {
+  const index = headline.indexOf(accent)
+  if (index === -1) return <>{headline}</>
 
   return (
-    <section id="top" className="relative overflow-hidden">
-      {/* Decorative grid + accent wash; purely visual. */}
-      <div
-        aria-hidden="true"
-        className="hero-backdrop pointer-events-none absolute inset-0"
-      />
+    <>
+      {headline.slice(0, index)}
+      <span className="grad-text">{accent}</span>
+      {headline.slice(index + accent.length)}
+    </>
+  )
+}
 
-      <div className="relative mx-auto max-w-[1100px] px-5 pt-32 pb-20 sm:px-8 md:pt-44 md:pb-28">
-        <Reveal>
-          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/60 px-3.5 py-1.5 text-xs text-muted backdrop-blur">
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
-            <span aria-hidden="true" className="text-sm leading-none">
-              {hero.flag}
-            </span>
-            {t.hero.location}
-            <span aria-hidden="true" className="text-line-strong">
-              ·
-            </span>
-            {t.hero.availability}
-          </p>
-        </Reveal>
+export default function Hero() {
+  const { hero, profile } = useContent()
 
-        <Reveal delay={0.08}>
-          <h1 className="mt-7 text-[clamp(2.75rem,9vw,5.5rem)] leading-[0.95] font-bold">
-            {hero.name}
+  const go = (id) => (event) => {
+    event.preventDefault()
+    scrollToSection(id)
+  }
+
+  return (
+    <section className="hero" id="home">
+      <div className="container hero__inner">
+        <div className="hero__content">
+          <span className="hero__badge">
+            <Icon name="spark" size={15} />
+            {hero.badge}
+          </span>
+
+          <h1 className="hero__title">
+            <Headline headline={hero.headline} accent={hero.headlineAccent} />
           </h1>
-        </Reveal>
 
-        <Reveal delay={0.14}>
-          <p className="mt-5 font-display text-lg font-medium tracking-tight text-muted sm:text-xl">
-            {t.hero.role}
-            <span aria-hidden="true" className="mx-2.5 text-accent">
-              ·
-            </span>
-            {t.hero.years}
-          </p>
-        </Reveal>
+          <p className="hero__role">{profile.title}</p>
 
-        <Reveal delay={0.2}>
-          <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg md:text-xl">
-            {t.hero.tagline}
-          </p>
-        </Reveal>
+          <p className="hero__intro">{hero.intro}</p>
 
-        <Reveal delay={0.26}>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Button href="#work">
-              {t.ui.viewWork}
-              <ArrowDown size={16} aria-hidden="true" />
-            </Button>
-            <Button href="#contact" variant="ghost">
-              {t.ui.getInTouch}
-            </Button>
+          <div className="hero__actions">
+            <a
+              className="btn btn--primary"
+              href={`#${hero.primaryCta.target}`}
+              onClick={go(hero.primaryCta.target)}
+            >
+              {hero.primaryCta.label}
+              <Icon name="arrowRight" className="btn__icon" />
+            </a>
+            <a
+              className="btn btn--ghost"
+              href={`#${hero.secondaryCta.target}`}
+              onClick={go(hero.secondaryCta.target)}
+            >
+              {hero.secondaryCta.label}
+              <Icon name="arrowRight" className="btn__icon" />
+            </a>
           </div>
-        </Reveal>
 
-        {/* Stat row */}
-        <Reveal delay={0.34}>
-          <dl className="mt-16 grid max-w-2xl grid-cols-3 gap-px overflow-hidden rounded-2xl border border-line bg-line md:mt-20">
-            {hero.stats.map((stat) => (
-              <div key={stat.id} className="bg-bg px-4 py-6 sm:px-6">
-                <dt className="sr-only">{t.hero.stats[stat.id]}</dt>
-                <dd>
-                  <span className="block font-display text-2xl font-bold tracking-tight sm:text-3xl">
-                    {stat.value}
-                  </span>
-                  <span className="mt-1 block text-xs text-muted sm:text-sm">
-                    {t.hero.stats[stat.id]}
-                  </span>
-                </dd>
-              </div>
+          <ul className="hero__pillars">
+            {hero.pillars.map((pillar) => (
+              <li key={pillar.title} className="hero__pillar">
+                <strong>{pillar.title}</strong>
+                <span>{pillar.detail}</span>
+              </li>
             ))}
-          </dl>
-        </Reveal>
+          </ul>
+        </div>
+
+        <HeroVisual />
+      </div>
+
+      <div className="container">
+        <ul className="hero__stats">
+          {hero.stats.map((stat) => (
+            <li key={stat.label} className="hero__stat">
+              <strong className="grad-text">{stat.value}</strong>
+              <span>{stat.label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
-  );
+  )
 }

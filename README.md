@@ -1,163 +1,139 @@
 # Artjom Liske — Portfolio
 
-Single-page personal portfolio for a freelance front-end developer.
-React + Vite, Tailwind CSS v4, Framer Motion, lucide-react.
+Single-page portfolio for a freelance Full Stack Developer, built with React 18 + Vite.
 
-## Run it
+## Running it
+
+Node.js 18+ is required. Verified against Node 24.19.0 LTS.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # production bundle → dist/
-npm run preview  # serve the production bundle
-npm run lint
+npm run dev      # local dev server on http://localhost:5173
+npm run build    # production bundle in ./dist
+npm run preview  # serve the production build locally
 ```
-
-## Where to change things
-
-| What                     | Where                                              |
-| ------------------------ | -------------------------------------------------- |
-| **All copy**             | `src/i18n/{en,pt,es}.js` — one file per language     |
-| **Structure**            | `src/data/content.js` — slugs, tags, icons, levels   |
-| **Contact link**         | `src/components/Contact.jsx` → `CONTACT_URL`        |
-| **Colours / typography** | `src/index.css` — the token block at the top        |
-| **Project screenshots**  | drop files in `src/assets/projects/` — see below    |
-
-### Project images
-
-Seven of the eight cards use **real screenshots of the delivered work**, in
-`src/assets/projects/`. They were extracted from a screenshot of the Workana
-profile, so their source resolution is only ~166x100 — they read fine at card
-size but are visibly soft. **Replacing them with full-size exports is the single
-biggest visual upgrade available.**
-
-`Product Listing — Vassalli` has no screenshot on the Workana profile, so it
-falls back to an openly-licensed stand-in photo in `src/assets/covers/`. See
-[src/assets/covers/CREDITS.md](src/assets/covers/CREDITS.md).
-
-The portrait in the About section is `src/assets/avatar.webp`.
-
-#### Chatbot demos
-
-The last three cards are **capability demos, not client work** — chat interfaces
-built to show what a Telegram/WhatsApp bot can do. Their images are real
-screenshots of those interfaces, and each card carries a **"Demo"** badge so
-they can't be mistaken for delivered projects.
-
-The badge is driven by `demo: true` in `src/data/content.js`. Remove the flag to
-drop the badge, or delete the three entries to drop the demos entirely. The
-interface source lives outside the app; regenerate by re-screenshotting at
-1600x900 and dropping the result into `src/assets/projects/`.
-
-### Replacing a project image
-
-Drop a file into `src/assets/projects/` named after the project's `slug`:
-
-```
-src/assets/projects/vassalli.jpg
-```
-
-It replaces whatever was there — no code change, and the dev server hot-reloads.
-
-| Filename             | Project                                             |
-| -------------------- | --------------------------------------------------- |
-| `travel-booking.*`   | Travel Booking & Digital Aviation Platform          |
-| `aquarium.*`         | Premium Aquarium Management & Corporate Site        |
-| `event-checkin.*`    | Real-Time Event Management & Check-In Platform      |
-| `enneagram.*`        | Enneagram Profile Analysis — Personality Assessment |
-| `ai-agent.*`         | Autonomous AI Agent for Workflow Automation         |
-| `vassalli.*`         | Product Listing — Vassalli  *(no real shot yet)*    |
-| `ecommerce.*`        | eCommerce Website                                   |
-| `wordpress-design.*` | WordPress Website Design                            |
-| `telegram-order-bot.*`   | Telegram Order & Support Bot  *(demo)*          |
-| `whatsapp-booking-bot.*` | WhatsApp Appointment Booking Bot  *(demo)*      |
-| `chatbot-handover.*`     | Multi-Channel Bot, Live Agent Handover  *(demo)*|
-
-Accepts `.webp` `.jpg` `.jpeg` `.png` `.avif`. Recommended **1600x900**.
-Images go through Vite, so they get content-hashed filenames and long-lived
-cache headers. The `<img>` is lazy-loaded inside a locked 16:9 box, so swapping
-one causes **no layout shift**.
-
-Resolution order, per project: explicit `image` field → `assets/projects/<slug>`
-→ `assets/covers/<slug>` → generated initial block.
-
-#### Getting sharp originals
-
-Workana serves portfolio images from `workana.s3.amazonaws.com` via time-limited
-signed URLs. On your own profile, right-click a portfolio image → **Copy image
-address**, and that URL downloads the full-resolution original (valid ~6 hours).
-
-## Languages
-
-The site ships in **English, Portuguese and Spanish**, switched by the EN/PT/ES
-control in the header (and inside the mobile drawer). Like the theme, the choice
-lives in React state only — no `localStorage`.
-
-Switching also updates `<html lang>`, `document.title` and the meta description,
-so assistive tech and shared links get the right language.
-
-Copy and structure are kept apart on purpose:
-
-- `src/data/content.js` — everything identical across languages: project slugs,
-  tech tags, icon names, skill levels, placeholder hues.
-- `src/i18n/en.js`, `pt.js`, `es.js` — every translatable string, keyed by those
-  same ids. `en.js` is the reference; the other two mirror its shape.
-
-`useContent()` merges the two. So adding a project means one entry in
-`content.js` plus one block in each locale file — and a forgotten translation
-shows up as an undefined title rather than silently falling back to English.
-
-To add a language: drop in `src/i18n/<code>.js` copied from `en.js`, then
-register it in `src/i18n/locales.js`. The switcher picks it up automatically.
-
-Product names (JavaScript, WordPress, React Native…) are deliberately left
-untranslated.
 
 ## Structure
 
 ```
+index.html               SEO meta, Open Graph, JSON-LD Person schema, fonts
+public/                  robots.txt, sitemap.xml, favicons
 src/
-├── assets/
-│   ├── avatar.webp        Portrait used in the About section
-│   ├── covers/            Licensed stand-ins for projects with no screenshot
-│   └── projects/          Real screenshots — these win
-├── i18n/
-│   ├── en.js pt.js es.js  Translatable copy, one file per language
-│   ├── locales.js         Language registry used by the switcher
-│   ├── context.js         useI18n() + useContent() merge hook
-│   └── I18nProvider.jsx   Holds the active language in state
-├── data/
-│   ├── content.js         Language-independent structure
-│   └── projectImages.js   Slug-based screenshot auto-discovery
-├── hooks/
-│   ├── useTheme.js        Dark/light in React state (no localStorage)
-│   ├── useScrolled.js     Drives the condensing sticky header
-│   └── useActiveSection.js  IntersectionObserver nav highlighting
-├── components/
-│   ├── Header.jsx         Sticky nav, theme + language toggles, drawer
-│   ├── LanguageSwitcher.jsx  EN / PT / ES segmented control
-│   ├── Hero.jsx           Name, tagline, availability badge, stats
-│   ├── Projects.jsx       Project grid + award badge
-│   ├── ProjectThumb.jsx   Real screenshot or generated placeholder
-│   ├── Services.jsx       "What I can do for you"
-│   ├── Skills.jsx         Grouped skill pills with experience levels
-│   ├── About.jsx          Bio, how I work, languages
-│   ├── Contact.jsx        Closing CTA  ← CONTACT_URL lives here
-│   ├── Footer.jsx
-│   └── ui/                Button, Section, Reveal, AwardBadge
-└── index.css              Design tokens + base styles
+  main.jsx               entry point
+  App.jsx                page composition + ambient background
+  i18n/
+    translations.js      ← ALL site copy, in English, German, Portuguese and Spanish
+    LanguageContext.jsx  provider, detection and persistence
+  data/content.js        shared assets + buildContent(lang)
+  hooks/
+    useReveal.js         IntersectionObserver scroll-reveal
+    useScrollSpy.js      active-section tracking for the nav
+    useTheme.js          light/dark preference
+    usePointerDepth.js   pointer-driven parallax on the ambient background
+  utils/
+    scrollToSection.js   nav-offset aware smooth scrolling
+    notifyVisit.js       one ping per tab session to the shared notifier
+  styles/global.css      design tokens, layout primitives, buttons, chips
+  components/
+    Navbar.jsx           sticky nav, scroll spy, mobile drawer
+    LanguageSwitcher.jsx dropdown in the nav, button row in the drawer
+    Hero.jsx             headline, CTAs, pillars, stat band
+    HeroVisual.jsx       animated code-window mockup
+    About.jsx            biography, highlights, profile card
+    Services.jsx         six service cards
+    Skills.jsx           six skill categories as a depth-stacked deck
+    Projects.jsx         filterable grid of client work and reference builds
+    ProjectCard.jsx      one tile in that grid
+    ProjectDialog.jsx    the full record for one project
+    ProjectVisual.jsx    inline-SVG interface mockups (one scene per build)
+    Process.jsx          six-step workflow
+    Footer.jsx           tagline, quick links, expertise
+    BackToTop.jsx        floating scroll-to-top control
+    ui/                  Icon, Reveal, SectionHead primitives
 ```
+
+Each component keeps its styles in a sibling `.css` file, imported by the component.
+
+## Languages
+
+The site ships in **English, German, Portuguese and Spanish** — the four languages on the profile.
+The switcher sits in the navigation (a dropdown) and in the mobile drawer (a row of buttons). The
+chosen language is stored in `localStorage`; a first-time visitor gets their browser's language if
+it is one of the four, and English otherwise. English rather than German is the fallback because the
+site is aimed at clients in several countries; a German visitor is picked up by detection. Switching
+updates `<html lang>` so screen readers and search engines follow.
+
+To add a language: append it to `languages` in `src/i18n/translations.js`, add a locale object with
+the same shape as `en`, and the switcher picks it up automatically.
+
+## Editing content
+
+Everything readable on the page — headline, biography, services, skills, projects, process steps,
+footer, and every UI label — comes from `src/i18n/translations.js`, one block per language.
+Language-independent data (images, technology names, certifications) lives in `src/data/content.js`,
+which merges the two with `buildContent(lang)`.
+
+### Content provenance
+
+All content is grounded in Artjom's published freelancer profile. Taken directly from it: the skill
+list, project titles and technology stacks, certifications and scores, languages and levels, the
+hourly rate, the Bronze level and the "Preferred Freelancer of the Quarter" recognition.
+
+Project overviews and feature lists are written from each project's title and stack — they contain
+**no invented metrics or outcome figures**, because the profile publishes none. In particular the
+site claims no client rating, no completed-project count and no marketplace ranking, since the
+profile currently records none of those.
+
+### Before publishing
+
+1. **Canonical URL** — `index.html`, `public/robots.txt` and `public/sitemap.xml` use
+   `https://artjom-liske.vercel.app/`. Swap in the real domain.
+2. **Profile link** — `profile.profileUrl` in `src/data/content.js` is empty, so the note at the
+   foot of the About card renders as plain text and the site carries no outbound link. Set it to the
+   public profile URL to turn that note into a link.
+
+## Project imagery
+
+The eight client projects come from the profile portfolio. Seven use **real screenshots of the
+delivered work**, stored in `src/assets/projects/` as WebP. Each renders at its own aspect ratio
+with `width`/`height` set from `imageSize` in `content.js`, so no layout shift occurs and nothing
+is cropped.
+
+The eighth — Product Listing, Vassalli — has no screenshot on file, so it falls back to an inline
+SVG of the storefront it was built in rather than to a stock photo standing in for a screenshot.
+
+### Reference builds
+
+Below the client work, the same grid carries **reference builds**: demonstrations of capabilities on
+the profile that have no client project attached. Three of them (the Telegram order bot, the
+WhatsApp booking bot and the multi-channel bot with agent handover) ship with captured screenshots;
+the rest are drawn as inline SVG in `ProjectScenes.jsx` and `ProjectScenesMore.jsx` — the interface
+each build would actually run in, at any resolution, with no network requests.
+
+They are **not** client deliveries and the site never presents them as such: each is numbered
+"Example 01/02" rather than "Project", carries a dashed *Reference build* badge, and a closing line
+under the grid states that everything else was delivered for a paying client. Remove `exampleMedia`
+and `exampleOrder` from `content.js` to drop them entirely.
+
+The portrait in `src/assets/avatar.webp` is the site's logo. It appears as the brand mark in the
+navigation, in the footer, in the About card, and as the browser tab icon (`public/favicon.png`,
+`favicon-32.png`, `apple-touch-icon.png`, all generated from the same file).
+
+## Design system
+
+Light editorial: warm off-white paper (`#faf9f6`), deep navy ink (`#0d1b30`), a single blue accent
+(`#1d4ed8`), Source Serif 4 for display headings and Inter for UI text. Structure is drawn with
+hairline rules rather than boxes. Every colour, radius, shadow and font is a custom property in
+`src/styles/global.css`, so the whole palette can be retuned from one place.
 
 ## Notes on the build
 
-- **Theme** — dark by default, toggled in React state and written to a `.dark`
-  class on `<html>`. No `localStorage`/`sessionStorage` anywhere.
-- **Languages** — EN/PT/ES, also state-only; see the Languages section above.
-- **Accessibility** — skip link, keyboard-reachable nav, visible focus rings,
-  `aria-current` on the active section, Escape/scroll-lock on the mobile drawer.
-  Skill levels are visible labels rather than hover-only text. All text pairs
-  meet WCAG AA in both themes.
-- **Motion** — `prefers-reduced-motion` is honoured globally and inside every
-  scroll reveal. `LazyMotion` ships only the Framer Motion features in use.
-- **No layout shift** — thumbnails are locked to a 16:9 box; fonts load with
-  `display=swap`.
+- **Performance** — no UI/animation/icon libraries; React + ReactDOM are the only dependencies.
+  Icons are inline SVG, visuals are inline SVG, fonts load with `display=swap`.
+- **SEO** — descriptive title/description/keywords, canonical, Open Graph, Twitter cards,
+  JSON-LD `Person` schema, semantic landmarks, one `<h1>`, `aria-labelledby` on every section.
+- **Accessibility** — skip link, visible focus rings, labelled controls, `prefers-reduced-motion`
+  disables animations and smooth scrolling.
+- **Responsive** — mobile-first, fluid `clamp()` type, breakpoints at 600 / 680 / 900 / 1024 / 1140px.
+
+As requested, the site contains no contact page, no contact form, no demo links and no pricing section.

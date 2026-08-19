@@ -1,54 +1,140 @@
-import { useContent } from "../i18n";
-import Reveal from "./ui/Reveal";
-import { Section, SectionHeading } from "./ui/Section";
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { useContent } from '../i18n/LanguageContext'
+import Icon from './ui/Icon'
+import Reveal from './ui/Reveal'
+import SectionHead from './ui/SectionHead'
+import './Skills.css'
+
+/* Long enough to read a panel before the next one arrives. */
+const DWELL_MS = 6500
 
 /**
- * Skill pill. The experience level is rendered as a visible label rather than
- * hover-only text, so it's available to touch and screen-reader users too.
+ * The stack as a deck of panels standing in depth.
+ *
+ * One discipline is face-on and fully readable; the rest stand behind it,
+ * receding and dimming, so the whole stack is visible as depth without six
+ * panels competing for the same attention. Choosing a discipline deals it to
+ * the front and the others fall in behind.
+ *
+ * It advances on its own until someone takes an interest - hovering or
+ * focusing pauses it, and choosing a discipline outright stops it, because
+ * after that the reader is driving and moving the deck under them would be
+ * rude.
  */
-function SkillPill({ name, level, t }) {
-  return (
-    <li className="group inline-flex items-center gap-2 rounded-full border border-line bg-surface py-1.5 pr-2 pl-3.5 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-accent-soft">
-      <span className="text-ink">{name}</span>
-      {level && (
-        <span className="rounded-full bg-surface-2 px-2 py-0.5 font-display text-[11px] font-semibold text-muted transition-colors duration-200 group-hover:text-accent">
-          <span className="sr-only">{t.ui.experience} </span>
-          {level}
-          <span className="sr-only">{t.ui.yearsSuffix}</span>
-        </span>
-      )}
-    </li>
-  );
-}
-
 export default function Skills() {
-  const { t, skillGroups } = useContent();
+  const { skills } = useContent()
+  const count = skills.categories.length
+  const [active, setActive] = useState(0)
+  const [held, setHeld] = useState(false)
+  const [taken, setTaken] = useState(false)
+  const tabs = useRef([])
+
+  useEffect(() => {
+    if (held || taken) return undefined
+    const timer = setInterval(() => setActive((i) => (i + 1) % count), DWELL_MS)
+    return () => clearInterval(timer)
+  }, [held, taken, count])
+
+  const choose = useCallback((index) => {
+    setActive(index)
+    setTaken(true)
+  }, [])
+
+  // Left and right walk the rail; the deck follows, as a tab strip should.
+  const onKeyDown = useCallback(
+    (event) => {
+      const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+      if (!step) return
+      event.preventDefault()
+      const next = (active + step + count) % count
+      choose(next)
+      tabs.current[next]?.focus()
+    },
+    [active, count, choose]
+  )
 
   return (
-    <Section id="skills">
-      <SectionHeading
-        eyebrow={t.sections.skills.eyebrow}
-        title={t.sections.skills.title}
-        lead={t.sections.skills.lead}
-      />
+    <section className="section section--alt" id="skills" aria-labelledby="skills-title">
+      <div className="container">
+        <SectionHead
+          id="skills-title"
+          center
+          eyebrow={skills.eyebrow}
+          title={skills.heading}
+          intro={skills.intro}
+        />
 
-      <div className="space-y-10">
-        {skillGroups.map((group, i) => (
-          <Reveal key={group.id} delay={i * 0.05}>
-            <div className="grid gap-5 border-t border-line pt-7 md:grid-cols-[180px_1fr] md:gap-8">
-              <h3 className="font-display text-sm font-semibold tracking-[0.14em] text-muted uppercase">
-                {group.name}
-              </h3>
+        <Reveal
+          className="deck"
+          onMouseEnter={() => setHeld(true)}
+          onMouseLeave={() => setHeld(false)}
+          onFocusCapture={() => setHeld(true)}
+          onBlurCapture={() => setHeld(false)}
+        >
+          <div className="deck__rail" role="tablist" aria-labelledby="skills-title" onKeyDown={onKeyDown}>
+            {skills.categories.map((category, index) => (
+              <button
+                key={category.name}
+                type="button"
+                role="tab"
+                id={`stack-tab-${index}`}
+                aria-selected={index === active}
+                aria-controls={`stack-panel-${index}`}
+                tabIndex={index === active ? 0 : -1}
+                ref={(node) => {
+                  tabs.current[index] = node
+                }}
+                className={`deck__pick ${index === active ? 'is-active' : ''}`.trim()}
+                onClick={() => choose(index)}
+              >
+                <span className="deck__pickIcon">
+                  <Icon name={category.icon} size={17} />
+                </span>
+                <span className="deck__pickText">
+                  <span className="deck__pickName">{category.name}</span>
+                  <span className="deck__pickCount">{category.items.length}</span>
+                </span>
+                {index === active && !taken && !held ? (
+                  <span className="deck__timer" style={{ '--dwell': `${DWELL_MS}ms` }} aria-hidden="true" />
+                ) : null}
+              </button>
+            ))}
+          </div>
 
-              <ul className="flex flex-wrap gap-2.5">
-                {group.skills.map((skill) => (
-                  <SkillPill key={skill.name} {...skill} t={t} />
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        ))}
+          <div className="deck__stage">
+            {skills.categories.map((category, index) => {
+              // Distance from the front of the deck, wrapping round the back.
+              const depth = (index - active + count) % count
+              return (
+                <article
+                  key={category.name}
+                  id={`stack-panel-${index}`}
+                  role="tabpanel"
+                  aria-labelledby={`stack-tab-${index}`}
+                  aria-hidden={depth !== 0}
+                  className={`deckCard ${depth === 0 ? 'is-front' : ''}`.trim()}
+                  style={{ '--depth': depth, '--of': count }}
+                >
+                  <span className="deckCard__icon">
+                    <Icon name={category.icon} size={22} />
+                  </span>
+                  <h3 className="deckCard__name">{category.name}</h3>
+                  <p className="deckCard__caption">{category.caption}</p>
+
+                  <ul className="deckCard__items">
+                    {category.items.map((item, i) => (
+                      <li key={item} className="deckCard__chip" style={{ '--i': i }}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              )
+            })}
+          </div>
+        </Reveal>
       </div>
-    </Section>
-  );
+    </section>
+  )
 }

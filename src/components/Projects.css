@@ -1,0 +1,720 @@
+/* ==========================================================================
+   Projects — filterable grid of tiles, full record in a dialog
+   ========================================================================== */
+
+/* Section band ------------------------------------------------------------ */
+
+.section--projects {
+  background:
+    radial-gradient(36rem 24rem at 88% 3%, rgba(14, 165, 233, 0.08), transparent 62%),
+    linear-gradient(180deg, var(--paper-sunken) 0%, var(--paper) 72%);
+  border-block: 1px solid var(--line-hair);
+}
+
+/* A faint dot grid, faded out before it reaches the cards so it reads as
+   texture behind the heading rather than noise under the content. */
+.section--projects::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dot-ink) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 42%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 42%);
+  pointer-events: none;
+}
+
+.section--projects > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Filter bar -------------------------------------------------------------- */
+
+.projects__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-raised);
+  color: var(--body);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease),
+    background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.filter:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+/* The count makes a filter's yield visible before it is pressed. */
+.filter__count {
+  min-width: 18px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: var(--paper-sunken);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-align: center;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.filter.is-active .filter__count {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.filter.is-active {
+  border-color: transparent;
+  background: var(--grad-brand);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Grid -------------------------------------------------------------------- */
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: clamp(18px, 2vw, 26px);
+  margin-top: clamp(26px, 3vw, 38px);
+}
+
+.projects__empty {
+  margin-top: 40px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Card -------------------------------------------------------------------- */
+
+/* The grid is the shared 3D space; each card tilts inside it. */
+.projects__grid {
+  perspective: 1200px;
+}
+
+.pcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  /* The card stays square to the reader and simply rises; the pointer moves
+     the light around it rather than turning the card itself. */
+  will-change: translate;
+  transition: translate 0.55s var(--ease), scale 0.35s var(--ease),
+    box-shadow 0.55s var(--ease), border-color 0.55s var(--ease);
+  /* Staggered entrance, ordered by position in the grid. `backwards` rather
+     than `both`: holding the final keyframe would leave the animation owning
+     transform after it finished, and the hover tilt would never take. */
+  animation: pcard-in 0.85s var(--ease) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes pcard-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px) rotateX(6deg) scale(0.98);
+  }
+}
+
+.pcard:active {
+  translate: 0 -3px;
+  scale: 0.988;
+  transition: translate 0.12s var(--ease), scale 0.12s var(--ease);
+}
+
+.pcard:hover,
+.pcard:focus-visible {
+  translate: 0 -10px;
+  border-color: transparent;
+  box-shadow: 0 40px 68px -34px rgba(13, 27, 48, 0.4);
+}
+
+/*
+ * The edge lights up where the pointer is. Drawn as a gradient behind the
+ * card and punched out to a one-pixel rim, which is the only way to give a
+ * border a gradient - `border-color` takes a single colour.
+ */
+.pcard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    340px circle at var(--sx, 50%) var(--sy, 50%),
+    var(--accent),
+    transparent 58%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease);
+}
+
+.pcard:hover::after,
+.pcard:focus-visible::after {
+  opacity: 1;
+}
+
+/* A soft pool of accent light under the copy, following the same point. */
+.pcard__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--sx, 50%) var(--sy, 50%),
+    var(--card-glow),
+    transparent 62%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.55s var(--ease);
+}
+
+.pcard:hover .pcard__glow {
+  opacity: 1;
+}
+
+/* Media ------------------------------------------------------------------- */
+
+.pcard__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  background: var(--paper-sunken);
+  overflow: hidden;
+}
+
+.pcard__shot,
+.pcard__media .projectVisual {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.95s var(--ease);
+}
+
+.pcard:hover .pcard__shot,
+.pcard:hover .pcard__media .projectVisual {
+  transform: scale(1.045);
+}
+
+/* Keeps the label legible over whatever the scene happens to be. */
+.pcard__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 27, 48, 0.42) 0%,
+    rgba(13, 27, 48, 0) 38%,
+    rgba(13, 27, 48, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* Sits over whatever the scene happens to be - some are near-white - so it
+   carries its own background rather than trusting the veil. */
+.pcard__index {
+  position: absolute;
+  top: 11px;
+  left: 12px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(13, 27, 48, 0.72);
+  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+.pcard__badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #33445e;
+  font-size: 9.5px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+/* Body -------------------------------------------------------------------- */
+
+.pcard__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 9px;
+  padding: 18px 20px 20px;
+}
+
+.pcard__category {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pcard__title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.pcard__overview {
+  color: var(--body);
+  font-size: 13.6px;
+  line-height: 1.62;
+  /* Two lines is enough to choose from; the dialog carries the rest. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pcard__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.chip--sm {
+  padding: 3px 9px;
+  font-size: 10.5px;
+}
+
+.pcard__more {
+  align-self: center;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+
+.pcard__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 12px;
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.pcard__cta svg {
+  transition: transform 0.4s var(--ease);
+}
+
+.pcard:hover .pcard__cta svg {
+  transform: translateX(4px);
+}
+
+/* Load more --------------------------------------------------------------- */
+
+.projects__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: clamp(28px, 3.5vw, 42px);
+}
+
+.loadMore {
+  padding: 11px 26px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease),
+    background 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.loadMore:hover {
+  border-color: transparent;
+  background: var(--grad-brand);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.projects__count {
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+
+/* Dialog ------------------------------------------------------------------ */
+
+.pdialog {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+  padding: clamp(12px, 3vw, 40px);
+  background: var(--scrim);
+  backdrop-filter: blur(5px);
+  animation: pdialog-veil 0.32s var(--ease) both;
+}
+
+@keyframes pdialog-veil {
+  from {
+    opacity: 0;
+  }
+}
+
+.pdialog__panel {
+  position: relative;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  width: min(880px, 100%);
+  max-height: min(88vh, 900px);
+  border-radius: var(--radius-xl);
+  background: var(--paper-solid);
+  box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.6);
+  /* The panel itself never scrolls, so the close button stays reachable no
+     matter how long the record is. */
+  overflow: hidden;
+  animation: pdialog-rise 0.44s var(--ease) both;
+}
+
+.pdialog__scroll {
+  display: grid;
+  max-height: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Opens as a panel swinging towards the reader rather than a box fading in. */
+@keyframes pdialog-rise {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) translate3d(0, 30px, -180px) rotateX(9deg);
+  }
+}
+
+.pdialog__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--overlay-raised);
+  color: var(--ink-soft);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.pdialog__close:hover {
+  background: var(--ink);
+  color: var(--on-ink);
+  transform: rotate(90deg);
+}
+
+.pdialog__media {
+  padding: 14px;
+  /* The page colour, which reads as recessed against the panel beside it. */
+  background: var(--paper);
+}
+
+.pdialog__shot,
+.pdialog__media .projectVisual {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-sunken);
+}
+
+.pdialog__body {
+  padding: 22px clamp(20px, 3.5vw, 34px) clamp(26px, 3.5vw, 34px);
+}
+
+.pdialog__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-right: 46px;
+}
+
+.pdialog__number {
+  display: inline-flex;
+  align-items: center;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pdialog__category {
+  position: relative;
+  padding-left: 14px;
+  color: var(--accent);
+}
+
+.pdialog__category::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+.pdialog__badge {
+  display: inline-flex;
+  padding: 3px 11px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pdialog__title {
+  margin-top: 12px;
+  font-size: clamp(23px, 2.4vw, 31px);
+  letter-spacing: -0.022em;
+}
+
+.pdialog__overview {
+  margin-top: 14px;
+  color: var(--body);
+  font-size: 15.2px;
+  line-height: 1.75;
+}
+
+.pdialog__block {
+  margin-top: 26px;
+}
+
+.pdialog__label {
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pdialog__label--inline {
+  color: var(--accent);
+}
+
+.pdialog__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.pdialog__features {
+  display: grid;
+  gap: 10px;
+  margin-top: 13px;
+}
+
+.pdialog__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-size: 14.2px;
+  line-height: 1.6;
+}
+
+.pdialog__features svg {
+  flex-shrink: 0;
+  margin-top: 6px;
+  color: var(--accent);
+}
+
+.pdialog__value {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 28px;
+  padding: 18px 20px;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--paper-tint);
+}
+
+.pdialog__valueIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--overlay-soft);
+  color: var(--accent);
+}
+
+.pdialog__value p {
+  margin-top: 7px;
+  color: var(--accent-ink);
+  font-size: 14.2px;
+  line-height: 1.68;
+}
+
+@media (min-width: 820px) {
+  .pdialog__scroll {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: stretch;
+  }
+
+  /* The column fills the panel so the tint reads as a panel rather than a
+     gap, while the visual itself stays put as the record scrolls past it. */
+  .pdialog__mediaInner {
+    position: sticky;
+    top: 16px;
+  }
+
+  .pdialog__body {
+    padding: 26px 30px 34px;
+  }
+}
+
+/* Capability examples ----------------------------------------------------- */
+
+.examples__head {
+  margin-top: clamp(56px, 7vw, 92px);
+  padding-top: clamp(40px, 5vw, 64px);
+  border-top: 1px solid var(--line);
+  max-width: 680px;
+}
+
+.examples__title {
+  margin-top: 4px;
+  font-size: clamp(24px, 2.6vw, 34px);
+  letter-spacing: -0.02em;
+}
+
+.examples__intro {
+  margin-top: 14px;
+  color: var(--body);
+  font-size: 15.5px;
+  max-width: 62ch;
+}
+
+.examples__note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-hair);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.examples__note svg {
+  flex-shrink: 0;
+  color: var(--faint);
+}
+
+/* Motion preferences ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard,
+  .pdialog,
+  .pdialog__panel {
+    animation: none;
+  }
+
+  .pcard,
+  .pcard:hover,
+  .pcard:focus-visible {
+    translate: none;
+    transition: box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+
+  .pcard__glow {
+    display: none;
+  }
+
+  .pcard:hover .pcard__shot,
+  .pcard:hover .pcard__media .projectVisual {
+    transform: none;
+  }
+}
+
+/* Touch and pen never get the tilt: there is no hover to lead it, and the
+   highlight would appear under the finger that is hiding it. */
+@media (hover: none), (pointer: coarse) {
+  .pcard,
+  .pcard:hover {
+    translate: none;
+  }
+
+  .pcard__glow,
+  .pcard::after {
+    display: none;
+  }
+}

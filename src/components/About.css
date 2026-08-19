@@ -1,0 +1,253 @@
+.about__grid {
+  display: grid;
+  gap: clamp(38px, 4.5vw, 64px);
+  align-items: start;
+}
+
+/* Editorial lead paragraph */
+.about__paragraph {
+  margin-bottom: 20px;
+  color: var(--body);
+  font-size: clamp(16px, 1.1vw, 17.5px);
+  max-width: 66ch;
+}
+
+.about__paragraph:first-of-type {
+  color: var(--ink-soft);
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.75vw, 23px);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.about__paragraph:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Highlights ------------------------------------------------------------- */
+
+.about__highlights {
+  display: grid;
+  gap: 26px;
+  margin-top: 46px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.about__highlight {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.about__highlightIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--paper-tint);
+  color: var(--accent);
+}
+
+.about__highlight h3 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.about__highlight p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+/* Aside card ------------------------------------------------------------- */
+
+.about__card {
+  padding: clamp(26px, 3vw, 34px);
+}
+
+.about__identity {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.about__avatar {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--paper-sunken);
+  box-shadow: 0 0 0 1px var(--line), 0 0 0 5px var(--paper-raised), 0 0 0 6px var(--accent-soft);
+}
+
+.about__name {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.about__title {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.about__facts {
+  position: relative;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 0;
+}
+
+.about__fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line-hair);
+}
+
+.about__fact:last-child {
+  border-bottom: 0;
+}
+
+.about__fact dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.about__fact dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Credentials blocks -------------------------------------------------- */
+
+.about__block {
+  position: relative;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-hair);
+}
+
+.about__blockTitle {
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about__certs {
+  margin-top: 14px;
+  display: grid;
+  gap: 9px;
+}
+
+.about__certs li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}
+
+.about__certs strong {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.about__langs {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.about__langs li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.about__langs strong {
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.about__langs span {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.about__note {
+  position: relative;
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  margin-top: 26px;
+  transition: background-color 0.3s var(--ease);
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: var(--paper-tint);
+  color: var(--accent-ink);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.about__note:hover {
+  background: var(--accent-soft);
+}
+
+/* Nothing to click when no profile URL is configured, so nothing lights up. */
+.about__note--static:hover {
+  background: var(--paper-tint);
+}
+
+.about__note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+/* Breakpoints ------------------------------------------------------------ */
+
+@media (min-width: 640px) {
+  .about__highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 34px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about__grid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+
+  .about__aside {
+    position: sticky;
+    top: calc(var(--nav-h) + 28px);
+  }
+}
