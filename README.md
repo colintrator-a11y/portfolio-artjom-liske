@@ -121,10 +121,28 @@ navigation, in the footer, in the About card, and as the browser tab icon (`publ
 
 ## Design system
 
-Light editorial: warm off-white paper (`#faf9f6`), deep navy ink (`#0d1b30`), a single blue accent
-(`#1d4ed8`), Source Serif 4 for display headings and Inter for UI text. Structure is drawn with
-hairline rules rather than boxes. Every colour, radius, shadow and font is a custom property in
-`src/styles/global.css`, so the whole palette can be retuned from one place.
+Dark technical: graphite ground (`#0c0d10`), an acid-lime accent (`#b6f24a`), Space Grotesk for
+display headings, Inter for body text and JetBrains Mono for labels, eyebrows and technology chips.
+Corners are nearly square (2–8px), structure is drawn with hairline rules, and the wireframe solids
+drifting behind the page are stroked in the accent.
+
+Every colour, radius, shadow and font is a custom property in `src/styles/global.css`, so the whole
+palette retunes from one place.
+
+**Dark is the base, not an override.** `:root` carries the dark palette and `:root[data-theme='light']`
+is the alternate, so a browser that never runs the boot script still paints the intended ground.
+
+Three accent tokens exist because they behave differently between the two themes, and mixing them up
+is the easy way to produce unreadable text:
+
+| Token | What it is | Light | Dark |
+| --- | --- | --- | --- |
+| `--accent` | the readable *text* tone — links, icons, eyebrows | deep olive | lime |
+| `--accent-fill` | the brand colour as a *fill* — primary button, markers | lime | lime |
+| `--grad-brand` | the accent→cyan gradient — active filter, active skill tab | deep | bright |
+
+`--accent-fill` never flips, so anything painted with it takes `--on-accent`. `--grad-brand` does
+flip, so anything painted with it takes `--on-brand`. The two are not interchangeable.
 
 ## Notes on the build
 

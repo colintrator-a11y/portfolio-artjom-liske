@@ -44,7 +44,7 @@
   min-width: 176px;
   padding: 6px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--paper-raised);
   box-shadow: var(--shadow-md);
   opacity: 0;
@@ -128,7 +128,7 @@
 .langInline__btn {
   padding: 9px 16px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--paper-raised);
   color: var(--body);
   font-size: 14px;

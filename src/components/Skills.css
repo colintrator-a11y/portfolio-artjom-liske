@@ -45,7 +45,7 @@
 .deck__pick.is-active {
   border-color: transparent;
   background: var(--grad-brand);
-  color: #fff;
+  color: var(--on-brand);
   box-shadow: var(--shadow-md);
 }
 
@@ -62,8 +62,8 @@
 }
 
 .deck__pick.is-active .deck__pickIcon {
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.14);
+  color: var(--on-brand);
 }
 
 .deck__pickText {
@@ -90,7 +90,9 @@
   left: 0;
   bottom: 0;
   height: 2px;
-  background: rgba(255, 255, 255, 0.85);
+  /* Runs across the active tab, which is the bright gradient - so it darkens
+     rather than lightens, or it would be invisible on the lime end. */
+  background: rgba(0, 0, 0, 0.5);
   animation: deck-dwell var(--dwell) linear forwards;
 }
 
@@ -141,8 +143,12 @@
     box-shadow 0.72s var(--ease);
 }
 
+/* The front panel has to be solid, not merely opaque-valued: with a
+   translucent surface the panels standing behind it read straight through the
+   card in front, and their headings collide with its own. */
 .deckCard.is-front {
   opacity: 1;
+  background: var(--paper-solid);
   box-shadow: var(--shadow-lg);
   pointer-events: auto;
 }
@@ -152,7 +158,7 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--accent-soft);
   color: var(--accent);
 }
@@ -183,7 +189,7 @@
 .deckCard__chip {
   padding: 7px 14px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--paper);
   color: var(--ink-soft);
   font-size: 13px;

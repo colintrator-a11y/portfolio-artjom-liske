@@ -1,56 +1,77 @@
 /* ==========================================================================
    Design tokens + base layer
-   Light editorial: warm off-white paper, deep navy ink, blue accent,
-   serif display headings, hairline rules, generous whitespace.
+   Dark technical: graphite ground, acid-lime accent, grotesk display with
+   monospace labels, tight geometry, hairline rules.
+
+   Dark is the base rather than an override, so a browser that never runs the
+   boot script still gets the intended page. The light palette below is the
+   alternate.
    ========================================================================== */
 
 :root {
-  /* Paper. Everything above the backdrop is translucent, so the field drifting
-     behind the page is visible through it; only --paper itself is solid,
-     because it is what the backdrop paints. */
-  --paper: #faf9f6;
-  --paper-raised: rgba(255, 255, 255, 0.58);
-  --paper-sunken: rgba(240, 239, 233, 0.4);
-  --paper-tint: rgba(238, 243, 251, 0.64);
-  --paper-solid: #ffffff;
+  /* Ground. Everything above the backdrop is translucent, so the wireframe
+     field drifting behind the page shows through it; only --paper is solid,
+     because it is what the backdrop paints on. */
+  --paper: #0c0d10;
+  /* Opaque enough to occlude: the skills deck stands cards in depth behind one
+     another, and a near-transparent surface let every card behind bleed through
+     the one in front. Still short of solid, so the backdrop glows faintly. */
+  --paper-raised: rgba(24, 27, 32, 0.72);
+  --paper-sunken: rgba(0, 0, 0, 0.22);
+  --paper-tint: rgba(182, 242, 74, 0.07);
+  --paper-solid: #131519;
   /* Dims the page behind a dialog. Has to be its own value: a fixed dark wash
      barely registers once the page beneath it is already dark. */
-  --scrim: rgba(9, 18, 33, 0.55);
+  --scrim: rgba(3, 4, 6, 0.8);
 
   /* Ink */
-  --ink: #0d1b30;
-  --ink-soft: #33445e;
-  --body: #4a5a72;
-  --muted: #77869c;
-  --faint: #9aa6b8;
+  --ink: #f2f4f2;
+  --ink-soft: #c9cec8;
+  --body: #9aa19b;
+  --muted: #767d78;
+  --faint: #5a615c;
 
-  /* Accent */
-  --accent: #1d4ed8;
-  --accent-hover: #1a44bd;
-  --accent-soft: #dbe7fb;
-  --accent-ink: #12356f;
-  --sky: #0ea5e9;
+  /* Accent.
+     --accent is the readable *text* tone and flips between themes.
+     --accent-fill is the lime itself and does NOT flip: it stays the brand
+     mark on buttons and markers in both themes, always carrying --on-accent
+     as its text colour. */
+  --accent: #b6f24a;
+  --accent-hover: #c8f870;
+  --accent-fill: #b6f24a;
+  --on-accent: #0c0d10;
+  --accent-soft: rgba(182, 242, 74, 0.14);
+  --accent-ink: #d4f88f;
+  --sky: #4ad2f2;
+
+  /* Accent derivatives, so no rule has to spell the lime out in rgba() and
+     then fail to follow the theme. */
+  --accent-wash: rgba(182, 242, 74, 0.07);
+  --accent-ring: rgba(182, 242, 74, 0.5);
+  --accent-line: rgba(182, 242, 74, 0.34);
+  --accent-shadow: 0 16px 34px -18px rgba(182, 242, 74, 0.45);
 
   /* Lines */
-  --line: rgba(13, 27, 48, 0.1);
-  --line-strong: rgba(13, 27, 48, 0.18);
-  --line-hair: rgba(13, 27, 48, 0.07);
+  --line: rgba(242, 244, 242, 0.1);
+  --line-strong: rgba(242, 244, 242, 0.2);
+  --line-hair: rgba(242, 244, 242, 0.06);
 
   /* Gradients */
-  --grad-brand: linear-gradient(120deg, #1d4ed8 0%, #0ea5e9 100%);
-  --grad-text: linear-gradient(115deg, #1d4ed8 0%, #0284c7 60%, #0ea5e9 100%);
+  --grad-brand: linear-gradient(120deg, #b6f24a 0%, #4ad2f2 100%);
+  --on-brand: #0c0d10;
+  --grad-text: linear-gradient(115deg, #d4f88f 0%, #b6f24a 45%, #4ad2f2 100%);
 
-  /* Shadows — soft, navy-tinted, never grey */
-  --shadow-xs: 0 1px 2px rgba(13, 27, 48, 0.05);
-  --shadow-sm: 0 2px 8px -2px rgba(13, 27, 48, 0.08);
-  --shadow-md: 0 14px 34px -18px rgba(13, 27, 48, 0.24);
-  --shadow-lg: 0 34px 70px -34px rgba(13, 27, 48, 0.3);
+  /* Shadows carry no light on a dark ground; they only deepen it. */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 14px 34px -18px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 34px 70px -34px rgba(0, 0, 0, 0.9);
 
-  /* Geometry — editorial keeps corners restrained */
-  --radius-sm: 6px;
-  --radius: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
+  /* Geometry — technical keeps corners nearly square */
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
 
   /* Layout */
   --container: 1180px;
@@ -59,93 +80,99 @@
 
   /* Text that sits on an --ink background. --ink inverts between themes, so
      anything painted with it needs a partner that inverts with it. */
-  --on-ink: #ffffff;
-  --footer-bg: var(--ink);
+  --on-ink: #0c0d10;
+  --footer-bg: #08090b;
   /* The header once it leaves the top of the page. Translucent, so it has to
      name its own colour rather than inherit one. */
-  --nav-scrolled: rgba(250, 249, 246, 0.86);
-  --nav-shadow: 0 1px 0 rgba(13, 27, 48, 0.02), 0 12px 30px -26px rgba(13, 27, 48, 0.4);
+  --nav-scrolled: rgba(12, 13, 16, 0.88);
+  --nav-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 12px 30px -26px rgba(0, 0, 0, 0.9);
 
   /* Surfaces that float above content and cannot inherit its background */
-  --overlay-raised: rgba(255, 255, 255, 0.9);
-  --overlay-soft: rgba(255, 255, 255, 0.75);
-  --card-glow: rgba(29, 78, 216, 0.09);
-  --cursor-glow: rgba(29, 78, 216, 0.1);
-  --grid-ink: rgba(13, 27, 48, 0.045);
-  --dot-ink: rgba(13, 27, 48, 0.06);
+  --overlay-raised: rgba(19, 21, 25, 0.94);
+  --overlay-soft: rgba(255, 255, 255, 0.06);
+  --card-glow: rgba(182, 242, 74, 0.1);
+  --cursor-glow: rgba(182, 242, 74, 0.1);
+  --grid-ink: rgba(242, 244, 242, 0.04);
+  --dot-ink: rgba(242, 244, 242, 0.055);
 
   /* Motion */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 0.5s;
 
   /* Type */
-  --font-serif: 'Source Serif 4', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
     sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  color-scheme: dark;
 }
 
 
 /* ==========================================================================
-   Dark theme
-   The light palette above stays the base, so a browser with no JavaScript
-   still gets a complete, readable page. `data-theme` is stamped on <html>
-   before the first paint, and dark is what the document ships with.
+   Light theme
+   The alternate, stamped on <html> by the boot script in index.html before
+   the first paint so the page never flashes the wrong ground.
+
+   The lime is far too bright to read as text on a light ground, so --accent
+   drops to a deep olive here while --accent-fill stays lime: the brand colour
+   survives on buttons and markers, and text stays legible.
    ========================================================================== */
 
-:root[data-theme='dark'] {
-  /* Paper — deep navy rather than grey, so it stays the same family as the ink */
-  --paper: #0b1120;
-  --paper-raised: rgba(20, 30, 50, 0.5);
-  --paper-sunken: rgba(12, 20, 35, 0.34);
-  --paper-tint: rgba(23, 38, 65, 0.56);
-  --paper-solid: #121c2f;
-  --scrim: rgba(3, 7, 15, 0.74);
+:root[data-theme='light'] {
+  --paper: #f3f4f0;
+  --paper-raised: rgba(255, 255, 255, 0.72);
+  --paper-sunken: rgba(0, 0, 0, 0.028);
+  --paper-tint: rgba(103, 150, 10, 0.08);
+  --paper-solid: #ffffff;
+  --scrim: rgba(16, 18, 14, 0.5);
 
-  /* Ink */
-  --ink: #eaf0fb;
-  --ink-soft: #c5d1e6;
-  --body: #a2b3cc;
-  --muted: #8092ab;
-  --faint: #64758f;
+  --ink: #14161a;
+  --ink-soft: #34383a;
+  --body: #4e5450;
+  --muted: #74796f;
+  --faint: #9aa096;
 
-  /* Accent — lifted, because the light-mode blue is too dark to read on navy */
-  --accent: #6aa8fb;
-  --accent-hover: #8bbcfd;
-  --accent-soft: #1b2f52;
-  --accent-ink: #d3e2ff;
-  --sky: #38bdf8;
+  --accent: #4a7c00;
+  --accent-hover: #3c6600;
+  --accent-fill: #b6f24a;
+  --on-accent: #14161a;
+  --accent-soft: rgba(103, 150, 10, 0.16);
+  --accent-ink: #2f5200;
+  --sky: #0891b2;
 
-  /* Lines */
-  --line: rgba(234, 240, 251, 0.13);
-  --line-strong: rgba(234, 240, 251, 0.24);
-  --line-hair: rgba(234, 240, 251, 0.08);
+  --accent-wash: rgba(74, 124, 0, 0.06);
+  --accent-ring: rgba(74, 124, 0, 0.4);
+  --accent-line: rgba(74, 124, 0, 0.3);
+  --accent-shadow: 0 16px 34px -18px rgba(74, 124, 0, 0.5);
 
-  --grad-brand: linear-gradient(120deg, #3b82f6 0%, #22d3ee 100%);
-  --grad-text: linear-gradient(115deg, #7cb5fb 0%, #38bdf8 60%, #22d3ee 100%);
+  --line: rgba(20, 22, 26, 0.12);
+  --line-strong: rgba(20, 22, 26, 0.22);
+  --line-hair: rgba(20, 22, 26, 0.075);
 
-  /* Shadows carry no light on a dark ground; they only deepen it. */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 14px 34px -18px rgba(0, 0, 0, 0.75);
-  --shadow-lg: 0 34px 70px -34px rgba(0, 0, 0, 0.85);
+  --grad-brand: linear-gradient(120deg, #4a7c00 0%, #0891b2 100%);
+  --on-brand: #ffffff;
+  --grad-text: linear-gradient(115deg, #4a7c00 0%, #2f7d3a 55%, #0891b2 100%);
 
-  --on-ink: #0b1120;
-  --nav-scrolled: rgba(10, 16, 30, 0.86);
-  --nav-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 30px -26px rgba(0, 0, 0, 0.9);
-  /* Deeper than the page, so the footer still reads as its own field rather
-     than the near-white slab --ink would now paint. */
-  --footer-bg: #070d18;
+  --shadow-xs: 0 1px 2px rgba(20, 22, 26, 0.05);
+  --shadow-sm: 0 2px 8px -2px rgba(20, 22, 26, 0.09);
+  --shadow-md: 0 14px 34px -18px rgba(20, 22, 26, 0.26);
+  --shadow-lg: 0 34px 70px -34px rgba(20, 22, 26, 0.32);
 
-  --overlay-raised: rgba(18, 28, 47, 0.92);
-  --overlay-soft: rgba(255, 255, 255, 0.08);
-  /* Accent light pools further on a dark ground before it looks like glare. */
-  --card-glow: rgba(106, 168, 251, 0.14);
-  --cursor-glow: rgba(106, 168, 251, 0.13);
-  --grid-ink: rgba(234, 240, 251, 0.05);
-  --dot-ink: rgba(234, 240, 251, 0.06);
+  --on-ink: #f3f4f0;
+  --footer-bg: var(--ink);
+  --nav-scrolled: rgba(243, 244, 240, 0.88);
+  --nav-shadow: 0 1px 0 rgba(20, 22, 26, 0.02), 0 12px 30px -26px rgba(20, 22, 26, 0.42);
 
-  color-scheme: dark;
+  --overlay-raised: rgba(255, 255, 255, 0.94);
+  --overlay-soft: rgba(255, 255, 255, 0.8);
+  --card-glow: rgba(74, 124, 0, 0.1);
+  --cursor-glow: rgba(74, 124, 0, 0.1);
+  --grid-ink: rgba(20, 22, 26, 0.045);
+  --dot-ink: rgba(20, 22, 26, 0.06);
+
+  color-scheme: light;
 }
 
 *,
@@ -180,11 +207,11 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-weight: 600;
   color: var(--ink);
-  line-height: 1.18;
-  letter-spacing: -0.015em;
+  line-height: 1.14;
+  letter-spacing: -0.028em;
 }
 
 h4 {
@@ -230,7 +257,7 @@ svg {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* --------------------------------------------------------------------------
@@ -269,31 +296,30 @@ svg {
   text-align: center;
 }
 
-/* Eyebrow: a rule and a small-caps label, not a pill */
+/* Eyebrow: a rule and a monospace label, not a pill */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
   color: var(--accent);
-  font-family: var(--font-sans);
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .eyebrow::before {
   content: '';
-  width: 26px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.55;
+  width: 22px;
+  height: 2px;
+  background: var(--accent-fill);
 }
 
 .section__title {
   font-size: clamp(31px, 4vw, 50px);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.032em;
 }
 
 .section__intro {
@@ -332,11 +358,11 @@ svg {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-size: 15px;
+  padding: 14px 26px;
+  border-radius: var(--radius);
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
     background-color 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
@@ -350,15 +376,17 @@ svg {
   transform: translateY(0);
 }
 
+/* The lime carries --on-accent rather than --on-ink: it is the one surface
+   whose text colour must not flip with the theme, because the fill does not. */
 .btn--primary {
-  color: var(--on-ink);
-  background: var(--ink);
+  color: var(--on-accent);
+  background: var(--accent-fill);
   box-shadow: var(--shadow-md);
 }
 
 .btn--primary:hover {
-  background: var(--accent);
-  box-shadow: 0 18px 36px -18px rgba(29, 78, 216, 0.65);
+  background: var(--accent-hover);
+  box-shadow: var(--accent-shadow);
 }
 
 .btn--ghost {
@@ -368,9 +396,9 @@ svg {
 }
 
 .btn--ghost:hover {
-  border-color: var(--accent);
+  border-color: var(--accent-line);
   color: var(--accent);
-  background: rgba(29, 78, 216, 0.04);
+  background: var(--accent-wash);
 }
 
 .btn__icon {
@@ -390,19 +418,20 @@ svg {
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 5px 13px;
+  padding: 5px 11px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--paper-raised);
   color: var(--ink-soft);
-  font-size: 13px;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 400;
   transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background-color 0.3s var(--ease);
 }
 
 .chip:hover {
   color: var(--accent-ink);
-  border-color: rgba(29, 78, 216, 0.32);
+  border-color: var(--accent-line);
   background: var(--paper-tint);
 }
 
@@ -480,7 +509,7 @@ svg {
   right: -160px;
   width: 660px;
   height: 660px;
-  background: radial-gradient(circle, rgba(29, 78, 216, 0.16), transparent 68%);
+  background: radial-gradient(circle, var(--card-glow), transparent 68%);
   animation: orb-drift 26s var(--ease) infinite alternate;
   translate: calc(var(--px) * 40px) calc(var(--py) * 26px);
   transition: translate 0.8s var(--ease);
@@ -505,7 +534,7 @@ svg {
   bottom: -220px;
   width: 620px;
   height: 620px;
-  background: radial-gradient(circle, rgba(29, 78, 216, 0.11), transparent 70%);
+  background: radial-gradient(circle, var(--cursor-glow), transparent 70%);
   animation: orb-drift 38s var(--ease) infinite alternate;
   translate: calc(var(--px) * 20px) calc(var(--py) * -14px);
   transition: translate 0.8s var(--ease);

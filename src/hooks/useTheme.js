@@ -6,8 +6,8 @@ const LIGHT = 'light'
 
 /** What the boot script in index.html already stamped on the document. */
 function current() {
-  if (typeof document === 'undefined') return LIGHT
-  return document.documentElement.dataset.theme === DARK ? DARK : LIGHT
+  if (typeof document === 'undefined') return DARK
+  return document.documentElement.dataset.theme === LIGHT ? LIGHT : DARK
 }
 
 /**
@@ -25,7 +25,7 @@ export default function useTheme() {
 
     // Keep the browser's own chrome - address bar, task switcher - in step.
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute('content', theme === DARK ? '#0b1120' : '#faf9f6')
+    if (meta) meta.setAttribute('content', theme === DARK ? '#0c0d10' : '#f3f4f0')
 
     try {
       localStorage.setItem(KEY, theme)

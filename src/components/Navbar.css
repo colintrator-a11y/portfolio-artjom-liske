@@ -34,7 +34,7 @@
 .nav__mark {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius);
   object-fit: cover;
   background: var(--paper-sunken);
   box-shadow: 0 0 0 1px var(--line), 0 0 0 3px var(--paper), 0 0 0 4px var(--accent-soft);
@@ -42,7 +42,7 @@
 }
 
 .nav__brand:hover .nav__mark {
-  box-shadow: 0 0 0 1px var(--line), 0 0 0 3px var(--paper), 0 0 0 4px rgba(29, 78, 216, 0.45);
+  box-shadow: 0 0 0 1px var(--line), 0 0 0 3px var(--paper), 0 0 0 4px var(--accent-ring);
 }
 
 .nav__brandText {
@@ -53,7 +53,7 @@
 
 .nav__brandText strong {
   color: var(--ink);
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -180,7 +180,7 @@
   padding: 16px 2px;
   border-bottom: 1px solid var(--line-hair);
   color: var(--ink-soft);
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 20px;
   font-weight: 600;
   opacity: 0;
@@ -213,7 +213,7 @@
   position: fixed;
   inset: var(--nav-h) 0 0;
   z-index: 1;
-  background: rgba(13, 27, 48, 0.25);
+  background: rgba(6, 7, 9, 0.55);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s var(--ease), visibility 0.4s;

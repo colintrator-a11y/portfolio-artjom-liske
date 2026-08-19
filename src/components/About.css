@@ -14,7 +14,7 @@
 
 .about__paragraph:first-of-type {
   color: var(--ink-soft);
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(19px, 1.75vw, 23px);
   line-height: 1.6;
   letter-spacing: -0.01em;
@@ -83,7 +83,7 @@
   flex-shrink: 0;
   width: 72px;
   height: 72px;
-  border-radius: 50%;
+  border-radius: var(--radius);
   object-fit: cover;
   background: var(--paper-sunken);
   box-shadow: 0 0 0 1px var(--line), 0 0 0 5px var(--paper-raised), 0 0 0 6px var(--accent-soft);

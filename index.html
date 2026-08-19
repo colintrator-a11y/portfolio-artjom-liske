@@ -1,14 +1,17 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#faf9f6" />
+    <meta name="theme-color" content="#0c0d10" />
 
     <!--
       Applies the saved theme before the first paint. Inline and synchronous on
       purpose: loading it as a module would let the default paint first and the
       page would flash the wrong theme on every visit.
+
+      Dark is the default in the tag above, so a visitor who has never chosen
+      gets the intended ground even if this script never runs.
     -->
     <script>
       (function () {
@@ -18,7 +21,7 @@
             document.documentElement.dataset.theme = saved
           }
         } catch (e) {
-          /* Private mode blocks storage; the light default in the tag stands. */
+          /* Private mode blocks storage; the dark default in the tag stands. */
         }
       })()
     </script>
@@ -65,7 +68,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 

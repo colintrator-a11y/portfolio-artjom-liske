@@ -65,7 +65,7 @@ const en = {
     rightsReserved: 'All rights reserved.',
     builtWith: 'Designed & developed with React — engineered for performance and accessibility.',
   },
-  profileTitle: 'Full Stack Developer | Web, Mobile & E-Commerce',
+  profileTitle: 'Full Stack Developer | Web, Mobile & E‑Commerce',
   navRole: 'Full Stack Developer',
   tagline: 'Freelancer expert in IT & Programming, building reliable, scalable and modern digital solutions.',
   nav: {
@@ -78,8 +78,8 @@ const en = {
   },
   hero: {
     badge: 'Preferred Freelancer of the Quarter · IT & Programming',
-    headline: 'Building Scalable Web, Mobile & E-Commerce Solutions for Modern Businesses',
-    headlineAccent: 'E-Commerce Solutions',
+    headline: 'Building Scalable Web, Mobile & E‑Commerce Solutions for Modern Businesses',
+    headlineAccent: 'E‑Commerce Solutions',
     intro:
       'I am Artjom Liske, a full stack developer based in Germany. I build websites and web and mobile applications that genuinely work well — fast, clear and easy to use on any screen. Working independently since 2014, I have delivered booking platforms, mobile applications, e-commerce stores, corporate sites and workflow automation for clients across Europe and Latin America.',
     primaryCta: 'View Projects',
@@ -90,7 +90,7 @@ const en = {
       'Languages Spoken',
       'Certifications Passed',
     ],
-    pillars: ['Full-Stack', 'Mobile', 'E-Commerce', 'APIs'],
+    pillars: ['Full-Stack', 'Mobile', 'E‑Commerce', 'APIs'],
   },
   about: {
     eyebrow: 'About Me',
@@ -871,7 +871,7 @@ const pt = {
     rightsReserved: 'Todos os direitos reservados.',
     builtWith: 'Desenhado e desenvolvido com React — otimizado para desempenho e acessibilidade.',
   },
-  profileTitle: 'Desenvolvedor Full Stack | Web, Mobile e E-Commerce',
+  profileTitle: 'Desenvolvedor Full Stack | Web, Mobile e E‑Commerce',
   navRole: 'Desenvolvedor Full Stack',
   tagline:
     'Freelancer especialista em TI e Programação, a criar soluções digitais fiáveis, escaláveis e modernas.',
@@ -886,8 +886,8 @@ const pt = {
   hero: {
     badge: 'Freelancer Preferido do Trimestre · TI e Programação',
     headline:
-      'Criando Soluções Web, Mobile e de E-Commerce Escaláveis para Empresas Modernas',
-    headlineAccent: 'E-Commerce Escaláveis',
+      'Criando Soluções Web, Mobile e de E‑Commerce Escaláveis para Empresas Modernas',
+    headlineAccent: 'E‑Commerce Escaláveis',
     intro:
       'Sou Artjom Liske, desenvolvedor full stack baseado na Alemanha. Construo sites e aplicações web e mobile que funcionam mesmo bem — rápidos, claros e fáceis de usar em qualquer ecrã. A trabalhar de forma independente desde 2014, entreguei plataformas de reservas, aplicações móveis, lojas de e-commerce, sites empresariais e automação de processos para clientes na Europa e na América Latina.',
     primaryCta: 'Ver Projetos',
@@ -898,7 +898,7 @@ const pt = {
       'Idiomas Falados',
       'Certificações Concluídas',
     ],
-    pillars: ['Full-Stack', 'Mobile', 'E-Commerce', 'APIs'],
+    pillars: ['Full-Stack', 'Mobile', 'E‑Commerce', 'APIs'],
   },
   about: {
     eyebrow: 'Sobre Mim',
@@ -1679,7 +1679,7 @@ const es = {
     rightsReserved: 'Todos los derechos reservados.',
     builtWith: 'Diseñado y desarrollado con React — optimizado para rendimiento y accesibilidad.',
   },
-  profileTitle: 'Desarrollador Full Stack | Web, Móvil y E-Commerce',
+  profileTitle: 'Desarrollador Full Stack | Web, Móvil y E‑Commerce',
   navRole: 'Desarrollador Full Stack',
   tagline:
     'Freelancer experto en TI y Programación, creando soluciones digitales fiables, escalables y modernas.',
@@ -1694,8 +1694,8 @@ const es = {
   hero: {
     badge: 'Freelancer Preferido del Trimestre · TI y Programación',
     headline:
-      'Creando Soluciones Web, Móviles y de E-Commerce Escalables para Empresas Modernas',
-    headlineAccent: 'E-Commerce Escalables',
+      'Creando Soluciones Web, Móviles y de E‑Commerce Escalables para Empresas Modernas',
+    headlineAccent: 'E‑Commerce Escalables',
     intro:
       'Soy Artjom Liske, desarrollador full stack radicado en Alemania. Construyo sitios y aplicaciones web y móviles que funcionan realmente bien: rápidas, claras y fáciles de usar en cualquier pantalla. Trabajando de forma independiente desde 2014, he entregado plataformas de reservas, aplicaciones móviles, tiendas de e-commerce, sitios corporativos y automatización de procesos para clientes de Europa y América Latina.',
     primaryCta: 'Ver Proyectos',
@@ -1706,7 +1706,7 @@ const es = {
       'Idiomas Hablados',
       'Certificaciones Superadas',
     ],
-    pillars: ['Full-Stack', 'Móvil', 'E-Commerce', 'APIs'],
+    pillars: ['Full-Stack', 'Móvil', 'E‑Commerce', 'APIs'],
   },
   about: {
     eyebrow: 'Sobre Mí',
@@ -2488,7 +2488,7 @@ const de = {
     rightsReserved: 'Alle Rechte vorbehalten.',
     builtWith: 'Gestaltet und entwickelt mit React — auf Performance und Barrierefreiheit ausgelegt.',
   },
-  profileTitle: 'Full Stack Developer | Web, Mobile & E-Commerce',
+  profileTitle: 'Full Stack Developer | Web, Mobile & E‑Commerce',
   navRole: 'Full Stack Developer',
   tagline:
     'Freelancer und Experte für IT & Programmierung — für verlässliche, skalierbare und moderne digitale Lösungen.',
@@ -2503,8 +2503,8 @@ const de = {
   hero: {
     badge: 'Bevorzugter Freelancer des Quartals · IT & Programmierung',
     headline:
-      'Skalierbare Web-, Mobile- und E-Commerce-Lösungen für moderne Unternehmen',
-    headlineAccent: 'E-Commerce-Lösungen',
+      'Skalierbare Web-, Mobile- und E‑Commerce-Lösungen für moderne Unternehmen',
+    headlineAccent: 'E‑Commerce-Lösungen',
     intro:
       'Ich bin Artjom Liske, Full Stack Developer aus Deutschland. Ich baue Websites sowie Web- und Mobile-Anwendungen, die wirklich gut funktionieren — schnell, klar und auf jedem Bildschirm einfach zu bedienen. Seit 2014 arbeite ich selbstständig und habe Buchungsplattformen, mobile Anwendungen, Onlineshops, Unternehmenswebsites und Prozessautomatisierung für Kunden in Europa und Lateinamerika umgesetzt.',
     primaryCta: 'Projekte ansehen',
@@ -2515,7 +2515,7 @@ const de = {
       'Gesprochene Sprachen',
       'Bestandene Zertifizierungen',
     ],
-    pillars: ['Full-Stack', 'Mobile', 'E-Commerce', 'APIs'],
+    pillars: ['Full-Stack', 'Mobile', 'E‑Commerce', 'APIs'],
   },
   about: {
     eyebrow: 'Über mich',

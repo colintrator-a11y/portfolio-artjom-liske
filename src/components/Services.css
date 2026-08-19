@@ -40,14 +40,14 @@
   width: 46px;
   height: 46px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: var(--paper);
   color: var(--accent);
   transition: color 0.45s var(--ease), border-color 0.45s var(--ease), transform 0.45s var(--ease);
 }
 
 .service:hover .service__icon {
-  border-color: rgba(29, 78, 216, 0.3);
+  border-color: var(--accent-line);
   transform: translateY(-2px);
 }
 
