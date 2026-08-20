@@ -78,10 +78,6 @@ const pillarDetails = [
   'REST APIs · Integrations · Chatbots',
 ]
 
-/* Two of these caption the portrait in the hero; all four caption the skills
-   panel. Kept beside the details so a pillar cannot lose its icon. */
-const pillarIcons = ['layers', 'mobile', 'cart', 'api']
-
 const serviceIcons = ['layers', 'cart', 'mobile', 'api', 'layout', 'ai']
 
 const skillIcons = ['layout', 'server', 'mobile', 'cart', 'tools', 'ai']
@@ -428,11 +424,7 @@ export function buildContent(lang) {
       primaryCta: { label: t.hero.primaryCta, target: 'projects' },
       secondaryCta: { label: t.hero.secondaryCta, target: 'skills' },
       stats: t.hero.stats.map((label, i) => ({ value: statValues[i], label })),
-      pillars: t.hero.pillars.map((title, i) => ({
-        title,
-        detail: pillarDetails[i],
-        icon: pillarIcons[i],
-      })),
+      pillars: t.hero.pillars.map((title, i) => ({ title, detail: pillarDetails[i] })),
     },
 
     about: {

@@ -40,7 +40,7 @@ src/
     PanelRail.jsx        panel-position marks down the right edge (desktop)
     LanguageSwitcher.jsx dropdown in the header, button row in the drawer
     Hero.jsx             panel 01 — claim, CTAs, stat band
-    HeroPortrait.jsx     the portrait, with two stack captions floating beside it
+    HeroPortrait.jsx     the portrait in its gradient frame
     About.jsx            panel 02 — biography, highlights, credentials strip
     Services.jsx         panel 03 — six service tiles
     Skills.jsx           panel 04 — stack summaries + six category tiles

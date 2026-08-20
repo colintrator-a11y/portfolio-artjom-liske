@@ -69,7 +69,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <HeroPortrait avatar={profile.avatar} pillars={hero.pillars} />
+        <HeroPortrait avatar={profile.avatar} />
       </div>
 
       <ul className="hero__stats">

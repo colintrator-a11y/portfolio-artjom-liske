@@ -1,24 +1,15 @@
-import Icon from './ui/Icon'
-
 /**
- * The portrait that opens the page, with two stack captions floating beside it.
+ * The portrait that opens the page.
  *
  * This replaced a mocked-up code window. The window was a drawing of a file
  * that does not exist; the portrait is the person the visitor is deciding
  * whether to hire, which is the more useful thing to put at eye level.
  *
- * The captions are the last two pillars rather than hard-coded strings - the
- * window's badges were the only English left on a site that ships in four
- * languages.
- *
  * `alt` is empty and the figure is hidden from the accessibility tree: the
- * about panel carries the same portrait with a real description, and a
- * screen reader gaining "portrait of Artjom Liske" twice is noise. The
- * captions repeat pillars that the skills panel also lists.
+ * about panel carries the same portrait with a real description, and a screen
+ * reader gaining "portrait of Artjom Liske" twice is noise.
  */
-export default function HeroPortrait({ avatar, pillars }) {
-  const captions = pillars.slice(2)
-
+export default function HeroPortrait({ avatar }) {
   return (
     <div className="hero__visual" aria-hidden="true">
       <figure className="portrait">
@@ -32,18 +23,6 @@ export default function HeroPortrait({ avatar, pillars }) {
         />
         <span className="portrait__sheen" />
       </figure>
-
-      {captions.map((pillar, i) => (
-        <div key={pillar.title} className={`heroBadge heroBadge--${i + 1}`}>
-          <span className="heroBadge__icon">
-            <Icon name={pillar.icon} size={18} />
-          </span>
-          <span className="heroBadge__text">
-            <strong>{pillar.title}</strong>
-            <small>{pillar.detail}</small>
-          </span>
-        </div>
-      ))}
 
       <div className="heroGlow" />
     </div>

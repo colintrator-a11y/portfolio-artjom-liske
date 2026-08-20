@@ -110,10 +110,8 @@
 
 .hero__visual {
   position: relative;
-  /* Room for the captions that sit outside the portrait's top and bottom. */
-  margin-block: 56px;
   animation: hero-in 1s var(--ease) 0.3s both;
-  /* The shared 3D space for the portrait and the captions floating round it. */
+  /* The 3D space the portrait tilts inside. */
   perspective: 1200px;
   perspective-origin: 50% 45%;
 }
@@ -138,7 +136,7 @@
   /* Squarer than the source image so the crop sits on the face rather than
      leaving a band of background under the chin. */
   aspect-ratio: 4 / 4.4;
-  max-width: 380px;
+  max-width: 420px;
   margin-inline: auto;
   border-radius: var(--radius-xl);
   /* The gradient is the frame: a 2px ring drawn as padding, with the portrait
@@ -179,113 +177,6 @@
   pointer-events: none;
 }
 
-/* Floating badges — raised panels clear of the window -------------------- */
-
-.heroBadge {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 11px 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper-raised);
-  box-shadow: var(--shadow-md);
-  /*
-   * Nearer the reader than the window, so they travel further as it turns.
-   * Set through `translate` rather than `transform` because the bob animation
-   * owns `transform` outright - composing here instead of fighting it.
-   */
-  translate: calc(var(--px, 0) * 24px) calc(var(--py, 0) * 14px);
-  transition: translate 0.6s var(--ease);
-}
-
-/* Badges sit clear of the code area — above and below the window, never
-   on top of the source lines. */
-.heroBadge--1 {
-  top: -46px;
-  left: -6px;
-  animation: bob 6s ease-in-out infinite;
-}
-
-.heroBadge--2 {
-  bottom: -46px;
-  right: -6px;
-  animation: bob 7s ease-in-out infinite reverse;
-}
-
-.heroBadge__icon {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--paper-tint);
-  color: var(--accent);
-}
-
-.heroBadge__text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.35;
-}
-
-.heroBadge__text strong {
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.heroBadge__text small {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-/* Animations ------------------------------------------------------------- */
-
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes code-in {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes pulse {
-  70% {
-    box-shadow: 0 0 0 9px rgba(165, 243, 208, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(165, 243, 208, 0);
-  }
-}
-
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
 /* Breakpoints ------------------------------------------------------------ */
 
 @media (min-width: 700px) {
@@ -312,21 +203,11 @@
 }
 
 @media (max-width: 560px) {
-  .heroBadge--1 {
-    left: 0;
-  }
 
-  .heroBadge--2 {
-    right: 0;
-  }
 
-  .heroBadge__text small {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroBadge,
   .portrait,
   .portrait:hover {
     translate: none;
