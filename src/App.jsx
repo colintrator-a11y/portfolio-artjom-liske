@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import About from './components/About'
 import BackToTop from './components/BackToTop'
 import ClickPulse from './components/ClickPulse'
-import BackdropSolids from './components/BackdropSolids'
+import BackdropMesh from './components/BackdropMesh'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
@@ -31,7 +31,7 @@ export default function App() {
     <div className="app">
       <div className="backdrop" aria-hidden="true">
         <div className="backdrop__grid" />
-        <BackdropSolids />
+        <BackdropMesh />
         <span className="backdrop__orb backdrop__orb--a" />
         <span className="backdrop__orb backdrop__orb--b" />
         <span className="backdrop__orb backdrop__orb--c" />

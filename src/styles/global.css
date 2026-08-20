@@ -534,8 +534,8 @@ svg {
   transform-style: preserve-3d;
 }
 
-/* The drifting wireframes, drawn on a canvas. Held back from the centre of
-   the frame, where the reading happens, and left strongest around the edges. */
+/* The rippling mesh, drawn on a canvas. Held back from the centre of the
+   frame, where the reading happens, and left strongest around the edges. */
 .backdrop__field {
   position: absolute;
   inset: 0;
@@ -579,7 +579,7 @@ svg {
   left: -240px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.14), transparent 70%);
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.13), transparent 70%);
   animation: orb-drift 32s var(--ease) infinite alternate-reverse;
   translate: calc(var(--px) * -30px) calc(var(--py) * -18px);
   transition: translate 0.8s var(--ease);

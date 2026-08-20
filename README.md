@@ -36,6 +36,7 @@ src/
     notifyVisit.js       one ping per tab session to the shared notifier
   styles/global.css      design tokens, panel layer, buttons, chips
   components/
+    BackdropMesh.jsx     the rippling 3D mesh behind the page, on a canvas
     Navbar.jsx           slim header: brand, theme, language, CTA, mobile drawer
     PanelRail.jsx        panel-position marks down the right edge (desktop)
     LanguageSwitcher.jsx dropdown in the header, button row in the drawer
