@@ -7,6 +7,7 @@ import BackdropSolids from './components/BackdropSolids'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
+import PanelRail from './components/PanelRail'
 import Process from './components/Process'
 import Projects from './components/Projects'
 import Services from './components/Services'
@@ -41,6 +42,7 @@ export default function App() {
       </a>
 
       <Navbar />
+      <PanelRail />
 
       <main id="main">
         <Hero />

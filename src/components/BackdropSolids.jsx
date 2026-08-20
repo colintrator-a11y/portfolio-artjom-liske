@@ -52,9 +52,9 @@ export default function BackdropSolids() {
     const ctx = canvas.getContext('2d', { alpha: true })
     if (!ctx) return undefined
 
-    let line = '182, 242, 74'
+    let line = '124, 58, 237'
     const readTheme = () => {
-      line = document.documentElement.dataset.theme === 'light' ? '74, 124, 0' : '182, 242, 74'
+      line = document.documentElement.dataset.theme === 'dark' ? '167, 139, 250' : '124, 58, 237'
     }
     readTheme()
     const themeWatch = new MutationObserver(readTheme)

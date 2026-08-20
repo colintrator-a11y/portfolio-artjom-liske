@@ -68,54 +68,6 @@
   white-space: nowrap;
 }
 
-/* Desktop links — underline, not pills -------------------------------- */
-
-.nav__links {
-  display: none;
-  align-items: center;
-  gap: 22px;
-}
-
-.nav__link {
-  position: relative;
-  padding: 6px 0;
-  white-space: nowrap;
-  color: var(--body);
-  font-size: 14.5px;
-  font-weight: 500;
-  transition: color 0.3s var(--ease);
-}
-
-.nav__link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1.5px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease);
-}
-
-.nav__link:hover {
-  color: var(--ink);
-}
-
-.nav__link:hover::after {
-  transform: scaleX(1);
-}
-
-.nav__link.is-active {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.nav__link.is-active::after {
-  transform: scaleX(1);
-}
-
 /* Actions ---------------------------------------------------------------- */
 
 .nav__actions {
@@ -233,11 +185,7 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .nav__links {
-    display: flex;
-  }
-
+@media (min-width: 901px) {
   .nav__toggle,
   .nav__drawer,
   .nav__scrim {
@@ -248,10 +196,6 @@
 @media (min-width: 1320px) {
   .nav__cta {
     display: inline-flex;
-  }
-
-  .nav__links {
-    gap: 26px;
   }
 }
 

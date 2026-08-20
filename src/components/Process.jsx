@@ -1,38 +1,43 @@
 import { useContent } from '../i18n/LanguageContext'
+import Panel from './ui/Panel'
 import Reveal from './ui/Reveal'
-import SectionHead from './ui/SectionHead'
 import './Process.css'
 
+/**
+ * The six steps as one track rather than a stacked matrix.
+ *
+ * Laid out along a single rule so the panel reads left to right as a sequence,
+ * which is what a process is. Below the tablet breakpoint the track turns
+ * vertical and the rule runs down the left of the steps instead.
+ */
 export default function Process() {
-  const { process } = useContent()
+  const { process, nav } = useContent()
 
   return (
-    <section className="section section--alt" id="process" aria-labelledby="process-title">
-      <div className="container">
-        <SectionHead
-          id="process-title"
-          center
-          eyebrow={process.eyebrow}
-          title={process.heading}
-          intro={process.intro}
-        />
+    <Panel
+      id="process"
+      label={nav.find((item) => item.id === 'process')?.label}
+      labelledBy="process-title"
+    >
+      <Reveal className="section__head section__head--center">
+        <h2 className="section__title" id="process-title">
+          {process.heading}
+        </h2>
+        <p className="section__intro">{process.intro}</p>
+      </Reveal>
 
-        <ol className="process__list">
-          {process.steps.map((step, index) => (
-            <Reveal as="li" key={step.title} delay={(index % 3) * 100} className="process__item">
-              <div className="card process__card">
-                <div className="process__head">
-                  <span className="process__number">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="process__line" aria-hidden="true" />
-                </div>
-                <h3 className="process__title">{step.title}</h3>
-                <p className="process__detail">{step.detail}</p>
-                <span className="process__output">{step.output}</span>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
-    </section>
+      <ol className="track">
+        {process.steps.map((step, index) => (
+          <Reveal as="li" key={step.title} delay={index * 70} className="track__step">
+            <span className="track__node" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 className="track__title">{step.title}</h3>
+            <p className="track__detail">{step.detail}</p>
+            <p className="track__output">{step.output}</p>
+          </Reveal>
+        ))}
+      </ol>
+    </Panel>
   )
 }

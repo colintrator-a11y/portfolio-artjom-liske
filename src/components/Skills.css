@@ -1,248 +1,94 @@
-/* ==========================================================================
-   The stack, dealt as a deck standing in depth
-   ========================================================================== */
-
-.deck {
+/* Four stack summaries, captioning the categories below them. */
+.skills__pillars {
   display: grid;
-  gap: clamp(26px, 3vw, 44px);
-  margin-top: clamp(34px, 4vw, 56px);
+  gap: clamp(12px, 1.4vw, 18px);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin-bottom: clamp(14px, 1.8vh, 22px);
 }
 
-/* Rail ---------------------------------------------------------------------- */
-
-.deck__rail {
-  display: grid;
-  gap: 8px;
-  align-content: start;
-}
-
-.deck__pick {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper-raised);
-  color: var(--body);
-  font-family: inherit;
-  font-size: 14px;
-  text-align: left;
-  cursor: pointer;
-  overflow: hidden;
-  transition: color 0.35s var(--ease), border-color 0.35s var(--ease),
-    background 0.35s var(--ease), transform 0.35s var(--ease);
-}
-
-.deck__pick:hover {
-  border-color: var(--line-strong);
-  color: var(--ink);
-  transform: translateX(3px);
-}
-
-.deck__pick.is-active {
-  border-color: transparent;
-  background: var(--grad-brand);
-  color: var(--on-brand);
-  box-shadow: var(--shadow-md);
-}
-
-.deck__pickIcon {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: var(--paper-sunken);
-  color: var(--accent);
-  transition: background 0.35s var(--ease), color 0.35s var(--ease);
-}
-
-.deck__pick.is-active .deck__pickIcon {
-  background: rgba(0, 0, 0, 0.14);
-  color: var(--on-brand);
-}
-
-.deck__pickText {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  flex: 1;
-}
-
-.deck__pickName {
-  font-weight: 600;
-}
-
-.deck__pickCount {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  opacity: 0.65;
-}
-
-/* Runs the length of the button while the deck is waiting to advance. */
-.deck__timer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  /* Runs across the active tab, which is the bright gradient - so it darkens
-     rather than lightens, or it would be invisible on the lime end. */
-  background: rgba(0, 0, 0, 0.5);
-  animation: deck-dwell var(--dwell) linear forwards;
-}
-
-@keyframes deck-dwell {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* Stage --------------------------------------------------------------------- */
-
-.deck__stage {
-  position: relative;
-  min-height: 360px;
-  padding-bottom: 88px;
-  perspective: 1400px;
-  perspective-origin: 50% 42%;
-}
-
-/*
- * Each panel is pushed back by its distance from the front, so the deck reads
- * as one object seen in depth rather than six cards in a pile. Panels behind
- * the front one are inert: they cannot be clicked or tabbed into.
- */
-.deckCard {
-  position: absolute;
-  inset: 0 0 88px;
+.skills__pillar {
   display: flex;
   flex-direction: column;
-  padding: clamp(24px, 3vw, 34px);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--paper-raised);
+  gap: 3px;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent-line);
+}
+
+.skills__pillar strong {
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.skills__pillar span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.skills__grid {
+  display: grid;
+  gap: clamp(14px, 1.6vw, 20px);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.skillCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(15px, 1.7vw, 20px);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.skillCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-line);
   box-shadow: var(--shadow-md);
-  /* Pushed back and dropped, so each panel behind shows a band of itself
-     below the one in front - the deck has to be seen to read as a deck. */
-  transform: translate3d(0, calc(var(--depth) * 38px), calc(var(--depth) * -150px))
-    rotateX(calc(var(--depth) * -1.4deg));
-  /* Past the third panel the opacity calculation goes negative, which clamps
-     to zero, so the deck fades out on its own without a cutoff rule. */
-  opacity: calc(1 - var(--depth) * 0.3);
-  z-index: calc(var(--of) - var(--depth));
-  pointer-events: none;
-  transition: transform 0.72s var(--ease), opacity 0.72s var(--ease),
-    box-shadow 0.72s var(--ease);
 }
 
-/* The front panel has to be solid, not merely opaque-valued: with a
-   translucent surface the panels standing behind it read straight through the
-   card in front, and their headings collide with its own. */
-.deckCard.is-front {
-  opacity: 1;
-  background: var(--paper-solid);
-  box-shadow: var(--shadow-lg);
-  pointer-events: auto;
+.skillCard__head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
 }
 
-.deckCard__icon {
+.skillCard__icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
   background: var(--accent-soft);
   color: var(--accent);
 }
 
-.deckCard__name {
-  margin-top: 16px;
-  font-size: clamp(21px, 2.2vw, 27px);
-  letter-spacing: -0.02em;
+.skillCard__name {
+  flex: 1;
+  font-size: 16px;
 }
 
-.deckCard__caption {
-  margin-top: 8px;
-  color: var(--body);
-  font-size: 15px;
-  line-height: 1.7;
-  max-width: 52ch;
+.skillCard__count {
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
 }
 
-.deckCard__items {
+.skillCard__caption {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.skillCard__items {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 5px;
   margin-top: auto;
-  padding-top: 24px;
+  padding-top: 10px;
 }
 
-/* Chips arrive one after another once their panel reaches the front. */
-.deckCard__chip {
-  padding: 7px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--paper);
-  color: var(--ink-soft);
-  font-size: 13px;
-  font-weight: 550;
-  opacity: 0;
-}
-
-.deckCard.is-front .deckCard__chip {
-  animation: chip-in 0.5s var(--ease) forwards;
-  animation-delay: calc(120ms + var(--i) * 55ms);
-}
-
-@keyframes chip-in {
-  from {
-    opacity: 0;
-    transform: translateY(9px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (min-width: 900px) {
-  .deck {
-    grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
-    align-items: start;
-  }
-
-  .deck__stage {
-    min-height: 396px;
-  }
-}
-
-/* Motion preferences --------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .deckCard {
-    transform: none;
-    transition: opacity 0.2s linear;
-  }
-
-  .deck__timer {
-    animation: none;
-    display: none;
-  }
-
-  .deckCard.is-front .deckCard__chip {
-    animation: none;
-    opacity: 1;
-  }
-
-  .deck__pick:hover {
-    transform: none;
+@media (min-width: 1024px) {
+  .skills__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

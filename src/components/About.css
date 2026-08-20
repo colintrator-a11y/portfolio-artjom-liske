@@ -1,22 +1,58 @@
-.about__grid {
+/*
+ * Biography and highlights across the top, credentials as a wide strip
+ * beneath. The credentials used to be a tall card standing beside the
+ * biography, which made this the one panel that could not fit a screen.
+ */
+.about__top {
   display: grid;
-  gap: clamp(38px, 4.5vw, 64px);
+  gap: clamp(24px, 3vw, 44px);
   align-items: start;
+}
+
+@media (min-width: 900px) {
+  .about__top {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+}
+
+.about__strip {
+  display: grid;
+  gap: clamp(18px, 2.4vw, 32px);
+  margin-top: clamp(18px, 2.4vh, 30px);
+  padding: clamp(18px, 2vw, 26px);
+}
+
+@media (min-width: 900px) {
+  .about__strip {
+    grid-template-columns:
+      minmax(0, 1.15fr) minmax(0, 1.25fr) minmax(0, 0.85fr) minmax(0, 0.9fr);
+  }
+}
+
+.about__col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about__main .section__title {
+  margin-bottom: clamp(12px, 1.8vh, 22px);
 }
 
 /* Editorial lead paragraph */
 .about__paragraph {
-  margin-bottom: 20px;
+  margin-bottom: 7px;
   color: var(--body);
-  font-size: clamp(16px, 1.1vw, 17.5px);
-  max-width: 66ch;
+  font-size: clamp(13.5px, 0.95vw, 15px);
+  line-height: 1.6;
+  max-width: 62ch;
 }
 
 .about__paragraph:first-of-type {
   color: var(--ink-soft);
   font-family: var(--font-display);
-  font-size: clamp(19px, 1.75vw, 23px);
-  line-height: 1.6;
+  font-size: clamp(15px, 1.1vw, 16.5px);
+  line-height: 1.45;
   letter-spacing: -0.01em;
 }
 
@@ -28,10 +64,13 @@
 
 .about__highlights {
   display: grid;
-  gap: 26px;
-  margin-top: 46px;
-  padding-top: 40px;
-  border-top: 1px solid var(--line);
+  gap: 14px 22px;
+}
+
+@media (min-width: 560px) {
+  .about__highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .about__highlight {
@@ -53,36 +92,32 @@
 }
 
 .about__highlight h3 {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .about__highlight p {
-  margin-top: 5px;
+  margin-top: 3px;
   color: var(--muted);
-  font-size: 14.5px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
-/* Aside card ------------------------------------------------------------- */
-
-.about__card {
-  padding: clamp(26px, 3vw, 34px);
-}
+/* Credentials strip ------------------------------------------------------ */
 
 .about__identity {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding-bottom: 24px;
+  gap: 14px;
+  padding-bottom: 0;
   border-bottom: 1px solid var(--line);
 }
 
 .about__avatar {
   flex-shrink: 0;
-  width: 72px;
-  height: 72px;
+  width: 60px;
+  height: 60px;
   border-radius: var(--radius);
   object-fit: cover;
   background: var(--paper-sunken);
@@ -104,17 +139,18 @@
 
 .about__facts {
   position: relative;
-  margin: 24px 0 0;
+  margin: 0;
   display: grid;
   gap: 0;
+  align-content: start;
 }
 
 .about__fact {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 16px;
-  padding: 11px 0;
+  gap: 12px;
+  padding: 4px 0;
   border-bottom: 1px solid var(--line-hair);
 }
 
@@ -207,9 +243,9 @@
   display: flex;
   gap: 11px;
   align-items: flex-start;
-  margin-top: 26px;
+  margin-top: auto;
   transition: background-color 0.3s var(--ease);
-  padding: 16px 18px;
+  padding: 9px 13px;
   border-radius: var(--radius);
   background: var(--paper-tint);
   color: var(--accent-ink);
@@ -242,12 +278,5 @@
 }
 
 @media (min-width: 1024px) {
-  .about__grid {
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  }
 
-  .about__aside {
-    position: sticky;
-    top: calc(var(--nav-h) + 28px);
-  }
 }

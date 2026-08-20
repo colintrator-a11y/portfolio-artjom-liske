@@ -7,6 +7,18 @@ import LanguageSwitcher from './LanguageSwitcher'
 import ThemeToggle from './ThemeToggle'
 import './Navbar.css'
 
+/**
+ * A slim header: identity on the left, controls on the right.
+ *
+ * The row of section links that used to sit in the middle is gone. With every
+ * section filling the viewport, where the reader is matters more than a list
+ * of destinations, so `PanelRail` reports position down the right edge instead
+ * and this header keeps only what the rail cannot carry - the brand, the
+ * theme and language controls, and the call to action.
+ *
+ * The drawer stays: below the tablet breakpoint the rail is hidden, and the
+ * drawer becomes the only navigation.
+ */
 export default function Navbar() {
   const { nav, profile, hero, ui } = useContent()
   const ids = useMemo(() => nav.map((item) => item.id), [nav])
@@ -57,20 +69,6 @@ export default function Navbar() {
             <small>{profile.navRole}</small>
           </span>
         </a>
-
-        <nav className="nav__links" aria-label={ui.primaryNav}>
-          {nav.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`nav__link ${active === item.id ? 'is-active' : ''}`.trim()}
-              aria-current={active === item.id ? 'page' : undefined}
-              onClick={go(item.id)}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
 
         <div className="nav__actions">
           <ThemeToggle />

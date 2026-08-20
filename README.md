@@ -1,6 +1,7 @@
 # Artjom Liske — Portfolio
 
 Single-page portfolio for a freelance Full Stack Developer, built with React 18 + Vite.
+Six full-viewport panels, a horizontal work rail, and four languages.
 
 ## Running it
 
@@ -20,39 +21,68 @@ index.html               SEO meta, Open Graph, JSON-LD Person schema, fonts
 public/                  robots.txt, sitemap.xml, favicons
 src/
   main.jsx               entry point
-  App.jsx                page composition + ambient background
+  App.jsx                panel composition + ambient background
   i18n/
     translations.js      ← ALL site copy, in English, German, Portuguese and Spanish
     LanguageContext.jsx  provider, detection and persistence
   data/content.js        shared assets + buildContent(lang)
   hooks/
     useReveal.js         IntersectionObserver scroll-reveal
-    useScrollSpy.js      active-section tracking for the nav
+    useScrollSpy.js      active-panel tracking for the rail
     useTheme.js          light/dark preference
     usePointerDepth.js   pointer-driven parallax on the ambient background
   utils/
     scrollToSection.js   nav-offset aware smooth scrolling
     notifyVisit.js       one ping per tab session to the shared notifier
-  styles/global.css      design tokens, layout primitives, buttons, chips
+  styles/global.css      design tokens, panel layer, buttons, chips
   components/
-    Navbar.jsx           sticky nav, scroll spy, mobile drawer
-    LanguageSwitcher.jsx dropdown in the nav, button row in the drawer
-    Hero.jsx             headline, CTAs, pillars, stat band
+    Navbar.jsx           slim header: brand, theme, language, CTA, mobile drawer
+    PanelRail.jsx        panel-position marks down the right edge (desktop)
+    LanguageSwitcher.jsx dropdown in the header, button row in the drawer
+    Hero.jsx             panel 01 — claim, CTAs, stat band
     HeroVisual.jsx       animated code-window mockup
-    About.jsx            biography, highlights, profile card
-    Services.jsx         six service cards
-    Skills.jsx           six skill categories as a depth-stacked deck
-    Projects.jsx         filterable grid of client work and reference builds
-    ProjectCard.jsx      one tile in that grid
+    About.jsx            panel 02 — biography, highlights, credentials strip
+    Services.jsx         panel 03 — six service tiles
+    Skills.jsx           panel 04 — stack summaries + six category tiles
+    Projects.jsx         panel 05 — filterable horizontal work rail
+    ProjectCard.jsx      one card on that rail
     ProjectDialog.jsx    the full record for one project
     ProjectVisual.jsx    inline-SVG interface mockups (one scene per build)
-    Process.jsx          six-step workflow
+    Process.jsx          panel 06 — six-step track
     Footer.jsx           tagline, quick links, expertise
     BackToTop.jsx        floating scroll-to-top control
-    ui/                  Icon, Reveal, SectionHead primitives
+    ui/                  Panel, Icon, Reveal, SectionHead primitives
 ```
 
 Each component keeps its styles in a sibling `.css` file, imported by the component.
+
+## The panel deck
+
+Every section fills the viewport and carries its own number (`01 / 06`). `ui/Panel.jsx` draws that
+number from its position in `sectionIds`, so a panel can never disagree with the navigation about
+where it sits, and reordering the page renumbers it.
+
+Navigation follows from that. The header keeps only the brand and the controls; **where the reader
+is** is reported by `PanelRail.jsx`, a column of marks down the right edge. Below 900px the rail is
+hidden and the drawer in the header takes over, so exactly one navigation exists at any width.
+
+Snapping is `scroll-snap-type: y proximity`, never `mandatory` — a mandatory snap fights anyone
+reading a long panel and traps keyboard scrolling between two stops. Panels use `min-height: 100svh`
+rather than `height`, so a panel whose content outgrows the viewport grows instead of clipping.
+
+**Where the panels actually fit.** Measured against real viewports:
+
+| Window | Result |
+| --- | --- |
+| 1920×1080 | all six panels fit exactly |
+| 1600×1000 | five fit; *about* runs ~55px over |
+| 1440×900 | five fit; *about* ~115px over, *projects* ~25px over |
+| under 900px wide, or under 720px tall | snapping is switched off and the panels stack as an ordinary scrolling document |
+
+The about panel is the stubborn one: it carries five biography paragraphs, four highlights and a
+full credentials strip, and that is roughly 930px of content however it is packed. It is laid out to
+fit 1080p and to scroll gracefully below that rather than to drop any of the content. If you would
+rather it always fit, the lever is content — fewer biography paragraphs — not more CSS.
 
 ## Languages
 
@@ -104,15 +134,15 @@ SVG of the storefront it was built in rather than to a stock photo standing in f
 
 ### Reference builds
 
-Below the client work, the same grid carries **reference builds**: demonstrations of capabilities on
+Alongside the client work, the same rail carries **reference builds**: demonstrations of capabilities on
 the profile that have no client project attached. Three of them (the Telegram order bot, the
 WhatsApp booking bot and the multi-channel bot with agent handover) ship with captured screenshots;
 the rest are drawn as inline SVG in `ProjectScenes.jsx` and `ProjectScenesMore.jsx` — the interface
 each build would actually run in, at any resolution, with no network requests.
 
 They are **not** client deliveries and the site never presents them as such: each is numbered
-"Example 01/02" rather than "Project", carries a dashed *Reference build* badge, and a closing line
-under the grid states that everything else was delivered for a paying client. Remove `exampleMedia`
+"Example 01/02" rather than "Project", carries a *Reference build* badge, and a closing line under
+the rail states that everything else was delivered for a paying client. Remove `exampleMedia`
 and `exampleOrder` from `content.js` to drop them entirely.
 
 The portrait in `src/assets/avatar.webp` is the site's logo. It appears as the brand mark in the
@@ -121,28 +151,26 @@ navigation, in the footer, in the About card, and as the browser tab icon (`publ
 
 ## Design system
 
-Dark technical: graphite ground (`#0c0d10`), an acid-lime accent (`#b6f24a`), Space Grotesk for
-display headings, Inter for body text and JetBrains Mono for labels, eyebrows and technology chips.
-Corners are nearly square (2–8px), structure is drawn with hairline rules, and the wireframe solids
-drifting behind the page are stroked in the accent.
+Soft product: a lilac-white ground (`#faf8ff`), a violet-to-pink accent (`#7c3aed` → `#ec4899`),
+Plus Jakarta Sans throughout with JetBrains Mono kept for counters and small labels, generous radii
+(10–30px), and glass panels over the coloured light drifting behind the page.
 
 Every colour, radius, shadow and font is a custom property in `src/styles/global.css`, so the whole
-palette retunes from one place.
+palette retunes from one place. Light is the base and `:root[data-theme='dark']` — a deep violet
+rather than a grey — is the alternate.
 
-**Dark is the base, not an override.** `:root` carries the dark palette and `:root[data-theme='light']`
-is the alternate, so a browser that never runs the boot script still paints the intended ground.
+Three accent tokens exist because they behave differently, and mixing them up is the easy way to
+produce unreadable text:
 
-Three accent tokens exist because they behave differently between the two themes, and mixing them up
-is the easy way to produce unreadable text:
+| Token | What it is | Partner text colour |
+| --- | --- | --- |
+| `--accent` | the readable text tone — links, icons, labels | — |
+| `--accent-fill` | the solid accent as a fill — markers, icon tiles | `--on-accent` |
+| `--grad-brand` | the violet→pink pair — primary button, active filter, active tile | `--on-brand` |
 
-| Token | What it is | Light | Dark |
-| --- | --- | --- | --- |
-| `--accent` | the readable *text* tone — links, icons, eyebrows | deep olive | lime |
-| `--accent-fill` | the brand colour as a *fill* — primary button, markers | lime | lime |
-| `--grad-brand` | the accent→cyan gradient — active filter, active skill tab | deep | bright |
+`--accent-fill` and `--grad-brand` are not interchangeable: each has its own partner, and painting
+one with the other's text colour is how a button ends up illegible in one theme only.
 
-`--accent-fill` never flips, so anything painted with it takes `--on-accent`. `--grad-brand` does
-flip, so anything painted with it takes `--on-brand`. The two are not interchangeable.
 
 ## Notes on the build
 

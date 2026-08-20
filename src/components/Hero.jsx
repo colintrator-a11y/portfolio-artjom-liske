@@ -2,6 +2,7 @@ import { useContent } from '../i18n/LanguageContext'
 import scrollToSection from '../utils/scrollToSection'
 import Icon from './ui/Icon'
 import HeroVisual from './HeroVisual'
+import Panel from './ui/Panel'
 import './Hero.css'
 
 function Headline({ headline, accent }) {
@@ -17,8 +18,16 @@ function Headline({ headline, accent }) {
   )
 }
 
+/**
+ * The opening panel: the claim, the two ways in, and the stat band.
+ *
+ * The pillars that used to sit under the buttons have moved to the skills
+ * panel, where a summary of each stack belongs. Four more list items here
+ * pushed the stat band past the fold, and the first panel has to resolve
+ * inside one screen or the deck it opens has already broken its own rule.
+ */
 export default function Hero() {
-  const { hero, profile } = useContent()
+  const { hero, nav } = useContent()
 
   const go = (id) => (event) => {
     event.preventDefault()
@@ -26,8 +35,8 @@ export default function Hero() {
   }
 
   return (
-    <section className="hero" id="home">
-      <div className="container hero__inner">
+    <Panel id="home" label={nav.find((item) => item.id === 'home')?.label} className="hero">
+      <div className="hero__inner">
         <div className="hero__content">
           <span className="hero__badge">
             <Icon name="spark" size={15} />
@@ -37,8 +46,6 @@ export default function Hero() {
           <h1 className="hero__title">
             <Headline headline={hero.headline} accent={hero.headlineAccent} />
           </h1>
-
-          <p className="hero__role">{profile.title}</p>
 
           <p className="hero__intro">{hero.intro}</p>
 
@@ -60,30 +67,25 @@ export default function Hero() {
               <Icon name="arrowRight" className="btn__icon" />
             </a>
           </div>
-
-          <ul className="hero__pillars">
-            {hero.pillars.map((pillar) => (
-              <li key={pillar.title} className="hero__pillar">
-                <strong>{pillar.title}</strong>
-                <span>{pillar.detail}</span>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <HeroVisual />
       </div>
 
-      <div className="container">
-        <ul className="hero__stats">
+      <ul className="hero__stats">
           {hero.stats.map((stat) => (
             <li key={stat.label} className="hero__stat">
               <strong className="grad-text">{stat.value}</strong>
               <span>{stat.label}</span>
             </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+        ))}
+      </ul>
+
+      {/* Decorative: the panel below is reachable by scrolling, by the rail and
+          by the buttons above, so this needs no accessible name of its own. */}
+      <span className="hero__cue" aria-hidden="true">
+        <Icon name="chevronDown" size={18} strokeWidth={2} />
+      </span>
+    </Panel>
   )
 }
