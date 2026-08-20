@@ -71,15 +71,16 @@ export const sectionIds = [
   'process',
 ]
 
-/* Numbers and symbols carry across languages unchanged. */
-const statValues = ['10+', '8', '4', '3']
-
 const pillarDetails = [
   'React.js · Next.js · Node.js · NestJS',
   'React Native · Flutter · Android · iOS',
   'WooCommerce · WordPress · Shopify',
   'REST APIs · Integrations · Chatbots',
 ]
+
+/* Two of these caption the portrait in the hero; all four caption the skills
+   panel. Kept beside the details so a pillar cannot lose its icon. */
+const pillarIcons = ['layers', 'mobile', 'cart', 'api']
 
 const serviceIcons = ['layers', 'cart', 'mobile', 'api', 'layout', 'ai']
 
@@ -394,6 +395,15 @@ const exampleOrder = [
   'ios-property-viewings',
 ]
 
+/*
+ * Numbers and symbols carry across languages unchanged.
+ *
+ * The project count is derived rather than typed: it is the number of entries
+ * the work rail actually holds, so the stat and the rail's own "01 / 42"
+ * readout cannot drift apart when a project is added or removed.
+ */
+const statValues = ['10+', String(projectOrder.length + exampleOrder.length), '4', '3']
+
 /**
  * Merges the translated strings for `lang` with the shared data above and
  * returns the complete content tree the components render from.
@@ -418,7 +428,11 @@ export function buildContent(lang) {
       primaryCta: { label: t.hero.primaryCta, target: 'projects' },
       secondaryCta: { label: t.hero.secondaryCta, target: 'skills' },
       stats: t.hero.stats.map((label, i) => ({ value: statValues[i], label })),
-      pillars: t.hero.pillars.map((title, i) => ({ title, detail: pillarDetails[i] })),
+      pillars: t.hero.pillars.map((title, i) => ({
+        title,
+        detail: pillarDetails[i],
+        icon: pillarIcons[i],
+      })),
     },
 
     about: {

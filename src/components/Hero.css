@@ -106,159 +106,77 @@
   text-transform: uppercase;
 }
 
-/* Visual: code window — the darkest field on the page ------------------- */
+/* Visual: portrait ------------------------------------------------------ */
 
 .hero__visual {
   position: relative;
-  /* Room for the badges that sit outside the window's top and bottom edges. */
-  margin-block: 74px;
+  /* Room for the captions that sit outside the portrait's top and bottom. */
+  margin-block: 56px;
   animation: hero-in 1s var(--ease) 0.3s both;
-  /* The shared 3D space for the window and the badges that float around it. */
+  /* The shared 3D space for the portrait and the captions floating round it. */
   perspective: 1200px;
   perspective-origin: 50% 45%;
 }
 
 .heroGlow {
   position: absolute;
-  inset: 14% -4% -10% 8%;
+  inset: 6% -6% -8% 4%;
   z-index: -1;
-  background: radial-gradient(circle at 60% 45%, var(--card-glow), transparent 64%);
-  filter: blur(46px);
+  background: radial-gradient(circle at 58% 45%, var(--card-glow), transparent 66%);
+  filter: blur(52px);
 }
 
 /*
  * Turns towards the pointer using the --px/--py the page already publishes, so
- * no listener is needed here at all. The badges turn further than the window
- * and sit closer to the reader, which is what separates them in depth rather
- * than a drop shadow pretending to.
+ * no listener is needed here at all. The captions turn further than the
+ * portrait and sit closer to the reader, which is what separates them in depth
+ * rather than a drop shadow pretending to.
  */
-.codeWindow {
+.portrait {
   position: relative;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  background: #150e26;
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
+  margin: 0;
+  /* Squarer than the source image so the crop sits on the face rather than
+     leaving a band of background under the chin. */
+  aspect-ratio: 4 / 4.4;
+  max-width: 380px;
+  margin-inline: auto;
+  border-radius: var(--radius-xl);
+  /* The gradient is the frame: a 2px ring drawn as padding, with the portrait
+     sitting on the page colour inside it. */
+  padding: 2px;
+  background: var(--grad-brand);
+  box-shadow: var(--shadow-lg), var(--accent-shadow);
   transform: rotateY(calc(var(--px, 0) * -7deg)) rotateX(calc(var(--py, 0) * 4.5deg));
   transform-style: preserve-3d;
   transition: transform 0.6s var(--ease);
 }
 
-.codeWindow:hover {
+.portrait:hover {
   transform: rotateY(calc(var(--px, 0) * -7deg)) rotateX(calc(var(--py, 0) * 4.5deg))
     translate3d(0, -4px, 24px);
 }
 
-.codeWindow__bar {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 13px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+.portrait__img {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--radius-xl) - 2px);
+  object-fit: cover;
+  object-position: 50% 14%;
+  background: var(--paper-sunken);
 }
 
-.codeWindow__dots {
-  display: flex;
-  gap: 6px;
-}
-
-.codeWindow__dots i {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.22);
-}
-
-.codeWindow__dots i:first-child {
-  background: #f87171;
-}
-
-.codeWindow__dots i:nth-child(2) {
-  background: #fbbf24;
-}
-
-.codeWindow__dots i:last-child {
-  background: #34d399;
-}
-
-.codeWindow__file {
-  color: rgba(255, 255, 255, 0.5);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-}
-
-.codeWindow__body {
-  margin: 0;
-  padding: 20px 18px 22px;
-  font-family: var(--font-mono);
-  font-size: clamp(11.5px, 1.05vw, 13px);
-  line-height: 1.95;
-  white-space: pre;
-  overflow-x: auto;
-}
-
-.codeWindow__line {
-  display: block;
-  opacity: 0;
-  transform: translateX(-6px);
-  animation: code-in 0.5s var(--ease) forwards;
-}
-
-.codeWindow__num {
-  display: inline-block;
-  width: 24px;
-  color: rgba(255, 255, 255, 0.22);
-  user-select: none;
-}
-
-.tok--kw {
-  color: #d8b4fe;
-}
-.tok--var {
-  color: #ede9fe;
-}
-.tok--key {
-  color: #f9a8d4;
-}
-.tok--str {
-  color: #a5f3d0;
-}
-.tok--fn {
-  color: #fcd34d;
-}
-.tok--op,
-.tok--pl {
-  color: #8b83ab;
-}
-
-.codeWindow__caret {
-  display: inline-block;
-  width: 8px;
-  height: 15px;
-  vertical-align: -2px;
-  background: #f9a8d4;
-  animation: blink 1.1s steps(2, start) infinite;
-}
-
-.codeWindow__status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.55);
-  font-family: var(--font-mono);
-  font-size: 11px;
-}
-
-.codeWindow__pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #a5f3d0;
-  box-shadow: 0 0 0 0 rgba(165, 243, 208, 0.6);
-  animation: pulse 2.2s infinite;
+/* A soft diagonal highlight across the glass, so the frame reads as a surface
+   rather than a sticker. */
+.portrait__sheen {
+  position: absolute;
+  inset: 2px;
+  border-radius: calc(var(--radius-xl) - 2px);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  pointer-events: none;
 }
 
 /* Floating badges — raised panels clear of the window -------------------- */
@@ -285,14 +203,14 @@
 /* Badges sit clear of the code area — above and below the window, never
    on top of the source lines. */
 .heroBadge--1 {
-  top: -70px;
-  left: -10px;
+  top: -46px;
+  left: -6px;
   animation: bob 6s ease-in-out infinite;
 }
 
 .heroBadge--2 {
-  bottom: -70px;
-  right: -10px;
+  bottom: -46px;
+  right: -6px;
   animation: bob 7s ease-in-out infinite reverse;
 }
 
@@ -409,15 +327,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .heroBadge,
-  .codeWindow {
+  .portrait,
+  .portrait:hover {
     translate: none;
-    transform: none;
-    transition: none;
-  }
-
-  .codeWindow,
-  .codeWindow:hover,
-  .heroBadge {
     transform: none;
     transition: none;
   }

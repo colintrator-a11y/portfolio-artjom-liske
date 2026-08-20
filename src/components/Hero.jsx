@@ -1,7 +1,7 @@
 import { useContent } from '../i18n/LanguageContext'
 import scrollToSection from '../utils/scrollToSection'
 import Icon from './ui/Icon'
-import HeroVisual from './HeroVisual'
+import HeroPortrait from './HeroPortrait'
 import Panel from './ui/Panel'
 import './Hero.css'
 
@@ -27,7 +27,7 @@ function Headline({ headline, accent }) {
  * inside one screen or the deck it opens has already broken its own rule.
  */
 export default function Hero() {
-  const { hero, nav } = useContent()
+  const { hero, nav, profile } = useContent()
 
   const go = (id) => (event) => {
     event.preventDefault()
@@ -69,7 +69,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <HeroVisual />
+        <HeroPortrait avatar={profile.avatar} pillars={hero.pillars} />
       </div>
 
       <ul className="hero__stats">

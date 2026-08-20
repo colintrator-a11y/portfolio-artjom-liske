@@ -40,7 +40,7 @@ src/
     PanelRail.jsx        panel-position marks down the right edge (desktop)
     LanguageSwitcher.jsx dropdown in the header, button row in the drawer
     Hero.jsx             panel 01 — claim, CTAs, stat band
-    HeroVisual.jsx       animated code-window mockup
+    HeroPortrait.jsx     the portrait, with two stack captions floating beside it
     About.jsx            panel 02 — biography, highlights, credentials strip
     Services.jsx         panel 03 — six service tiles
     Skills.jsx           panel 04 — stack summaries + six category tiles
@@ -145,9 +145,11 @@ They are **not** client deliveries and the site never presents them as such: eac
 the rail states that everything else was delivered for a paying client. Remove `exampleMedia`
 and `exampleOrder` from `content.js` to drop them entirely.
 
-The portrait in `src/assets/avatar.webp` is the site's logo. It appears as the brand mark in the
-navigation, in the footer, in the About card, and as the browser tab icon (`public/favicon.png`,
-`favicon-32.png`, `apple-touch-icon.png`, all generated from the same file).
+The portrait in `src/assets/avatar.webp` does most of the identity work. It opens the page as the
+hero image, and appears as the brand mark in the navigation, in the footer, in the credentials
+strip, and as the browser tab icon (`public/favicon.png`, `favicon-32.png`, `apple-touch-icon.png`,
+all generated from the same file). Workana serves it at 640px; drop a higher-resolution copy in and
+regenerate the favicons if the hero is ever shown larger than ~380px.
 
 ## Design system
 
