@@ -212,6 +212,34 @@
   overscroll-behavior-x: contain;
 }
 
+/* The rail can be dragged, so it says so. Only where there is a mouse to do
+   the dragging: on a touch screen a grab cursor is a claim about a pointer
+   that is not there. */
+@media (hover: hover) and (pointer: fine) {
+  .work__rail {
+    cursor: grab;
+  }
+}
+
+/*
+ * Held only while a drag is actually in progress.
+ *
+ * Snapping is switched off because it fights the pointer mid-drag, and comes
+ * back on release to settle the rail onto the nearest card. Selection is
+ * switched off because dragging across a row of cards otherwise sweeps up
+ * every title as highlighted text.
+ */
+.work__rail.is-dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  user-select: none;
+  cursor: grabbing;
+}
+
+.work__rail.is-dragging * {
+  cursor: grabbing;
+}
+
 .work__rail > * {
   flex: 0 0 clamp(268px, 27vw, 330px);
   scroll-snap-align: start;

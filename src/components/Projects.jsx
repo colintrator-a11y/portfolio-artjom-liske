@@ -18,8 +18,8 @@ import './Projects.css'
  *
  * Scrolling is the browser's own - `overflow-x` with scroll snapping - so a
  * trackpad, a touch screen, a scrollbar and Tab all move the rail without any
- * of it being reimplemented. The buttons are for pointers with neither a
- * horizontal wheel nor a touch screen, which is most mice.
+ * of it being reimplemented. A mouse has none of those, so it gets two things
+ * of its own: the travel buttons, and dragging the rail directly.
  *
  * Projects carry several tags rather than one discipline: a headless Shopify
  * storefront is Shopify work, front-end work and API work at once, and it
@@ -28,6 +28,9 @@ import './Projects.css'
  * Client deliveries and reference builds sit on the same rail but reference
  * builds carry a marker, so a visitor is never led to read one as paid work.
  */
+/* Far enough that a click with an unsteady hand is still a click. */
+const DRAG_SLOP = 5
+
 export default function Projects() {
   const { projects, ui, nav } = useContent()
   const [active, setActive] = useState('all')
@@ -35,6 +38,8 @@ export default function Projects() {
   const [at, setAt] = useState(0)
   const [ends, setEnds] = useState({ start: true, end: false })
   const rail = useRef(null)
+  const drag = useRef({ active: false, moved: false, startX: 0, startLeft: 0, id: -1 })
+  const swallowClick = useRef(false)
 
   const shown = useMemo(
     () => (active === 'all' ? projects.items : projects.items.filter((i) => i.tags?.includes(active))),
@@ -110,6 +115,78 @@ export default function Projects() {
     el.scrollBy({ left: dir * by, behavior: 'smooth' })
   }, [])
 
+  /*
+   * Drag to travel the rail.
+   *
+   * Mouse only: touch and pen already scroll it natively, with momentum and
+   * rubber-banding this cannot reproduce, and taking those over would make
+   * the rail worse on the devices it already works on.
+   *
+   * Nothing happens until the pointer has moved past the slop. Below that the
+   * gesture is still a click, so pressing a card and releasing it opens the
+   * card as it always did.
+   */
+  const onPointerDown = useCallback((event) => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return
+    const el = rail.current
+    if (!el) return
+    drag.current = {
+      active: true,
+      moved: false,
+      startX: event.clientX,
+      startLeft: el.scrollLeft,
+      id: event.pointerId,
+    }
+  }, [])
+
+  const onPointerMove = useCallback((event) => {
+    const d = drag.current
+    const el = rail.current
+    if (!d.active || !el) return
+
+    const dx = event.clientX - d.startX
+    if (!d.moved) {
+      if (Math.abs(dx) < DRAG_SLOP) return
+      d.moved = true
+      // Captured only once the gesture is definitely a drag, so a plain click
+      // is never retargeted away from the card underneath it. Capture is what
+      // lets the drag continue past the edge of the rail.
+      el.setPointerCapture(d.id)
+      // Snapping fights a drag in progress; it comes back on release and
+      // settles the rail onto the nearest card.
+      el.classList.add('is-dragging')
+    }
+    el.scrollLeft = d.startLeft - dx
+  }, [])
+
+  const endDrag = useCallback(() => {
+    const d = drag.current
+    const el = rail.current
+    if (!d.active) return
+    d.active = false
+    if (!d.moved) return
+
+    el?.classList.remove('is-dragging')
+    if (el?.hasPointerCapture?.(d.id)) el.releasePointerCapture(d.id)
+
+    /*
+     * A drag that happens to end on top of a card must not also open it.
+     * `click` is dispatched right after `pointerup`, before any macrotask, so
+     * a flag cleared on a zero timeout is up for exactly the one click this
+     * gesture produces and down again for the next real one.
+     */
+    swallowClick.current = true
+    setTimeout(() => {
+      swallowClick.current = false
+    }, 0)
+  }, [])
+
+  const onClickCapture = useCallback((event) => {
+    if (!swallowClick.current) return
+    event.preventDefault()
+    event.stopPropagation()
+  }, [])
+
   const close = useCallback(() => setOpen(null), [])
 
   return (
@@ -173,7 +250,19 @@ export default function Projects() {
       </Reveal>
 
       {/* Keyed on the filter so the rail replays its entrance on every change. */}
-      <div className="work__rail" ref={rail} key={active}>
+      <div
+        className="work__rail"
+        ref={rail}
+        key={active}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={onClickCapture}
+        /* The cards carry images, and an image is natively draggable: without
+           this the browser starts its own drag and the rail never moves. */
+        onDragStart={(event) => event.preventDefault()}
+      >
         {shown.map((project, index) => (
           <ProjectCard
             key={project.id}

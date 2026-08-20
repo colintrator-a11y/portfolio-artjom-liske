@@ -67,6 +67,31 @@ Navigation follows from that. The header keeps only the brand and the controls; 
 is** is reported by `PanelRail.jsx`, a column of marks down the right edge. Below 900px the rail is
 hidden and the drawer in the header takes over, so exactly one navigation exists at any width.
 
+### Travelling the work rail
+
+Panel 05 holds every project in one horizontal row. Each input moves it the way that input already
+works elsewhere:
+
+| Input | How it travels |
+| --- | --- |
+| trackpad / horizontal wheel | native scroll |
+| touch and pen | native scroll, with the platform's own momentum |
+| mouse | drag the rail, or the two travel buttons |
+| keyboard | Tab moves focus to the next card and the browser scrolls it into view |
+| scrollbar | native |
+
+Only the mouse drag is implemented by hand, because a mouse has none of the others. It is mouse-only
+on purpose: touch and pen already scroll with momentum and rubber-banding that a hand-rolled drag
+cannot reproduce, and taking those over would make the rail worse on the devices where it already
+works.
+
+Nothing happens until the pointer passes 5px of slop, so pressing a card and releasing it still
+opens the card. Past the slop the gesture becomes a drag: snapping is switched off so it does not
+fight the pointer, selection is switched off so dragging across the row does not sweep up every
+title as highlighted text, and the click that `pointerup` would otherwise produce is swallowed so a
+drag ending on a card does not also open it. On release, snapping comes back and settles the rail
+onto the nearest card.
+
 Snapping is `scroll-snap-type: y proximity`, never `mandatory` — a mandatory snap fights anyone
 reading a long panel and traps keyboard scrolling between two stops. Panels use `min-height: 100svh`
 rather than `height`, so a panel whose content outgrows the viewport grows instead of clipping.
