@@ -52,6 +52,7 @@ src/
     Process.jsx          panel 06 — six-step track
     Footer.jsx           tagline, quick links, expertise
     BackToTop.jsx        floating scroll-to-top control
+    ClickPulse.jsx       the burst that answers a click, anywhere on the page
     ui/                  Panel, Icon, Reveal, SectionHead primitives
 ```
 

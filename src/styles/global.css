@@ -770,49 +770,84 @@ svg {
   pointer-events: none;
 }
 
+/*
+ * Every layer is centred on the click by its own negative margin rather than
+ * by a transform: the rings animate their box, and a translate to centre them
+ * would be overwritten the moment a scale or a size keyframe ran.
+ */
 .pulse {
   position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.pulse__bloom,
+.pulse__ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* The soft light under the rings, gone before either of them. */
+.pulse__bloom {
+  width: 132px;
+  height: 132px;
+  margin: -66px 0 0 -66px;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 68%);
+  animation: pulse-bloom 560ms var(--ease) forwards;
+}
+
+.pulse__ring--near {
   width: 12px;
   height: 12px;
   margin: -6px 0 0 -6px;
   border: 2px solid var(--accent);
-  border-radius: 50%;
-  opacity: 0.75;
-  animation: pulse-out 620ms var(--ease) forwards;
+  animation: pulse-near 620ms var(--ease) forwards;
 }
 
-/* A dot at the point of contact, gone well before the ring is. Sized and
-   centred rather than animated open: the ring around it is already growing,
-   and animating width against a fixed inset over-constrains the box. */
-.pulse::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 9px;
-  height: 9px;
-  margin: -4.5px 0 0 -4.5px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse-dot 360ms var(--ease) forwards;
+/* Wider, thinner, slower and a beat late, so the two read as one spreading
+   thing rather than as a ring drawn twice. */
+.pulse__ring--far {
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 1.5px solid var(--sky);
+  animation: pulse-far 780ms var(--ease) 90ms forwards;
 }
 
-@keyframes pulse-dot {
+@keyframes pulse-bloom {
   from {
-    opacity: 0.6;
-    transform: scale(1);
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  35% {
+    opacity: 0.9;
   }
   to {
     opacity: 0;
-    transform: scale(0.3);
+    transform: scale(1.1);
   }
 }
 
-@keyframes pulse-out {
+@keyframes pulse-near {
+  from {
+    opacity: 0.85;
+  }
   to {
-    width: 116px;
-    height: 116px;
-    margin: -58px 0 0 -58px;
+    width: 96px;
+    height: 96px;
+    margin: -48px 0 0 -48px;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-far {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    width: 152px;
+    height: 152px;
+    margin: -76px 0 0 -76px;
     opacity: 0;
   }
 }
