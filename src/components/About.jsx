@@ -91,7 +91,10 @@ export default function About() {
 
           <dl className="about__facts">
             {about.facts.map((fact) => (
-              <div className="about__fact" key={fact.label}>
+              <div
+                className={`about__fact ${fact.lead ? 'about__fact--lead' : ''}`.trim()}
+                key={fact.label}
+              >
                 <dt>{fact.label}</dt>
                 <dd>{fact.value}</dd>
               </div>

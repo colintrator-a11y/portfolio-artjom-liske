@@ -175,6 +175,24 @@
   text-align: right;
 }
 
+/* The one fact the card leads on. Its value is longer than the others, so the
+   row is allowed to wrap rather than squeezing the label and value together. */
+.about__fact--lead {
+  flex-wrap: wrap;
+  row-gap: 2px;
+  padding-bottom: 7px;
+}
+
+.about__fact--lead dt {
+  color: var(--accent);
+}
+
+.about__fact--lead dd {
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
 /* Credentials blocks -------------------------------------------------- */
 
 .about__block {

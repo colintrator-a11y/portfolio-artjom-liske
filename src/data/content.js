@@ -82,6 +82,14 @@ const skillItems = [
   ['REST API', 'API Integration', 'Chatbots', 'ChatGPT', 'Process Automation', 'Third-Party Integrations', 'Google Maps', 'DevOps'],
 ]
 
+/*
+ * Which fact the card sets in bold. An index rather than a flag threaded
+ * through all four locale files: the emphasis is a layout decision about the
+ * card, not something a translator should have to carry, and keeping it here
+ * means the locales stay plain [label, value] pairs.
+ */
+const leadFact = 0
+
 /* Official test titles - left in their original language. */
 export const certifications = [
   { name: 'WordPress Intermedio', score: '96%' },
@@ -194,7 +202,7 @@ export function buildContent(lang) {
       heading: t.about.heading,
       paragraphs: t.about.paragraphs,
       highlights: t.about.highlights.map(([title, detail]) => ({ title, detail })),
-      facts: t.about.facts.map(([label, value]) => ({ label, value })),
+      facts: t.about.facts.map(([label, value], i) => ({ label, value, lead: i === leadFact })),
       languages: t.about.languageNames.map((name, i) => ({
         name,
         level: t.about.languageLevels[i],

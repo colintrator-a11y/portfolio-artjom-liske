@@ -62,7 +62,7 @@ const en = {
     certifications: 'Certifications',
     languagesTitle: 'Languages',
     profileNote:
-      'Freelancer profile · Bronze level · three passed certifications · one project at a time.',
+      'Freelancer profile · Bronze level · three passed certifications.',
     rightsReserved: 'All rights reserved.',
     builtWith: 'Designed & developed with React — engineered for performance and accessibility.',
   },
@@ -110,10 +110,10 @@ const en = {
       ['Communication First', 'Clear updates and screenshots at every stage, with fast and accurate revisions.'],
     ],
     facts: [
+      ['Main skills', 'Python · WordPress · Shopify'],
       ['Based in', 'Germany'],
       ['Experience', '10+ Years · Since 2014'],
       ['Rate', 'USD 30.00 / hour'],
-      ['Availability', 'One project at a time'],
       ['Focus', 'Web · Mobile · E-Commerce'],
       ['Delivery', 'Remote, Worldwide'],
     ],
@@ -298,7 +298,7 @@ const pt = {
     certifications: 'Certificações',
     languagesTitle: 'Idiomas',
     profileNote:
-      'Perfil de freelancer · nível Bronze · três certificações concluídas · um projeto de cada vez.',
+      'Perfil de freelancer · nível Bronze · três certificações concluídas.',
     rightsReserved: 'Todos os direitos reservados.',
     builtWith: 'Desenhado e desenvolvido com React — otimizado para desempenho e acessibilidade.',
   },
@@ -348,10 +348,10 @@ const pt = {
       ['Comunicação em primeiro lugar', 'Atualizações claras e capturas de ecrã em cada fase, com revisões rápidas e precisas.'],
     ],
     facts: [
+      ['Principais competências', 'Python · WordPress · Shopify'],
       ['Localização', 'Alemanha'],
       ['Experiência', '10+ Anos · Desde 2014'],
       ['Valor/hora', 'USD 30,00 / hora'],
-      ['Disponibilidade', 'Um projeto de cada vez'],
       ['Foco', 'Web · Mobile · E-Commerce'],
       ['Entrega', 'Remota, em todo o mundo'],
     ],
@@ -536,7 +536,7 @@ const es = {
     certifications: 'Certificaciones',
     languagesTitle: 'Idiomas',
     profileNote:
-      'Perfil de freelancer · nivel Bronce · tres certificaciones superadas · un proyecto a la vez.',
+      'Perfil de freelancer · nivel Bronce · tres certificaciones superadas.',
     rightsReserved: 'Todos los derechos reservados.',
     builtWith: 'Diseñado y desarrollado con React — optimizado para rendimiento y accesibilidad.',
   },
@@ -586,10 +586,10 @@ const es = {
       ['La comunicación primero', 'Actualizaciones claras y capturas de pantalla en cada etapa, con revisiones rápidas y precisas.'],
     ],
     facts: [
+      ['Habilidades principales', 'Python · WordPress · Shopify'],
       ['Ubicación', 'Alemania'],
       ['Experiencia', '10+ Años · Desde 2014'],
       ['Tarifa', 'USD 30,00 / hora'],
-      ['Disponibilidad', 'Un proyecto a la vez'],
       ['Enfoque', 'Web · Móvil · E-Commerce'],
       ['Entrega', 'Remota, en todo el mundo'],
     ],
@@ -775,7 +775,7 @@ const de = {
     certifications: 'Zertifizierungen',
     languagesTitle: 'Sprachen',
     profileNote:
-      'Freelancer-Profil · Bronze-Level · drei bestandene Zertifizierungen · ein Projekt zur Zeit.',
+      'Freelancer-Profil · Bronze-Level · drei bestandene Zertifizierungen.',
     rightsReserved: 'Alle Rechte vorbehalten.',
     builtWith: 'Gestaltet und entwickelt mit React — auf Performance und Barrierefreiheit ausgelegt.',
   },
@@ -825,10 +825,10 @@ const de = {
       ['Kommunikation zuerst', 'Klare Updates und Screenshots in jeder Phase, mit schnellen und präzisen Korrekturen.'],
     ],
     facts: [
+      ['Kernkompetenzen', 'Python · WordPress · Shopify'],
       ['Standort', 'Deutschland'],
       ['Erfahrung', '10+ Jahre · seit 2014'],
       ['Stundensatz', 'USD 30,00 / Stunde'],
-      ['Verfügbarkeit', 'Ein Projekt zur Zeit'],
       ['Schwerpunkt', 'Web · Mobile · E-Commerce'],
       ['Zusammenarbeit', 'Remote, weltweit'],
     ],
