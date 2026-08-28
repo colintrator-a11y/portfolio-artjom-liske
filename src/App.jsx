@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 import About from './components/About'
 import BackToTop from './components/BackToTop'
-import ClickPulse from './components/ClickPulse'
 import BackdropMesh from './components/BackdropMesh'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
@@ -13,14 +12,10 @@ import Projects from './components/Projects'
 import Services from './components/Services'
 import Skills from './components/Skills'
 import { useContent } from './i18n/LanguageContext'
-import usePointerDepth from './hooks/usePointerDepth'
 import notifyVisit from './utils/notifyVisit'
 
 export default function App() {
   const { ui } = useContent()
-
-  // Publishes the pointer as --px/--py for every parallax layer below.
-  usePointerDepth()
 
   // Announce the visit once per session. No-op in development.
   useEffect(() => {
@@ -54,8 +49,6 @@ export default function App() {
       </main>
 
       <Footer />
-      <div className="cursorGlow" aria-hidden="true" />
-      <ClickPulse />
       <BackToTop />
     </div>
   )

@@ -514,24 +514,12 @@ svg {
    Ambient background — restrained on light paper
    -------------------------------------------------------------------------- */
 
-:root {
-  /* Pointer position, -1..1, published by usePointerDepth. Declared here so
-     every layer has a sane value before the pointer has moved, and on touch
-     devices where it never will. */
-  --px: 0;
-  --py: 0;
-}
-
 .backdrop {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   background: var(--paper);
-  /* Establishes the shared 3D space the layers below sit in. */
-  perspective: 900px;
-  perspective-origin: 50% 40%;
-  transform-style: preserve-3d;
 }
 
 /* The rippling mesh, drawn on a canvas. Held back from the centre of the
@@ -548,8 +536,6 @@ svg {
 .backdrop__grid {
   position: absolute;
   inset: 0;
-  transform: translate3d(calc(var(--px) * -14px), calc(var(--py) * -10px), 0);
-  transition: transform 0.7s var(--ease);
   background-image: linear-gradient(var(--grid-ink) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-ink) 1px, transparent 1px);
   background-size: 76px 76px;
@@ -570,8 +556,6 @@ svg {
   height: 660px;
   background: radial-gradient(circle, var(--card-glow), transparent 68%);
   animation: orb-drift 26s var(--ease) infinite alternate;
-  translate: calc(var(--px) * 40px) calc(var(--py) * 26px);
-  transition: translate 0.8s var(--ease);
 }
 
 .backdrop__orb--b {
@@ -581,8 +565,6 @@ svg {
   height: 600px;
   background: radial-gradient(circle, rgba(236, 72, 153, 0.13), transparent 70%);
   animation: orb-drift 32s var(--ease) infinite alternate-reverse;
-  translate: calc(var(--px) * -30px) calc(var(--py) * -18px);
-  transition: translate 0.8s var(--ease);
 }
 
 /* Third wash, low and to the right, so the lower half of the page is not left
@@ -595,8 +577,6 @@ svg {
   height: 620px;
   background: radial-gradient(circle, var(--cursor-glow), transparent 70%);
   animation: orb-drift 38s var(--ease) infinite alternate;
-  translate: calc(var(--px) * 20px) calc(var(--py) * -14px);
-  transition: translate 0.8s var(--ease);
 }
 
 /* A slow drift keeps the page feeling alive without anything moving that the
@@ -611,14 +591,6 @@ svg {
   .backdrop__orb {
     animation: none;
   }
-
-  .backdrop__orb,
-  .backdrop__grid {
-    translate: none;
-    transform: none;
-    transition: none;
-  }
-
 }
 
 /* --------------------------------------------------------------------------
@@ -725,94 +697,4 @@ svg {
 .section--projects {
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
-}
-
-/* Cursor glow --------------------------------------------------------------
-   A soft light sitting exactly under the pointer. Moved by the compositor from
-   the coordinates the pointer hook publishes, so there is no script running a
-   frame loop to keep it in place, and no trail lagging behind it. */
-
-.cursorGlow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 110;
-  width: 320px;
-  height: 320px;
-  margin: -160px 0 0 -160px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--cursor-glow), transparent 68%);
-  translate: var(--pointer-x, -50vw) var(--pointer-y, -50vh);
-  pointer-events: none;
-  will-change: translate;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .cursorGlow {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cursorGlow {
-    display: none;
-  }
-}
-
-/* Click pulse ---------------------------------------------------------------
-   Above everything, including the dialog, because it answers the click rather
-   than any one control - and inert, so it can never swallow the next one. */
-
-.pulses {
-  position: fixed;
-  inset: 0;
-  z-index: 400;
-  pointer-events: none;
-}
-
-/*
- * Centred by a negative margin rather than by a translate, because the
- * transform is spoken for: the animation scales the dot, and centring it with
- * a translate in the same property would be overwritten on the first keyframe.
- */
-.pulse {
-  position: absolute;
-  width: 42px;
-  height: 42px;
-  margin: -21px 0 0 -21px;
-  border-radius: 50%;
-  /* Fades out well before the edge of the box, so the mark has no rim to read
-     as a ring - it is a soft light, not an outline. */
-  background: radial-gradient(circle, var(--accent) 0%, var(--sky) 52%, transparent 72%);
-  animation: pulse-pop 400ms var(--ease) forwards;
-}
-
-/*
- * Swell, overshoot, settle back. The dot ends slightly smaller than its peak
- * rather than larger, which is what keeps the motion reading as a press
- * answered in place instead of as something starting to radiate outwards.
- */
-@keyframes pulse-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  28% {
-    opacity: 0.85;
-    transform: scale(1.06);
-  }
-  58% {
-    opacity: 0.5;
-    transform: scale(0.94);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.88);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pulses {
-    display: none;
-  }
 }

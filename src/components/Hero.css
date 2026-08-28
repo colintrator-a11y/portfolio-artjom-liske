@@ -111,9 +111,6 @@
 .hero__visual {
   position: relative;
   animation: hero-in 1s var(--ease) 0.3s both;
-  /* The 3D space the portrait tilts inside. */
-  perspective: 1200px;
-  perspective-origin: 50% 45%;
 }
 
 .heroGlow {
@@ -124,12 +121,6 @@
   filter: blur(52px);
 }
 
-/*
- * Turns towards the pointer using the --px/--py the page already publishes, so
- * no listener is needed here at all. The captions turn further than the
- * portrait and sit closer to the reader, which is what separates them in depth
- * rather than a drop shadow pretending to.
- */
 .portrait {
   position: relative;
   margin: 0;
@@ -144,14 +135,6 @@
   padding: 2px;
   background: var(--grad-brand);
   box-shadow: var(--shadow-lg), var(--accent-shadow);
-  transform: rotateY(calc(var(--px, 0) * -7deg)) rotateX(calc(var(--py, 0) * 4.5deg));
-  transform-style: preserve-3d;
-  transition: transform 0.6s var(--ease);
-}
-
-.portrait:hover {
-  transform: rotateY(calc(var(--px, 0) * -7deg)) rotateX(calc(var(--py, 0) * 4.5deg))
-    translate3d(0, -4px, 24px);
 }
 
 .portrait__img {
@@ -205,15 +188,6 @@
 @media (max-width: 560px) {
 
 
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .portrait,
-  .portrait:hover {
-    translate: none;
-    transform: none;
-    transition: none;
-  }
 }
 
 

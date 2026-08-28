@@ -30,7 +30,6 @@ src/
     useReveal.js         IntersectionObserver scroll-reveal
     useScrollSpy.js      active-panel tracking for the rail
     useTheme.js          light/dark preference
-    usePointerDepth.js   pointer-driven parallax on the ambient background
   utils/
     scrollToSection.js   nav-offset aware smooth scrolling
     notifyVisit.js       one ping per tab session to the shared notifier
@@ -52,7 +51,6 @@ src/
     Process.jsx          panel 06 — six-step track
     Footer.jsx           tagline, quick links, expertise
     BackToTop.jsx        floating scroll-to-top control
-    ClickPulse.jsx       the burst that answers a click, anywhere on the page
     ui/                  Panel, Icon, Reveal, SectionHead primitives
 ```
 
@@ -196,6 +194,23 @@ The portrait in `src/assets/avatar.webp` does most of the identity work. It open
 hero image, and appears as the brand mark in the navigation, in the footer, in the credentials
 strip, and as the browser tab icon (`public/favicon.png`, `favicon-32.png`, `apple-touch-icon.png`,
 all generated from the same file).
+
+## Pointer
+
+The page carries no decorative mouse effects. There is no cursor glow, no click mark, no parallax on
+the background or the portrait, and no spotlight tracking across the project cards — nothing on the
+page moves because the pointer moved.
+
+What remains is either an affordance or a control:
+
+- **hover states** — buttons, cards, chips, filters and links respond to hover, because that is how a
+  visitor knows they are interactive;
+- **the work rail drag** — click and drag the rail sideways to travel it, since a mouse has no
+  horizontal scroll of its own (see *Travelling the work rail* above).
+
+Everything still moving does so on its own schedule rather than the pointer's: the backdrop mesh
+ripples on a clock, the orbs drift on long CSS animations, and sections reveal on scroll. All of it
+is switched off under `prefers-reduced-motion`.
 
 ## Design system
 

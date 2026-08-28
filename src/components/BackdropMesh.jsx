@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react'
 
-import { pointer } from '../hooks/usePointerDepth'
-
 /**
  * A sheet of mesh rippling in depth behind the page.
  *
@@ -9,8 +7,7 @@ import { pointer } from '../hooks/usePointerDepth'
  * lattice of points in world space, each pushed along z by a sum of three
  * sine waves, and every point is projected through `scale = focal / (focal +
  * z)` before anything is drawn. A crest therefore comes towards the reader and
- * grows, a trough recedes and shrinks, and the whole sheet leans with the
- * pointer.
+ * grows, and a trough recedes and shrinks.
  *
  * The sheet faces the camera rather than lying under it. A plane at a fixed
  * height would converge on a horizon, which is a floor grid - a different and
@@ -72,8 +69,6 @@ export default function BackdropMesh() {
     let height = 0
     let raf = 0
     let t = 0
-    let camX = 0
-    let camY = 0
 
     // One flat buffer rather than an array of objects: it is rewritten every
     // frame, and 836 short-lived objects per frame is work the collector then
@@ -109,8 +104,8 @@ export default function BackdropMesh() {
 
           const scale = FOCAL / (FOCAL + wz)
           const i = r * COLS + c
-          sx[i] = width / 2 + (wx - camX) * scale
-          sy[i] = height / 2 + (wy - camY) * scale
+          sx[i] = width / 2 + wx * scale
+          sy[i] = height / 2 + wy * scale
           depth[i] = scale
         }
       }
@@ -167,8 +162,6 @@ export default function BackdropMesh() {
     }
 
     function frame() {
-      camX += (pointer.x * 90 - camX) * 0.04
-      camY += (pointer.y * 60 - camY) * 0.04
       t += 0.0062
       draw(t)
       raf = requestAnimationFrame(frame)

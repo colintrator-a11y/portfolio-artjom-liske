@@ -325,7 +325,7 @@
   border-radius: inherit;
   padding: 1px;
   background: radial-gradient(
-    340px circle at var(--sx, 50%) var(--sy, 50%),
+    340px circle at 50% 50%,
     var(--accent),
     transparent 58%
   );
@@ -343,14 +343,14 @@
   opacity: 1;
 }
 
-/* A soft pool of accent light under the copy, following the same point. */
+/* A soft pool of accent light under the copy. */
 .pcard__glow {
   position: absolute;
   inset: 0;
   z-index: 1;
   border-radius: inherit;
   background: radial-gradient(
-    300px circle at var(--sx, 50%) var(--sy, 50%),
+    300px circle at 50% 50%,
     var(--card-glow),
     transparent 62%
   );
