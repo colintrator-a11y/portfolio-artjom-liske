@@ -204,50 +204,54 @@ export default function Projects() {
           <p className="section__intro">{projects.intro}</p>
         </Reveal>
 
-        <Reveal className="work__nav" delay={80}>
-          <span className="work__count" aria-live="polite">
-            <b>{String(Math.min(at + 1, shown.length)).padStart(2, '0')}</b>
-            <i>/</i>
-            {String(shown.length).padStart(2, '0')}
-          </span>
+        {shown.length ? (
+          <Reveal className="work__nav" delay={80}>
+            <span className="work__count" aria-live="polite">
+              <b>{String(Math.min(at + 1, shown.length)).padStart(2, '0')}</b>
+              <i>/</i>
+              {String(shown.length).padStart(2, '0')}
+            </span>
 
-          <span className="work__arrows">
-            <button
-              type="button"
-              className="work__arrow work__arrow--back"
-              onClick={() => step(-1)}
-              disabled={ends.start}
-              aria-label={ui.prevWork}
-            >
-              <Icon name="arrowRight" size={17} strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              className="work__arrow"
-              onClick={() => step(1)}
-              disabled={ends.end}
-              aria-label={ui.nextWork}
-            >
-              <Icon name="arrowRight" size={17} strokeWidth={2} />
-            </button>
-          </span>
-        </Reveal>
+            <span className="work__arrows">
+              <button
+                type="button"
+                className="work__arrow work__arrow--back"
+                onClick={() => step(-1)}
+                disabled={ends.start}
+                aria-label={ui.prevWork}
+              >
+                <Icon name="arrowRight" size={17} strokeWidth={2} />
+              </button>
+              <button
+                type="button"
+                className="work__arrow"
+                onClick={() => step(1)}
+                disabled={ends.end}
+                aria-label={ui.nextWork}
+              >
+                <Icon name="arrowRight" size={17} strokeWidth={2} />
+              </button>
+            </span>
+          </Reveal>
+        ) : null}
       </div>
 
-      <Reveal className="work__filters" role="group" aria-label={ui.filterLabel} delay={120}>
-        {filters.map(({ key, label, count }) => (
-          <button
-            key={key}
-            type="button"
-            className={`filter ${active === key ? 'is-active' : ''}`.trim()}
-            onClick={() => setActive(key)}
-            aria-pressed={active === key}
-          >
-            {label}
-            <span className="filter__count">{count}</span>
-          </button>
-        ))}
-      </Reveal>
+      {filters.length ? (
+        <Reveal className="work__filters" role="group" aria-label={ui.filterLabel} delay={120}>
+          {filters.map(({ key, label, count }) => (
+            <button
+              key={key}
+              type="button"
+              className={`filter ${active === key ? 'is-active' : ''}`.trim()}
+              onClick={() => setActive(key)}
+              aria-pressed={active === key}
+            >
+              {label}
+              <span className="filter__count">{count}</span>
+            </button>
+          ))}
+        </Reveal>
+      ) : null}
 
       {/* Keyed on the filter so the rail replays its entrance on every change. */}
       <div
@@ -280,10 +284,14 @@ export default function Projects() {
 
       {!shown.length ? <p className="projects__empty">{ui.noMatches}</p> : null}
 
-      <Reveal className="examples__note">
-        <Icon name="shield" size={16} />
-        <span>{projects.note}</span>
-      </Reveal>
+      {/* The note disclaims reference builds, so it only belongs on a rail
+          that actually carries one. */}
+      {projects.items.some((item) => item.reference) ? (
+        <Reveal className="examples__note">
+          <Icon name="shield" size={16} />
+          <span>{projects.note}</span>
+        </Reveal>
+      ) : null}
 
       {open ? (
         <ProjectDialog

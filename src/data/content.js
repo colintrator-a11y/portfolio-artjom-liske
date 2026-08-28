@@ -13,16 +13,6 @@
 import { translations } from '../i18n/translations'
 
 import avatarImg from '../assets/avatar.webp'
-import travelBookingImg from '../assets/projects/travel-booking.webp'
-import aquariumImg from '../assets/projects/aquarium.webp'
-import eventCheckinImg from '../assets/projects/event-checkin.webp'
-import enneagramImg from '../assets/projects/enneagram.webp'
-import aiAgentImg from '../assets/projects/ai-agent.webp'
-import wordpressDesignImg from '../assets/projects/wordpress-design.webp'
-import ecommerceImg from '../assets/projects/ecommerce.webp'
-import telegramBotImg from '../assets/projects/telegram-order-bot.webp'
-import whatsappBotImg from '../assets/projects/whatsapp-booking-bot.webp'
-import chatbotHandoverImg from '../assets/projects/chatbot-handover.webp'
 
 /*
  * Filter buttons, in the order they appear. Language-independent: the visible
@@ -99,304 +89,76 @@ export const certifications = [
   { name: 'Test de inglés', score: '80%' },
 ]
 
-/* Screenshots, stacks and scene names, keyed by project id. */
-const projectMedia = {
-  'travel-booking': {
-    tags: ['mobile', 'api'],
-    image: travelBookingImg,
-    imageSize: [700, 394],
-    tech: ['React Native', 'iOS', 'Android', 'DevOps', 'REST API'],
-  },
-  aquarium: {
-    tags: ['wordpress', 'php', 'frontend'],
-    image: aquariumImg,
-    imageSize: [700, 394],
-    tech: ['WordPress', 'CMS', 'PHP', 'Responsive Web Design'],
-  },
-  'event-checkin': {
-    tags: ['mobile', 'api'],
-    image: eventCheckinImg,
-    imageSize: [700, 394],
-    tech: ['React Native', 'JavaScript', 'REST API', 'iOS', 'Android'],
-  },
-  enneagram: {
-    tags: ['frontend', 'api'],
-    image: enneagramImg,
-    imageSize: [700, 394],
-    tech: ['Vue.js', 'JavaScript', 'REST API', 'Modern UI Development'],
-  },
-  'ai-agent': {
-    tags: ['automation', 'api'],
-    image: aiAgentImg,
-    imageSize: [700, 394],
-    tech: ['Python', 'React.js', 'ChatGPT', 'REST API', 'Process Automation'],
-  },
-  'wordpress-design': {
-    tags: ['wordpress', 'php', 'frontend'],
-    image: wordpressDesignImg,
-    imageSize: [700, 394],
-    tech: ['WordPress', 'HTML', 'CSS', 'PHP', 'Responsive Web Design'],
-  },
-  ecommerce: {
-    tags: ['ecommerce', 'php', 'frontend'],
-    image: ecommerceImg,
-    imageSize: [700, 394],
-    tech: ['PHP', 'MySQL', 'E-commerce', 'Graphic Design'],
-  },
-  /*
-   * The only client project with no screenshot on file, so it falls back to an
-   * inline SVG of the storefront it was built in rather than a stock photo
-   * standing in for one.
-   */
-  vassalli: {
-    tags: ['ecommerce', 'shopify', 'wordpress'],
-    visual: 'shopifyTheme',
-    tech: ['Shopify', 'WordPress', 'E-commerce', 'Marketing'],
-  },
-}
-
 /*
- * Profile order: the platform and mobile work first, then the WordPress and
- * PHP builds, then the storefronts. The row numbers in the UI are derived from
- * position, so reordering here renumbers the page.
+ * Projects — empty, waiting for real entries.
+ *
+ * Two collections, identical in shape. `projectMedia` is client work.
+ * `exampleMedia` is reference builds: own demonstrations rather than paid
+ * work, marked as such on the card so a visitor is never led to read one as a
+ * delivery. Everything in `exampleMedia` renders with that badge; everything
+ * in `projectMedia` does not.
+ *
+ * Each entry needs a matching block under `projects.items` (or
+ * `examples.items`) in EVERY locale of `src/i18n/translations.js`, keyed by
+ * the same id. An id present here and missing there renders a card with no
+ * title, so the two have to move together.
+ *
+ * The shape, with everything an entry can carry:
+ *
+ *   import travelBookingImg from '../assets/projects/travel-booking.webp'
+ *
+ *   const projectMedia = {
+ *     'travel-booking': {
+ *       // Any subset of `filterKeys` above. Several is normal - a headless
+ *       // Shopify storefront is Shopify, front-end and API work at once, and
+ *       // should appear under all three. A filter with no projects behind it
+ *       // hides itself, so unused keys cost nothing.
+ *       tags: ['mobile', 'api'],
+ *
+ *       // Either a real screenshot...
+ *       image: travelBookingImg,
+ *       imageSize: [700, 394],   // required with `image`, and it must be the
+ *                                // file's true pixel size: the card reserves
+ *                                // the space from it, so a wrong number is a
+ *                                // layout shift on every load.
+ *
+ *       // ...or a drawn scene, for a project with no screenshot on file.
+ *       // The key must name a scene in `ProjectVisual.jsx`.
+ *       // visual: 'shopifyTheme',
+ *
+ *       // Shown on the card, first three then a "+n". Proper nouns, so these
+ *       // stay out of the translation files.
+ *       tech: ['React Native', 'iOS', 'Android', 'DevOps', 'REST API'],
+ *     },
+ *   }
+ *
+ * And in each locale, under `projects.items`:
+ *
+ *   'travel-booking': {
+ *     category: 'Mobile Platform',
+ *     title: 'Travel Booking & Digital Aviation Platform',
+ *     overview: 'One paragraph. The card clamps it to two lines; the dialog
+ *                shows all of it.',
+ *     features: ['Four short lines', 'is the usual count', '...', '...'],
+ *     value: 'What it was worth to the client, in one sentence.',
+ *   }
  */
-const projectOrder = [
-  'travel-booking',
-  'aquarium',
-  'event-checkin',
-  'enneagram',
-  'ai-agent',
-  'wordpress-design',
-  'ecommerce',
-  'vassalli',
-]
+const projectMedia = {}
 
-const exampleMedia = {
-  /* The three chatbot builds ship with captured screenshots of the demos. */
-  'telegram-order-bot': {
-    tags: ['api', 'chatbot'],
-    image: telegramBotImg,
-    imageSize: [1400, 788],
-    tech: ['Telegram Bot API', 'Node.js', 'REST API', 'Chatbots'],
-  },
-  'whatsapp-booking-bot': {
-    tags: ['api', 'chatbot'],
-    image: whatsappBotImg,
-    imageSize: [1400, 788],
-    tech: ['WhatsApp Cloud API', 'Node.js', 'REST API', 'Chatbots'],
-  },
-  'chatbot-handover': {
-    tags: ['api', 'chatbot'],
-    image: chatbotHandoverImg,
-    imageSize: [1400, 788],
-    tech: ['Chatbots', 'Node.js', 'React.js', 'WhatsApp Cloud API', 'Telegram Bot API'],
-  },
-  'shopify-headless': {
-    tags: ['ecommerce', 'shopify', 'frontend', 'api'],
-    visual: 'shopifyHeadless',
-    tech: ['Shopify', 'Storefront API', 'Next.js', 'React.js', 'TypeScript'],
-  },
-  'shopify-subscription-app': {
-    tags: ['ecommerce', 'shopify', 'api'],
-    visual: 'shopifyApp',
-    tech: ['Shopify', 'Shopify App', 'Node.js', 'REST API', 'Webhooks'],
-  },
-  'woocommerce-store': {
-    tags: ['ecommerce', 'wordpress', 'php', 'frontend'],
-    visual: 'wooStore',
-    tech: ['WordPress', 'WooCommerce', 'PHP', 'E-commerce', 'Responsive Web Design'],
-  },
-  'wordpress-multilingual-site': {
-    tags: ['wordpress', 'php', 'frontend'],
-    visual: 'wordpressEditor',
-    tech: ['WordPress', 'PHP', 'Multilingual', 'SEO', 'Responsive Web Design'],
-  },
-  'wordpress-lead-plugin': {
-    tags: ['wordpress', 'php', 'api', 'automation'],
-    visual: 'wordpressPlugin',
-    tech: ['WordPress', 'PHP', 'REST API', 'Process Automation'],
-  },
-  'react-native-shop-app': {
-    tags: ['mobile', 'api'],
-    visual: 'mobileShopping',
-    tech: ['React Native', 'iOS', 'Android', 'REST API', 'Mobile App Design'],
-  },
-  'flutter-delivery-app': {
-    tags: ['mobile', 'api'],
-    visual: 'mobileDelivery',
-    tech: ['Flutter', 'Android', 'iOS', 'REST API', 'Google Maps'],
-  },
-  'android-field-service': {
-    tags: ['mobile', 'api'],
-    visual: 'mobileField',
-    tech: ['Android', 'Java', 'SQLite', 'REST API', 'Offline Sync'],
-  },
-  'laravel-booking-api': {
-    tags: ['php', 'api'],
-    visual: 'laravelApi',
-    tech: ['PHP', 'Laravel', 'MySQL', 'REST API', 'API Integration'],
-  },
-  'php-crm-invoicing': {
-    tags: ['php', 'frontend', 'api'],
-    visual: 'phpCrm',
-    tech: ['PHP', 'MySQL', 'REST API', 'Responsive Web Design'],
-  },
-  'php-payment-gateway': {
-    tags: ['php', 'api'],
-    visual: 'paymentGateway',
-    tech: ['PHP', 'REST API', 'Webhooks', 'API Integration'],
-  },
-  'python-automation': {
-    tags: ['api', 'automation'],
-    visual: 'python',
-    tech: ['Python', 'REST API', 'Process Automation', 'Third-Party Integrations'],
-  },
-  'vue-crm-portal': {
-    tags: ['frontend', 'api'],
-    visual: 'vueCrm',
-    tech: ['Vue.js', 'NestJS', 'REST API', 'API Integration', 'Modern UI Development'],
-  },
-  'laravel-saas-billing': {
-    tags: ['php', 'api'],
-    visual: 'laravelBilling',
-    tech: ['PHP', 'Laravel', 'MySQL', 'SaaS', 'Webhooks'],
-  },
-  'php-inventory-system': {
-    tags: ['php'],
-    visual: 'phpInventory',
-    tech: ['PHP', 'MySQL', 'REST API', 'Responsive Web Design'],
-  },
-  'wordpress-membership-site': {
-    tags: ['wordpress', 'php'],
-    visual: 'wpMembership',
-    tech: ['WordPress', 'PHP', 'MySQL', 'Responsive Web Design'],
-  },
-  'woocommerce-multivendor': {
-    tags: ['ecommerce', 'wordpress', 'php'],
-    visual: 'wooMarketplace',
-    tech: ['WordPress', 'WooCommerce', 'PHP', 'E-commerce', 'REST API'],
-  },
-  'shopify-b2b-wholesale': {
-    tags: ['ecommerce', 'shopify'],
-    visual: 'shopifyB2b',
-    tech: ['Shopify', 'Shopify App', 'Liquid', 'E-commerce', 'API Integration'],
-  },
-  'react-analytics-dashboard': {
-    tags: ['frontend', 'api'],
-    visual: 'reactAnalytics',
-    tech: ['React.js', 'TypeScript', 'REST API', 'Data Visualisation', 'Modern UI Development'],
-  },
-  'booking-scheduling-app': {
-    tags: ['frontend', 'api'],
-    visual: 'bookingAdmin',
-    tech: ['React.js', 'Node.js', 'REST API', 'API Integration', 'Responsive Web Design'],
-  },
-  'nest-microservices': {
-    tags: ['api'],
-    visual: 'nestServices',
-    tech: ['NestJS', 'Node.js', 'REST API', 'Webhooks', 'API Integration'],
-  },
-  'nextjs-headless-blog': {
-    tags: ['frontend', 'api'],
-    visual: 'nextHeadlessBlog',
-    tech: ['Next.js', 'React.js', 'TypeScript', 'REST API', 'SEO'],
-  },
-  'laravel-queue-worker': {
-    tags: ['php', 'api', 'automation'],
-    visual: 'laravelQueue',
-    tech: ['PHP', 'Laravel', 'MySQL', 'REST API', 'Process Automation'],
-  },
-  'wordpress-headless-api': {
-    tags: ['wordpress', 'php', 'frontend', 'api'],
-    visual: 'wpRestApi',
-    tech: ['WordPress', 'PHP', 'REST API', 'Next.js', 'React.js'],
-  },
-  'shopify-inventory-sync': {
-    tags: ['ecommerce', 'shopify', 'api', 'automation'],
-    visual: 'shopifySync',
-    tech: ['Shopify', 'Node.js', 'REST API', 'Webhooks', 'Process Automation'],
-  },
-  'node-realtime-orders': {
-    tags: ['api'],
-    visual: 'nodeRealtime',
-    tech: ['Node.js', 'REST API', 'Webhooks', 'API Integration'],
-  },
-  'python-data-pipeline': {
-    tags: ['api', 'automation'],
-    visual: 'pythonPipeline',
-    tech: ['Python', 'PostgreSQL', 'REST API', 'Process Automation'],
-  },
-  'react-native-loyalty-app': {
-    tags: ['mobile', 'api'],
-    visual: 'rnLoyalty',
-    tech: ['React Native', 'iOS', 'Android', 'REST API', 'Mobile App Design'],
-  },
-  'flutter-habit-tracker': {
-    tags: ['mobile'],
-    visual: 'flutterHabit',
-    tech: ['Flutter', 'Android', 'iOS', 'Mobile App Design'],
-  },
-  'android-pos-terminal': {
-    tags: ['mobile', 'api'],
-    visual: 'androidPos',
-    tech: ['Android', 'Java', 'SQLite', 'REST API', 'Offline Sync'],
-  },
-  'ios-property-viewings': {
-    tags: ['mobile', 'api'],
-    visual: 'iosProperty',
-    tech: ['iOS', 'React Native', 'REST API', 'Google Maps'],
-  },
-}
+/* Display order. An id here with no entry above renders nothing. */
+const projectOrder = []
 
-const exampleOrder = [
-  // Chatbots - the three builds with captured screenshots lead
-  'telegram-order-bot',
-  'whatsapp-booking-bot',
-  'chatbot-handover',
-  // PHP, then the WordPress and WooCommerce builds that run on it
-  'laravel-booking-api',
-  'php-crm-invoicing',
-  'php-payment-gateway',
-  'woocommerce-store',
-  'wordpress-multilingual-site',
-  'wordpress-lead-plugin',
-  // Shopify
-  'shopify-headless',
-  'shopify-subscription-app',
-  // Mobile
-  'react-native-shop-app',
-  'flutter-delivery-app',
-  'android-field-service',
-  // Automation
-  'python-automation',
-  // A second set of reference builds
-  'vue-crm-portal',
-  'laravel-saas-billing',
-  'php-inventory-system',
-  'wordpress-membership-site',
-  'woocommerce-multivendor',
-  'shopify-b2b-wholesale',
-  'react-analytics-dashboard',
-  'booking-scheduling-app',
-  'nest-microservices',
-  'nextjs-headless-blog',
-  'laravel-queue-worker',
-  'wordpress-headless-api',
-  'shopify-inventory-sync',
-  'node-realtime-orders',
-  'python-data-pipeline',
-  'react-native-loyalty-app',
-  'flutter-habit-tracker',
-  'android-pos-terminal',
-  'ios-property-viewings',
-]
+const exampleMedia = {}
+
+const exampleOrder = []
 
 /*
  * Numbers and symbols carry across languages unchanged.
  *
  * The project count is derived rather than typed: it is the number of entries
- * the work rail actually holds, so the stat and the rail's own "01 / 42"
- * readout cannot drift apart when a project is added or removed.
+ * the work rail actually holds, so the stat and the rail's own "01 / n"
+ * readout cannot drift apart as projects are added or removed. With an empty
+ * portfolio it reads zero, and corrects itself on the first entry.
  */
 const statValues = ['10+', String(projectOrder.length + exampleOrder.length), '4', '3']
 

@@ -149,34 +149,53 @@ profile currently records none of those.
    foot of the About card renders as plain text and the site carries no outbound link. Set it to the
    public profile URL to turn that note into a link.
 
-## Project imagery
+## Adding projects
 
-The eight client projects come from the profile portfolio. Seven use **real screenshots of the
-delivered work**, stored in `src/assets/projects/` as WebP. Each renders at its own aspect ratio
-with `width`/`height` set from `imageSize` in `content.js`, so no layout shift occurs and nothing
-is cropped.
+**The portfolio is currently empty.** The panel, the rail, the filters and the dialog all work; there
+is simply nothing in them yet. Every control that would describe an empty rail — the `01 / 42`
+counter, the travel arrows, the filter bar, the reference-build note — stands down until there is
+something to describe, so the panel reads as empty rather than broken.
 
-The eighth — Product Listing, Vassalli — has no screenshot on file, so it falls back to an inline
-SVG of the storefront it was built in rather than to a stock photo standing in for a screenshot.
+A project lives in two places, and both have to move together:
 
-### Reference builds
+1. **`src/data/content.js`** — the language-independent half: id, tags, image or drawn scene, and
+   the technology list. `projectMedia` is client work; `exampleMedia` is reference builds, which
+   render with a *Reference build* badge so a visitor is never led to read one as paid work. Add the
+   id to `projectOrder` / `exampleOrder` to place it.
+2. **`src/i18n/translations.js`** — the copy, under `projects.items` (or `examples.items`), keyed by
+   the same id, **in every locale**. An id present in `content.js` and missing from a locale renders
+   a card with no title in that language.
 
-Alongside the client work, the same rail carries **reference builds**: demonstrations of capabilities on
-the profile that have no client project attached. Three of them (the Telegram order bot, the
-WhatsApp booking bot and the multi-channel bot with agent handover) ship with captured screenshots;
-the rest are drawn as inline SVG in `ProjectScenes.jsx` and `ProjectScenesMore.jsx` — the interface
-each build would actually run in, at any resolution, with no network requests.
+The full shape of an entry, with every field it can carry, is written out as a comment above
+`projectMedia` in `content.js`.
 
-They are **not** client deliveries and the site never presents them as such: each is numbered
-"Example 01/02" rather than "Project", carries a *Reference build* badge, and a closing line under
-the rail states that everything else was delivered for a paying client. Remove `exampleMedia`
-and `exampleOrder` from `content.js` to drop them entirely.
+Two things worth getting right:
+
+- **`imageSize` must be the file's true pixel dimensions.** The card reserves space from it, so a
+  wrong number is a layout shift on every load.
+- **`tags` come from `filterKeys`** at the top of `content.js`. Several per project is normal — a
+  headless Shopify storefront is Shopify, front-end and API work at once and should appear under all
+  three. A filter with no projects behind it hides itself, so unused keys cost nothing.
+
+### Images, or drawn scenes
+
+Drop screenshots into `src/assets/projects/` as WebP, import them, and point `image` at the import.
+Each renders at its own aspect ratio with `width`/`height` set from `imageSize`, so nothing is
+cropped and nothing shifts.
+
+For a project with no screenshot on file, set `visual` instead of `image` and name one of the scenes
+in `ProjectVisual.jsx` — inline-SVG mockups of the interface a build of that kind would run in.
+Thirty-two of them are still in the repo from the previous portfolio (`ProjectScenes.jsx` and
+`ProjectScenesMore.jsx`); they are unreferenced now, so if the new projects all come with
+screenshots those two files and the `visual` branch can be deleted outright.
+
+The stat in the hero counts the rail: it is `projectOrder.length + exampleOrder.length`, so it
+corrects itself as projects are added and can never disagree with the `01 / n` readout.
 
 The portrait in `src/assets/avatar.webp` does most of the identity work. It opens the page as the
 hero image, and appears as the brand mark in the navigation, in the footer, in the credentials
 strip, and as the browser tab icon (`public/favicon.png`, `favicon-32.png`, `apple-touch-icon.png`,
-all generated from the same file). Workana serves it at 640px; drop a higher-resolution copy in and
-regenerate the favicons if the hero is ever shown larger than ~380px.
+all generated from the same file).
 
 ## Design system
 
