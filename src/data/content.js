@@ -181,7 +181,12 @@ export const linkKinds = ['live', 'appStore', 'googlePlay', 'admin', 'apk']
  * business with the right name. Anything that could not be confirmed that way
  * was left without a link, because a wrong link on a portfolio claims work
  * that was not done. The six: premium-aquarium, enneagram-assessment,
- * vassalli-listing, event-check-in, ecommerce-website, axolon-erp.
+ * vassalli-listing, event-check-in, ecommerce-website, axolon-erp,
+ * autonomous-ai-agent and hold-rome-hotel.
+ *
+ * The last two came out of the screenshot filenames rather than a search:
+ * "AboutGetTaskPilot" pointed straight at gettaskpilot.com, whose headline is
+ * word for word the one in the screenshot.
  */
 
 /* Official test titles - left in their original language. */
@@ -252,6 +257,7 @@ const projectMedia = {
       { src: aiAgent4, size: [792, 1037] },
       { src: aiAgent5, size: [884, 613] },
     ],
+    links: [{ kind: 'live', url: 'https://gettaskpilot.com' }],
     tech: ['Python', 'React.js', 'Artificial Intelligence', 'LLM Integration', 'REST API'],
   },
   'event-check-in': {
@@ -361,6 +367,7 @@ const projectMedia = {
       { src: holdRome1, size: [1200, 900] },
       { src: holdRome2, size: [1200, 900] },
     ],
+    links: [{ kind: 'live', url: 'https://holdrome.com/' }],
     tech: ['WordPress', 'HTML', 'CSS', 'Responsive Web Design'],
   },
   'shopify-store-build': {
