@@ -63,6 +63,9 @@ import franchise1Anim from '../assets/projects/find-a-franchise-1-anim.webp'
 import kungfu1Anim from '../assets/projects/kungfu-fighting-game-1-anim.webp'
 import kungfu2Anim from '../assets/projects/kungfu-fighting-game-2-anim.webp'
 import soFresh2Anim from '../assets/projects/so-fresh-2-anim.webp'
+import franchise1Card from '../assets/projects/find-a-franchise-1-card.webp'
+import kungfu1Card from '../assets/projects/kungfu-fighting-game-1-card.webp'
+import soFresh2Card from '../assets/projects/so-fresh-2-card.webp'
 
 /*
  * Filter buttons, in the order they appear. Language-independent: the visible
@@ -274,7 +277,7 @@ const projectMedia = {
   'kungfu-fighting-game': {
     tags: ['games'],
     gallery: [
-      { src: kungfu1, size: [1200, 675], anim: kungfu1Anim, animSize: [900, 506] },
+      { src: kungfu1, size: [1200, 675], anim: kungfu1Anim, card: kungfu1Card, cardSize: [560, 315], animSize: [900, 506] },
       { src: kungfu2, size: [1200, 675], anim: kungfu2Anim, animSize: [900, 506] },
     ],
     tech: ['Game Development', 'Game Design', 'Multiplayer'],
@@ -282,7 +285,7 @@ const projectMedia = {
   'find-a-franchise': {
     tags: ['mobile'],
     gallery: [
-      { src: franchise1, size: [600, 433], anim: franchise1Anim, animSize: [600, 433] },
+      { src: franchise1, size: [600, 433], anim: franchise1Anim, card: franchise1Card, cardSize: [560, 404], animSize: [600, 433] },
       { src: franchise2, size: [1200, 1500] },
     ],
     tech: ['React Native', 'iOS', 'Mobile App Design'],
@@ -298,7 +301,7 @@ const projectMedia = {
     tags: ['wordpress', 'ecommerce', 'api'],
     gallery: [
       { src: soFresh1, size: [1200, 1500] },
-      { src: soFresh2, size: [600, 433], anim: soFresh2Anim, animSize: [600, 433] },
+      { src: soFresh2, size: [600, 433], anim: soFresh2Anim, card: soFresh2Card, cardSize: [560, 404], animSize: [600, 433] },
     ],
     tech: ['WordPress', 'WooCommerce', 'API Integration', 'E-commerce'],
   },
@@ -443,14 +446,27 @@ export function buildContent(lang) {
       intro: t.projects.intro,
       note: t.examples.note,
       items: [
-        ...projectOrder.map((id) => ({
-          id,
-          ...projectMedia[id],
-          // The card shows one image; the dialog shows the whole gallery.
-          image: projectMedia[id].gallery[0].src,
-          imageSize: projectMedia[id].gallery[0].size,
-          ...t.projects.items[id],
-        })),
+        ...projectOrder.map((id) => {
+          const shots = projectMedia[id].gallery
+          /*
+           * The card shows one image; the dialog shows the whole gallery.
+           *
+           * A project with an animation leads its card with that shot rather
+           * than with the cover, so motion is never hidden a click away. For
+           * most of them the animation IS the cover; So Fresh keeps its in the
+           * second shot, and its card follows it there.
+           */
+          const lead = shots.find((shot) => shot.card) ?? shots[0]
+          return {
+            id,
+            ...projectMedia[id],
+            image: lead.src,
+            imageSize: lead.size,
+            cardAnim: lead.card,
+            cardAnimSize: lead.cardSize,
+            ...t.projects.items[id],
+          }
+        }),
         ...exampleOrder.map((id) => ({
           id,
           reference: true,

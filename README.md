@@ -212,10 +212,26 @@ An animated shot keeps its still as well, and a gallery entry carries both:
 { src: kungfu1, size: [1200, 675], anim: kungfu1Anim, animSize: [900, 506] }
 ```
 
-**The grid never animates.** The card always shows `src`, the still — an animated cover is the
-heaviest file in a project by an order of magnitude, and six of them looping at once is not a grid
-anyone can read. A card whose project contains an animation carries a small `GIF` marker instead, so
-a visitor knows where the motion is.
+**The card plays it too**, from a third copy cut for the size a card actually renders at — about
+390px, so the dialog's 900px copy would be twice the pixels and three times the weight for detail
+nobody sees. A busy clip also gives up more frames here (18fps rather than 30), because a small
+looping tile does not need them: the Kungfu clip is 1.34 MB in the dialog and 451 kB on the card.
+
+A gallery entry can therefore carry three versions of one shot:
+
+```js
+{ src: kungfu1,          size: [1200, 675],   // the still — poster, and reduced motion
+  anim: kungfu1Anim,     animSize: [900, 506],   // the dialog
+  card: kungfu1Card,     cardSize: [560, 315] }  // the grid
+```
+
+**A project leads its card with its animation wherever that sits in the gallery.** For most of them
+the animated shot is already the cover; So Fresh keeps its GIF in the second shot, and its card
+follows it there rather than showing a still and hiding the motion a click away.
+
+Under `prefers-reduced-motion` the card shows the still and **no animated file is requested at
+all**, and the small `GIF` marker appears — hidden the rest of the time, because a label saying
+"GIF" over something visibly moving is noise, but a frozen still needs to say what it stands for.
 
 **The dialog plays it**, and honours `prefers-reduced-motion` through `<picture>`: the still is
 offered as a `<source>` behind that media query, so a reader who has asked for less motion gets the
@@ -239,9 +255,10 @@ driven in a browser rather than assumed:
   so the click never reaches the dialog's own close-on-backdrop.
 - **Switching screenshot closes the preview**, since it would otherwise be showing the wrong one.
 
-Note that headless Chrome does not advance image animations, so the playback itself cannot be
-verified from a script — only that the files are valid animated WebP and that the right source is
-chosen. Check it in a real browser.
+Note that headless Chrome does not sustain image animation, so playback cannot be verified from a
+script — only that the files are valid animated WebP and that the right source is chosen. A capture
+does come back showing a frame other than the first, so it starts; it just does not keep running.
+Worth a look in a real browser.
 
 `size` must be the file's true pixel dimensions: the space is reserved from it, so a wrong number is
 a layout shift every time the image loads.

@@ -326,6 +326,10 @@
   overflow: hidden;
 }
 
+.pcard__media picture {
+  display: contents;
+}
+
 .pcard__shot {
   display: block;
   width: 100%;
@@ -369,9 +373,14 @@
   backdrop-filter: blur(4px);
 }
 
-/* Says a project has an animation in it, since the card itself holds still.
-   "GIF" reads the same in every language the site ships in. */
+/*
+ * Only shown when the animation is frozen. The card plays its clip normally,
+ * so a label saying "GIF" over something visibly moving is noise - but under
+ * reduced motion the still needs to say what it is standing in for.
+ * "GIF" reads the same in every language the site ships in.
+ */
 .pcard__gif {
+  display: none;
   position: absolute;
   right: 12px;
   bottom: 12px;
@@ -384,6 +393,12 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   backdrop-filter: blur(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard__gif {
+    display: block;
+  }
 }
 
 .pcard__badge {

@@ -24,8 +24,12 @@ export default function ProjectCard({
 }) {
   const shown = project.tech.slice(0, SHOWN_TECH)
   const extra = project.tech.length - shown.length
-  // The card never animates, so it says where the motion is instead.
-  const moves = project.gallery?.some((item) => item.anim)
+  /*
+   * A project with a GIF plays it here, at a size cut for a card rather than
+   * the dialog's - a card renders about 390px wide, so the dialog's copy would
+   * be twice the pixels and three times the weight for detail nobody sees.
+   */
+  const moves = Boolean(project.cardAnim)
 
   return (
     <button
@@ -36,15 +40,22 @@ export default function ProjectCard({
       aria-label={`${project.title} — ${ui.viewDetails}`}
     >
       <span className="pcard__media">
-        <img
-          className="pcard__shot"
-          src={project.image}
-          alt=""
-          loading={eager ? 'eager' : 'lazy'}
-          decoding="async"
-          width={project.imageSize?.[0]}
-          height={project.imageSize?.[1]}
-        />
+        <picture>
+          {/* A reader who has asked for less motion gets the frozen frame, and
+              the marker below tells them the still is standing in for a clip. */}
+          {moves ? (
+            <source srcSet={project.image} media="(prefers-reduced-motion: reduce)" />
+          ) : null}
+          <img
+            className="pcard__shot"
+            src={moves ? project.cardAnim : project.image}
+            alt=""
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+            width={(moves ? project.cardAnimSize : project.imageSize)?.[0]}
+            height={(moves ? project.cardAnimSize : project.imageSize)?.[1]}
+          />
+        </picture>
         <span className="pcard__veil" aria-hidden="true" />
         {moves ? <span className="pcard__gif">GIF</span> : null}
         <span className="pcard__index" aria-hidden="true">
