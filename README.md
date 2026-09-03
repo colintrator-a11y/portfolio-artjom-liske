@@ -221,6 +221,24 @@ a visitor knows where the motion is.
 offered as a `<source>` behind that media query, so a reader who has asked for less motion gets the
 frozen frame with nothing scripted.
 
+### The preview
+
+The dialog's media column is only ~380px wide, so clicking the image opens it full-screen. It shows
+at its natural size at most — a 1200px screenshot fills the window, and a 600px one is not upscaled
+into blur to pretend it can.
+
+That is a second modal over the first, which is the part worth being careful about, and all of it is
+driven in a browser rather than assumed:
+
+- **Escape closes the preview, not the dialog.** A second Escape then closes the dialog.
+- **Tab is trapped in whichever layer is on top** — the trap switches scope rather than fighting
+  itself.
+- **Focus returns to the image** that opened the preview, and moves to the preview's close button
+  when it opens.
+- **A backdrop click closes only the preview.** It is a sibling of the dialog rather than a child,
+  so the click never reaches the dialog's own close-on-backdrop.
+- **Switching screenshot closes the preview**, since it would otherwise be showing the wrong one.
+
 Note that headless Chrome does not advance image animations, so the playback itself cannot be
 verified from a script — only that the files are valid animated WebP and that the right source is
 chosen. Check it in a real browser.

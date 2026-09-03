@@ -27,6 +27,11 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [ta
  * the card that opened it. A dialog that loses the keyboard is worse than no
  * dialog at all.
  *
+ * Clicking the image opens it full-screen. That is a second layer over a
+ * modal, which is the part worth being careful about: Escape closes the
+ * preview before the dialog, Tab is trapped in whichever of the two is on
+ * top, and focus goes back to the image that opened it.
+ *
  * Rendered into the body rather than where it sits in the tree. `position:
  * fixed` means "relative to the viewport" only while no ancestor establishes a
  * containing block, and backdrop-filter on the section around it does exactly
@@ -36,7 +41,11 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [ta
 export default function ProjectDialog({ project, label, index, badge, ui, onClose }) {
   const panelRef = useRef(null)
   const closeRef = useRef(null)
+  const zoomRef = useRef(null)
+  const zoomOpenerRef = useRef(null)
+  const zoomCloseRef = useRef(null)
   const [shot, setShot] = useState(0)
+  const [zoom, setZoom] = useState(false)
 
   // The dialog mounts fresh for each project, so the gallery starts at the
   // cover without anything having to reset it.
@@ -56,15 +65,28 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
     if (gap > 0) body.style.paddingRight = `${gap}px`
     closeRef.current?.focus()
 
+    return () => {
+      body.style.overflow = previousOverflow
+      body.style.paddingRight = previousPad
+      if (opener instanceof HTMLElement) opener.focus()
+    }
+  }, [])
+
+  useEffect(() => {
     function onKeyDown(event) {
       if (event.key === 'Escape') {
         event.preventDefault()
-        onClose()
+        // The preview goes first: Escape over a stack closes the top of it,
+        // not everything at once.
+        if (zoom) setZoom(false)
+        else onClose()
         return
       }
       if (event.key !== 'Tab') return
 
-      const items = [...(panelRef.current?.querySelectorAll(FOCUSABLE) ?? [])]
+      // Whichever layer is on top owns the keyboard.
+      const scope = zoom ? zoomRef.current : panelRef.current
+      const items = [...(scope?.querySelectorAll(FOCUSABLE) ?? [])]
       if (!items.length) return
       const first = items[0]
       const last = items[items.length - 1]
@@ -78,13 +100,18 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
     }
 
     document.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      body.style.overflow = previousOverflow
-      body.style.paddingRight = previousPad
-      if (opener instanceof HTMLElement) opener.focus()
-    }
-  }, [onClose])
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onClose, zoom])
+
+  // Focus follows the preview in and back out again.
+  useEffect(() => {
+    if (zoom) zoomCloseRef.current?.focus()
+    else zoomOpenerRef.current?.focus()
+  }, [zoom])
+
+  // A different screenshot means the preview should show that one, not
+  // whatever was open when the thumbnail was pressed.
+  useEffect(() => setZoom(false), [shot])
 
   const dialog = (
     <div className="pdialog" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
@@ -108,18 +135,29 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
         <div className="pdialog__scroll">
         <div className="pdialog__media">
           <div className="pdialog__mediaInner">
-            <picture>
-              {current.anim ? (
-                <source srcSet={current.src} media="(prefers-reduced-motion: reduce)" />
-              ) : null}
-              <img
-                className="pdialog__shot"
-                src={current.anim ?? current.src}
-                alt={`${ui.screenshot} ${shot + 1} — ${project.title}`}
-                width={(current.anim ? current.animSize : current.size)?.[0]}
-                height={(current.anim ? current.animSize : current.size)?.[1]}
-              />
-            </picture>
+            <button
+              type="button"
+              className="pdialog__zoom"
+              onClick={() => setZoom(true)}
+              aria-label={`${ui.enlarge} — ${ui.screenshot} ${shot + 1}`}
+              ref={zoomOpenerRef}
+            >
+              <picture>
+                {current.anim ? (
+                  <source srcSet={current.src} media="(prefers-reduced-motion: reduce)" />
+                ) : null}
+                <img
+                  className="pdialog__shot"
+                  src={current.anim ?? current.src}
+                  alt={`${ui.screenshot} ${shot + 1} — ${project.title}`}
+                  width={(current.anim ? current.animSize : current.size)?.[0]}
+                  height={(current.anim ? current.animSize : current.size)?.[1]}
+                />
+              </picture>
+              <span className="pdialog__zoomHint" aria-hidden="true">
+                <Icon name="expand" size={15} strokeWidth={2} />
+              </span>
+            </button>
 
             {/* Only worth drawing when there is more than one to choose from. */}
             {gallery.length > 1 ? (
@@ -194,5 +232,48 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
     </div>
   )
 
-  return typeof document === 'undefined' ? dialog : createPortal(dialog, document.body)
+  /*
+   * A sibling of the dialog rather than a child of it, so the dialog's
+   * click-the-backdrop-to-close never fires from a click inside the preview.
+   */
+  const preview = zoom ? (
+    <div
+      className="plightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${ui.screenshot} ${shot + 1} — ${project.title}`}
+      ref={zoomRef}
+      onMouseDown={(event) => event.target === event.currentTarget && setZoom(false)}
+    >
+      <button
+        type="button"
+        className="plightbox__close"
+        onClick={() => setZoom(false)}
+        aria-label={ui.closeDetails}
+        ref={zoomCloseRef}
+      >
+        <Icon name="close" size={18} strokeWidth={2.2} />
+      </button>
+
+      <picture>
+        {current.anim ? (
+          <source srcSet={current.src} media="(prefers-reduced-motion: reduce)" />
+        ) : null}
+        <img
+          className="plightbox__img"
+          src={current.anim ?? current.src}
+          alt={`${ui.screenshot} ${shot + 1} — ${project.title}`}
+        />
+      </picture>
+    </div>
+  ) : null
+
+  const layers = (
+    <>
+      {dialog}
+      {preview}
+    </>
+  )
+
+  return typeof document === 'undefined' ? layers : createPortal(layers, document.body)
 }

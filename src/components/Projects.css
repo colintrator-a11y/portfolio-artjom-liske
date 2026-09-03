@@ -565,6 +565,106 @@
   display: block;
 }
 
+/* The image is a button, so it says so on hover and carries a corner hint. */
+.pdialog__zoom {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.pdialog__zoomHint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(8, 6, 16, 0.6);
+  color: #fff;
+  opacity: 0;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.3s var(--ease);
+}
+
+.pdialog__zoom:hover .pdialog__zoomHint,
+.pdialog__zoom:focus-visible .pdialog__zoomHint {
+  opacity: 1;
+}
+
+/* Coarse pointers get no hover, so the hint is simply always there. */
+@media (hover: none) {
+  .pdialog__zoomHint {
+    opacity: 1;
+  }
+}
+
+/* Preview ------------------------------------------------------------------
+   Above the dialog it opens from, and its own layer rather than a child of it,
+   so a click in here never reaches the dialog's close-on-backdrop. */
+
+.plightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 4vw, 52px);
+  background: rgba(10, 6, 22, 0.82);
+  backdrop-filter: blur(8px);
+  animation: pdialog-veil 0.28s var(--ease) both;
+  cursor: zoom-out;
+}
+
+.plightbox picture {
+  display: contents;
+}
+
+/*
+ * `contain` inside the padded box: the whole screenshot is visible at the
+ * largest size the window allows, whatever its shape - a wide banner and a
+ * tall page capture both fit without either being cropped.
+ */
+.plightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+  background: var(--paper-solid);
+  box-shadow: var(--shadow-lg);
+  cursor: default;
+}
+
+.plightbox__close {
+  position: absolute;
+  top: clamp(12px, 2vw, 22px);
+  right: clamp(12px, 2vw, 22px);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.plightbox__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 .pdialog__shot {
   display: block;
   width: 100%;
