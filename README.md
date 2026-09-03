@@ -199,6 +199,32 @@ Images are prepared at a 1200px maximum width and WebP quality 82. Anything tall
 trimmed to that rather than shrunk, so what survives stays readable instead of becoming an
 illegible strip.
 
+### Animations
+
+Four of the supplied screenshots were GIFs. They are converted to **animated WebP** — same `<img>`
+tag, a fraction of the weight: 8.4 MB of GIF becomes 3.0 MB. Short slideshows keep every frame; a
+30fps game clip keeps every second one, which halves the file for motion nobody can tell apart at
+this size.
+
+An animated shot keeps its still as well, and a gallery entry carries both:
+
+```js
+{ src: kungfu1, size: [1200, 675], anim: kungfu1Anim, animSize: [900, 506] }
+```
+
+**The grid never animates.** The card always shows `src`, the still — an animated cover is the
+heaviest file in a project by an order of magnitude, and six of them looping at once is not a grid
+anyone can read. A card whose project contains an animation carries a small `GIF` marker instead, so
+a visitor knows where the motion is.
+
+**The dialog plays it**, and honours `prefers-reduced-motion` through `<picture>`: the still is
+offered as a `<source>` behind that media query, so a reader who has asked for less motion gets the
+frozen frame with nothing scripted.
+
+Note that headless Chrome does not advance image animations, so the playback itself cannot be
+verified from a script — only that the files are valid animated WebP and that the right source is
+chosen. Check it in a real browser.
+
 `size` must be the file's true pixel dimensions: the space is reserved from it, so a wrong number is
 a layout shift every time the image loads.
 

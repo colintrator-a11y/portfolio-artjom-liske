@@ -16,6 +16,12 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [ta
  * lot stacked vertically: a project with six shots would otherwise push its
  * own description a screen and a half down the dialog.
  *
+ * A shot that came from a GIF plays here, and only here. The grid stays still:
+ * an animated cover is the heaviest file in the project by an order of
+ * magnitude, and six of them looping at once is not a grid anyone can read.
+ * The still is what a visitor who has asked for less motion gets instead -
+ * `<picture>` picks it by media query, so nothing has to be scripted.
+ *
  * Modal behaviour is done properly rather than approximately: the page behind
  * cannot scroll, Tab is trapped inside, Escape closes, and focus returns to
  * the card that opened it. A dialog that loses the keyboard is worse than no
@@ -102,13 +108,18 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
         <div className="pdialog__scroll">
         <div className="pdialog__media">
           <div className="pdialog__mediaInner">
-            <img
-              className="pdialog__shot"
-              src={current.src}
-              alt={`${ui.screenshot} ${shot + 1} — ${project.title}`}
-              width={current.size?.[0]}
-              height={current.size?.[1]}
-            />
+            <picture>
+              {current.anim ? (
+                <source srcSet={current.src} media="(prefers-reduced-motion: reduce)" />
+              ) : null}
+              <img
+                className="pdialog__shot"
+                src={current.anim ?? current.src}
+                alt={`${ui.screenshot} ${shot + 1} — ${project.title}`}
+                width={(current.anim ? current.animSize : current.size)?.[0]}
+                height={(current.anim ? current.animSize : current.size)?.[1]}
+              />
+            </picture>
 
             {/* Only worth drawing when there is more than one to choose from. */}
             {gallery.length > 1 ? (

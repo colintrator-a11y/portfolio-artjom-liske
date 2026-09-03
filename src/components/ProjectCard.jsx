@@ -24,6 +24,8 @@ export default function ProjectCard({
 }) {
   const shown = project.tech.slice(0, SHOWN_TECH)
   const extra = project.tech.length - shown.length
+  // The card never animates, so it says where the motion is instead.
+  const moves = project.gallery?.some((item) => item.anim)
 
   return (
     <button
@@ -44,6 +46,7 @@ export default function ProjectCard({
           height={project.imageSize?.[1]}
         />
         <span className="pcard__veil" aria-hidden="true" />
+        {moves ? <span className="pcard__gif">GIF</span> : null}
         <span className="pcard__index" aria-hidden="true">
           {label} {String(index + 1).padStart(2, '0')}
         </span>

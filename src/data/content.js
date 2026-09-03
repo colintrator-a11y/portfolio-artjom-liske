@@ -59,6 +59,10 @@ import shopifyStore5 from '../assets/projects/shopify-store-build-5.webp'
 import ecommerce1 from '../assets/projects/ecommerce-website-1.webp'
 import wordpress1 from '../assets/projects/wordpress-website-design-1.webp'
 import award1 from '../assets/projects/preferred-freelancer-1.webp'
+import franchise1Anim from '../assets/projects/find-a-franchise-1-anim.webp'
+import kungfu1Anim from '../assets/projects/kungfu-fighting-game-1-anim.webp'
+import kungfu2Anim from '../assets/projects/kungfu-fighting-game-2-anim.webp'
+import soFresh2Anim from '../assets/projects/so-fresh-2-anim.webp'
 
 /*
  * Filter buttons, in the order they appear. Language-independent: the visible
@@ -270,15 +274,15 @@ const projectMedia = {
   'kungfu-fighting-game': {
     tags: ['games'],
     gallery: [
-      { src: kungfu1, size: [1200, 675] },
-      { src: kungfu2, size: [1200, 675] },
+      { src: kungfu1, size: [1200, 675], anim: kungfu1Anim, animSize: [900, 506] },
+      { src: kungfu2, size: [1200, 675], anim: kungfu2Anim, animSize: [900, 506] },
     ],
     tech: ['Game Development', 'Game Design', 'Multiplayer'],
   },
   'find-a-franchise': {
     tags: ['mobile'],
     gallery: [
-      { src: franchise1, size: [600, 433] },
+      { src: franchise1, size: [600, 433], anim: franchise1Anim, animSize: [600, 433] },
       { src: franchise2, size: [1200, 1500] },
     ],
     tech: ['React Native', 'iOS', 'Mobile App Design'],
@@ -294,7 +298,7 @@ const projectMedia = {
     tags: ['wordpress', 'ecommerce', 'api'],
     gallery: [
       { src: soFresh1, size: [1200, 1500] },
-      { src: soFresh2, size: [600, 433] },
+      { src: soFresh2, size: [600, 433], anim: soFresh2Anim, animSize: [600, 433] },
     ],
     tech: ['WordPress', 'WooCommerce', 'API Integration', 'E-commerce'],
   },
