@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import Icon from './ui/Icon'
+import ProjectLinks from './ProjectLinks'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])'
 
@@ -193,6 +194,12 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
             {project.title}
           </h3>
           <p className="pdialog__overview">{project.overview}</p>
+
+          {project.links?.length ? (
+            <div className="pdialog__block">
+              <ProjectLinks links={project.links} ui={ui} className="plinks--dialog" />
+            </div>
+          ) : null}
 
           <div className="pdialog__block">
             <h4 className="pdialog__label">{ui.technologiesUsed}</h4>

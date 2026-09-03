@@ -165,6 +165,15 @@ const skillItems = [
  */
 const leadFact = 0
 
+/*
+ * Link kinds. The URL is data; the label is not - `ui.links[kind]` names it in
+ * whatever language the page is being read in, so a project never carries
+ * translated link text of its own. `note` disambiguates where one project has
+ * two of a kind (AutoFit ships two App Store listings) and holds a product
+ * name, which does not translate either.
+ */
+export const linkKinds = ['live', 'appStore', 'googlePlay', 'admin', 'apk']
+
 /* Official test titles - left in their original language. */
 export const certifications = [
   { name: 'WordPress Intermedio', score: '96%' },
@@ -293,6 +302,9 @@ const projectMedia = {
       { src: cowboy3, size: [1200, 635] },
       { src: cowboy4, size: [1200, 675] },
     ],
+    links: [
+      { kind: 'googlePlay', url: 'https://play.google.com/store/apps/details?id=com.gr.western.cowboy.survival.shooter.simualtor.gunfighter.game' },
+    ],
     tech: ['Unity 3D', 'C#', 'Android', 'iOS', 'Game Design'],
   },
   'kungfu-fighting-game': {
@@ -323,6 +335,9 @@ const projectMedia = {
     gallery: [
       { src: soFresh1, size: [1200, 1500] },
       { src: soFresh2, size: [600, 433], anim: soFresh2Anim, card: soFresh2Card, cardSize: [560, 404], animSize: [600, 433] },
+    ],
+    links: [
+      { kind: 'live', url: 'https://sofresh.ae/' },
     ],
     tech: ['WordPress', 'WooCommerce', 'API Integration', 'E-commerce'],
   },
@@ -375,12 +390,21 @@ const projectMedia = {
       { src: tutor4, size: [1200, 675] },
       { src: tutor5, size: [640, 480] },
     ],
+    links: [
+      { kind: 'apk', url: 'https://drive.google.com/file/d/13vtph-49KztxuqBcVfhSBNBEHOPsdGEH/view?usp=sharing' },
+    ],
     tech: ['Flutter', 'Dart', 'Google Gemini API', 'Android', 'Figma'],
   },
   'autofit-fitness': {
     tags: ['mobile'],
     gallery: [
       { src: autofit1, size: [768, 576], anim: autofit1Anim, animSize: [768, 576], card: autofit1Card, cardSize: [560, 420] },
+    ],
+    links: [
+      { kind: 'googlePlay', url: 'https://play.google.com/store/apps/details?id=com.cw.kobiifrach' },
+      { kind: 'appStore', url: 'https://apps.apple.com/us/app/autofit/id6511219528', note: 'AutoFit' },
+      { kind: 'appStore', url: 'https://apps.apple.com/us/app/zipori/id6502283864', note: 'Zipori' },
+      { kind: 'admin', url: 'https://panel.auto-fit.co.il/' },
     ],
     tech: ['Flutter', 'Android', 'iOS'],
   },
@@ -396,12 +420,19 @@ const projectMedia = {
     gallery: [
       { src: brightFit1, size: [768, 1344] },
     ],
+    links: [
+      { kind: 'appStore', url: 'https://apps.apple.com/us/app/bright-fit-fitness-app/id1593898914' },
+    ],
     tech: ['iOS', 'Android', 'Mobile App Development'],
   },
   'piece-of-dates': {
     tags: ['mobile', 'ecommerce'],
     gallery: [
       { src: dates1, size: [1200, 960] },
+    ],
+    links: [
+      { kind: 'appStore', url: 'https://apps.apple.com/us/app/%D8%A8%D8%B4%D9%82-%D8%AA%D9%85%D8%B1%D8%A9/id1500373688' },
+      { kind: 'googlePlay', url: 'https://play.google.com/store/apps/details?id=com.nextdaysoft.datesapp' },
     ],
     tech: ['Swift', 'iOS', 'Android', 'React Native', 'Flutter'],
   },
@@ -411,12 +442,18 @@ const projectMedia = {
       { src: blublonc1, size: [1200, 993] },
       { src: blublonc2, size: [1200, 1500] },
     ],
+    links: [
+      { kind: 'live', url: 'https://blublonc.com/' },
+    ],
     tech: ['Shopify', 'E-commerce', 'Web Design'],
   },
   'french-appeal': {
     tags: ['shopify', 'ecommerce', 'api'],
     gallery: [
       { src: french1, size: [1200, 1500] },
+    ],
+    links: [
+      { kind: 'live', url: 'https://frenchappeal.com/' },
     ],
     tech: ['Shopify', 'Liquid', 'SEO', 'API Integration'],
   },
@@ -425,12 +462,18 @@ const projectMedia = {
     gallery: [
       { src: hiketron1, size: [1200, 1500] },
     ],
+    links: [
+      { kind: 'live', url: 'https://www.hiketron.com/' },
+    ],
     tech: ['Shopify', 'Empire Theme', 'Shopify Templates'],
   },
   'luxor-linens': {
     tags: ['shopify', 'ecommerce', 'api'],
     gallery: [
       { src: luxor1, size: [1200, 1500] },
+    ],
+    links: [
+      { kind: 'live', url: 'https://luxorlinens.com/' },
     ],
     tech: ['Shopify', 'PayPal API', 'Klaviyo', 'Shogun'],
   },
@@ -439,12 +482,18 @@ const projectMedia = {
     gallery: [
       { src: petHospital1, size: [1200, 1500] },
     ],
+    links: [
+      { kind: 'live', url: 'https://www.4thstreetpethospital.com' },
+    ],
     tech: ['WordPress', 'CMS', 'Web Design', 'Responsive Web Design'],
   },
   'goldfields': {
     tags: ['frontend'],
     gallery: [
       { src: goldfields1, size: [1200, 1500] },
+    ],
+    links: [
+      { kind: 'live', url: 'http://www.grekalgoorlie.com.au/' },
     ],
     tech: ['Web Design', 'Web Development'],
   },
@@ -453,6 +502,9 @@ const projectMedia = {
     gallery: [
       { src: onroad1, size: [1200, 1500] },
     ],
+    links: [
+      { kind: 'live', url: 'https://www.onroad.to/' },
+    ],
     tech: ['React.js', 'Node.js', 'PHP', 'MongoDB'],
   },
   'safeway-foundation': {
@@ -460,12 +512,18 @@ const projectMedia = {
     gallery: [
       { src: safeway1, size: [1200, 1500] },
     ],
+    links: [
+      { kind: 'live', url: 'http://safewayfoundation.org/' },
+    ],
     tech: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'Web Design'],
   },
   'sheepdog-ag': {
     tags: ['wordpress', 'frontend'],
     gallery: [
       { src: sheepdog1, size: [1200, 602] },
+    ],
+    links: [
+      { kind: 'live', url: 'https://sheepdog.ag' },
     ],
     tech: ['WordPress', 'Figma', 'Web Design'],
   },

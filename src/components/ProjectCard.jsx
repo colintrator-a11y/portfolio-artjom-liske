@@ -1,11 +1,14 @@
 import Icon from './ui/Icon'
+import ProjectLinks from './ProjectLinks'
 
 /**
  * One tile on the projects rail.
  *
- * A button rather than a div: the whole card opens the detail dialog, and
- * making that a real button gives keyboard and screen-reader users the same
- * affordance a mouse user gets for free.
+ * The whole card opens the detail dialog, but the card itself is not the
+ * button: a project can carry outbound links, and an anchor inside a button is
+ * invalid markup that browsers resolve inconsistently. Instead an invisible
+ * button is stretched over the card and the links sit above it, so the card
+ * still opens from anywhere while each link stays separately clickable.
  *
  * Only the first few technologies are shown - the rest are a count, since the
  * tile is a lure into the dialog rather than the full record.
@@ -32,13 +35,14 @@ export default function ProjectCard({
   const moves = Boolean(project.cardAnim)
 
   return (
-    <button
-      type="button"
-      className="pcard"
-      style={{ '--i': delayIndex }}
-      onClick={() => onOpen(project)}
-      aria-label={`${project.title} — ${ui.viewDetails}`}
-    >
+    <div className="pcard" style={{ '--i': delayIndex }}>
+      {/* First in the DOM so Tab reaches the project before its link. */}
+      <button
+        type="button"
+        className="pcard__open"
+        onClick={() => onOpen(project)}
+        aria-label={`${project.title} — ${ui.viewDetails}`}
+      />
       <span className="pcard__media">
         <picture>
           {/* A reader who has asked for less motion gets the frozen frame, and
@@ -80,11 +84,15 @@ export default function ProjectCard({
           {extra > 0 ? <span className="pcard__more">+{extra}</span> : null}
         </span>
 
-        <span className="pcard__cta">
-          {ui.viewDetails}
-          <Icon name="arrowRight" size={14} strokeWidth={2.2} />
+        <span className="pcard__foot">
+          <span className="pcard__cta">
+            {ui.viewDetails}
+            <Icon name="arrowRight" size={14} strokeWidth={2.2} />
+          </span>
+          {/* One link on the card; the dialog lists them all. */}
+          <ProjectLinks links={project.links} ui={ui} limit={1} />
         </span>
       </span>
-    </button>
+    </div>
   )
 }

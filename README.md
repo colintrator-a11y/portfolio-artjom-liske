@@ -242,6 +242,26 @@ all**, and the small `GIF` marker appears — hidden the rest of the time, becau
 offered as a `<source>` behind that media query, so a reader who has asked for less motion gets the
 frozen frame with nothing scripted.
 
+### Links
+
+A project can carry outbound links — a live site, a store listing, an admin panel. 15 of the 30 do,
+19 links between them. The card shows **one**; the dialog lists them **all**.
+
+The URL is data, the label is not: an entry names a `kind`, and `ui.links[kind]` supplies the text
+in whatever language the page is being read in, so no project carries translated link text of its
+own. `note` disambiguates where a project has two of a kind — AutoFit ships two App Store listings —
+and holds a product name, which does not translate either.
+
+**The card had to be restructured for this.** An `<a>` inside a `<button>` is invalid markup that
+browsers resolve inconsistently, and the whole card used to be one button. Now an invisible button
+is stretched over the card and the links sit above it, so the card still opens from anywhere while
+each link stays separately clickable. The button comes first in the DOM, so Tab reaches the project
+before its link.
+
+Every link leaves the site and says so twice — an arrow for sighted readers, a visually hidden
+phrase for anyone listening — and carries `rel="noopener noreferrer"`, because `target="_blank"`
+without it hands the opened page a reference back.
+
 ### The preview
 
 The dialog's media column is only ~380px wide, so clicking the image opens it full-screen. It shows
@@ -329,4 +349,5 @@ one with the other's text colour is how a button ends up illegible in one theme 
   disables animations and smooth scrolling.
 - **Responsive** — mobile-first, fluid `clamp()` type, breakpoints at 600 / 680 / 900 / 1024 / 1140px.
 
-As requested, the site contains no contact page, no contact form, no demo links and no pricing section.
+The site carries no contact page, no contact form and no pricing section. It does link out to the
+live sites and store listings of the projects that have them.
