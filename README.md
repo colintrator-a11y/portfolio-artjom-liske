@@ -65,30 +65,29 @@ Navigation follows from that. The header keeps only the brand and the controls; 
 is** is reported by `PanelRail.jsx`, a column of marks down the right edge. Below 900px the rail is
 hidden and the drawer in the header takes over, so exactly one navigation exists at any width.
 
-### Travelling the work rail
+### The work grid
 
-Panel 05 holds every project in one horizontal row. Each input moves it the way that input already
-works elsewhere:
+Panel 05 shows six projects at a time in two rows of three, with a pager underneath once there is
+more than one page. 16 projects makes three pages; a filter with six or fewer shows no pager at all.
 
-| Input | How it travels |
-| --- | --- |
-| trackpad / horizontal wheel | native scroll |
-| touch and pen | native scroll, with the platform's own momentum |
-| mouse | drag the rail, or the two travel buttons |
-| keyboard | Tab moves focus to the next card and the browser scrolls it into view |
-| scrollbar | native |
+The grid is `auto-fit` rather than a fixed three columns, so it becomes two columns and then one as
+the panel narrows instead of squeezing three cards onto a phone. The filter bar wraps onto as many
+rows as it needs — it used to be a single row that scrolled sideways, which cut the last filter in
+half at most widths, and a filter you cannot see is a filter you will not use.
 
-Only the mouse drag is implemented by hand, because a mouse has none of the others. It is mouse-only
-on purpose: touch and pen already scroll with momentum and rubber-banding that a hand-rolled drag
-cannot reproduce, and taking those over would make the rail worse on the devices where it already
-works.
+Two things the pager has to get right, both covered:
 
-Nothing happens until the pointer passes 5px of slop, so pressing a card and releasing it still
-opens the card. Past the slop the gesture becomes a drag: snapping is switched off so it does not
-fight the pointer, selection is switched off so dragging across the row does not sweep up every
-title as highlighted text, and the click that `pointerup` would otherwise produce is swallowed so a
-drag ending on a card does not also open it. On release, snapping comes back and settles the rail
-onto the nearest card.
+- **Changing filter resets to page one**, because a new filter is a new set.
+- **Shrinking the set clamps the page.** Going from all 16 to a four-project filter while reading
+  page three would otherwise leave an empty grid. The clamp watches the page count rather than only
+  the filter, so it also covers the list shrinking for any other reason.
+
+**This is the one panel that does not fit a viewport.** Two rows of image cards come to about
+1,295px against a 937px viewport at 1920×1080 — roughly 360px over. A card is ~420px (a 16:9
+screenshot plus four lines of body), so two rows are ~860px before the heading, filters and pager
+are counted. It cannot be closed by trimming; the levers are one row of three per page, or a card
+without the overview line. Until then the panel grows and scrolls, which `min-height` and proximity
+snapping already handle.
 
 Snapping is `scroll-snap-type: y proximity`, never `mandatory` — a mandatory snap fights anyone
 reading a long panel and traps keyboard scrolling between two stops. Panels use `min-height: 100svh`

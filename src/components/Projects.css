@@ -45,12 +45,12 @@
 }
 
 .work__intro .section__title {
-  font-size: clamp(26px, 2.7vw, 36px);
+  font-size: clamp(24px, 2.3vw, 31px);
 }
 
 .work__intro .section__intro {
-  margin-top: 6px;
-  font-size: 13px;
+  margin-top: 5px;
+  font-size: 12.5px;
   /* Two lines: the panel below needs the height more than the third line does. */
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -83,66 +83,20 @@
   font-style: normal;
 }
 
-.work__arrows {
-  display: flex;
-  gap: 8px;
-}
-
-.work__arrow {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  color: var(--ink);
-  transition: color 0.3s var(--ease), border-color 0.3s var(--ease),
-    background 0.3s var(--ease), opacity 0.3s var(--ease);
-}
-
-.work__arrow:hover:not(:disabled) {
-  border-color: transparent;
-  background: var(--grad-brand);
-  color: var(--on-brand);
-}
-
-/* Disabled rather than hidden: a control that vanishes at the end of the rail
-   makes the row jump and moves the other button under the pointer. */
-.work__arrow:disabled {
-  opacity: 0.32;
-  cursor: default;
-}
-
-.work__arrow--back svg {
-  rotate: 180deg;
-}
-
 /* Filter bar -------------------------------------------------------------- */
 
 .work__filters {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 8px;
-  margin-inline: calc(var(--gutter) * -1);
-  padding-inline: var(--gutter);
   margin-bottom: clamp(12px, 1.6vh, 18px);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.work__filters::-webkit-scrollbar {
-  display: none;
-}
-
-.work__filters > * {
-  flex: 0 0 auto;
 }
 
 .filter {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 13px 7px 15px;
+  padding: 6px 12px 6px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--paper-raised);
@@ -187,71 +141,75 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Rail -------------------------------------------------------------------- */
+/* Grid -------------------------------------------------------------------- */
 
 /*
- * The browser's own horizontal scroller, so a trackpad, a touch drag, the
- * scrollbar and Tab moving focus to an offscreen card all travel the rail
- * without any of it being reimplemented.
- *
- * The negative margin lets cards run to the edges of the window while the
- * padding keeps the first and last clear of them; without it the rail would
- * end at the container and read as a box rather than as something continuing
- * past the screen.
+ * Two rows of three. `auto-fit` rather than a fixed three, so the grid becomes
+ * two columns and then one as the panel narrows instead of squeezing three
+ * cards into a phone.
  */
-.work__rail {
-  display: flex;
-  gap: 20px;
-  margin-inline: calc(var(--gutter) * -1);
-  padding: 4px var(--gutter) 14px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x proximity;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
-  overscroll-behavior-x: contain;
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: clamp(14px, 1.6vw, 20px);
+  /* The shared 3D space; each card tilts inside it. */
+  perspective: 1200px;
 }
 
-/* The rail can be dragged, so it says so. Only where there is a mouse to do
-   the dragging: on a touch screen a grab cursor is a claim about a pointer
-   that is not there. */
-@media (hover: hover) and (pointer: fine) {
-  .work__rail {
-    cursor: grab;
+@media (min-width: 1000px) {
+  .work__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/*
- * Held only while a drag is actually in progress.
- *
- * Snapping is switched off because it fights the pointer mid-drag, and comes
- * back on release to settle the rail onto the nearest card. Selection is
- * switched off because dragging across a row of cards otherwise sweeps up
- * every title as highlighted text.
- */
-.work__rail.is-dragging {
-  scroll-snap-type: none;
-  scroll-behavior: auto;
-  user-select: none;
-  cursor: grabbing;
+/* Pager -------------------------------------------------------------------- */
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: clamp(10px, 1.4vh, 16px);
 }
 
-.work__rail.is-dragging * {
-  cursor: grabbing;
-}
-
-.work__rail > * {
-  flex: 0 0 clamp(268px, 27vw, 330px);
-  scroll-snap-align: start;
-}
-
-.work__rail::-webkit-scrollbar {
-  height: 6px;
-}
-
-.work__rail::-webkit-scrollbar-thumb {
+.pager__arrow,
+.pager__page {
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 4px;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--line-strong);
+  color: var(--body);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease),
+    background 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.pager__arrow:hover:not(:disabled),
+.pager__page:hover {
+  border-color: var(--accent-line);
+  color: var(--accent);
+}
+
+.pager__page.is-active {
+  border-color: transparent;
+  background: var(--grad-brand);
+  color: var(--on-brand);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Disabled rather than hidden: a control that vanishes at the first or last
+   page makes the row jump and moves the other button under the pointer. */
+.pager__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pager__arrow--back svg {
+  rotate: 180deg;
 }
 
 .projects__empty {
@@ -261,11 +219,6 @@
 }
 
 /* Card -------------------------------------------------------------------- */
-
-/* The rail is the shared 3D space; each card tilts inside it. */
-.work__rail {
-  perspective: 1200px;
-}
 
 .pcard {
   position: relative;
@@ -440,8 +393,8 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 7px;
-  padding: 15px 17px 16px;
+  gap: 6px;
+  padding: 13px 15px 14px;
 }
 
 .pcard__category {
@@ -454,9 +407,9 @@
 
 .pcard__title {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.24;
   letter-spacing: -0.015em;
   color: var(--ink);
 }
@@ -496,9 +449,9 @@
   align-items: center;
   gap: 6px;
   margin-top: auto;
-  padding-top: 9px;
+  padding-top: 7px;
   color: var(--accent);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
 }
 
