@@ -174,6 +174,16 @@ const leadFact = 0
  */
 export const linkKinds = ['live', 'appStore', 'googlePlay', 'admin', 'apk']
 
+/*
+ * Six links here were not in the project notes. They were found by searching
+ * and then confirmed against the supplied screenshots before being added -
+ * matching nav labels, wordmarks, currencies and page text, not merely a
+ * business with the right name. Anything that could not be confirmed that way
+ * was left without a link, because a wrong link on a portfolio claims work
+ * that was not done. The six: premium-aquarium, enneagram-assessment,
+ * vassalli-listing, event-check-in, ecommerce-website, axolon-erp.
+ */
+
 /* Official test titles - left in their original language. */
 export const certifications = [
   { name: 'WordPress Intermedio', score: '96%' },
@@ -254,6 +264,7 @@ const projectMedia = {
       { src: eventCheckIn5, size: [1200, 829] },
       { src: eventCheckIn6, size: [1200, 1500] },
     ],
+    links: [{ kind: 'live', url: 'https://doity.com.br/en/' }],
     tech: ['React Native', 'JavaScript', 'Mobile App Design', 'User Experience Design'],
   },
   'enneagram-assessment': {
@@ -266,6 +277,7 @@ const projectMedia = {
       { src: enneagram5, size: [1200, 1500] },
       { src: enneagram6, size: [1200, 832] },
     ],
+    links: [{ kind: 'live', url: 'https://michaelgroser.dk/' }],
     tech: ['PHP', 'Laravel', 'Vue.js', 'JavaScript', 'MySQL'],
   },
   'premium-aquarium': {
@@ -276,6 +288,7 @@ const projectMedia = {
       { src: aquarium3, size: [1200, 542] },
       { src: aquarium4, size: [1200, 574] },
     ],
+    links: [{ kind: 'live', url: 'https://aquamoon.com/' }],
     tech: ['WordPress', 'CMS', 'Responsive Web Design', 'User Experience Design'],
   },
   'shopify-jewellery': {
@@ -292,6 +305,7 @@ const projectMedia = {
       { src: vassalli2, size: [1200, 675] },
       { src: vassalli3, size: [1200, 675] },
     ],
+    links: [{ kind: 'live', url: 'https://vassalli.co.nz/' }],
     tech: ['Shopify', 'JavaScript', 'HTML'],
   },
   'cowboy-shooter': {
@@ -365,6 +379,7 @@ const projectMedia = {
     gallery: [
       { src: ecommerce1, size: [1200, 1500] },
     ],
+    links: [{ kind: 'live', url: 'https://kushycbd.com/' }],
     tech: ['PHP', 'WordPress', 'WooCommerce', 'Graphic Design'],
   },
   'wordpress-website-design': {
@@ -413,6 +428,7 @@ const projectMedia = {
     gallery: [
       { src: axolon1, size: [1200, 918] },
     ],
+    links: [{ kind: 'live', url: 'https://axolon.com/' }],
     tech: ['Objective-C', 'Swift', 'iOS', 'Android', 'Xamarin'],
   },
   'bright-and-fit': {

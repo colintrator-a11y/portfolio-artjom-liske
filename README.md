@@ -244,8 +244,14 @@ frozen frame with nothing scripted.
 
 ### Links
 
-A project can carry outbound links — a live site, a store listing, an admin panel. 15 of the 30 do,
-19 links between them. The card shows **one**; the dialog lists them **all**.
+A project can carry outbound links — a live site, a store listing, an admin panel. 21 of the 30 do,
+25 links between them. The card shows **one**; the dialog lists them **all**.
+
+**Six of those links were not in the project notes.** They were found by searching and then confirmed
+against the supplied screenshots before being added — matching navigation labels, wordmarks,
+currencies and page text, not merely a business with the right name. Everything that could not be
+confirmed that way was left without a link: a wrong link on a portfolio claims work that was not
+done, which is worse than no link at all.
 
 The URL is data, the label is not: an entry names a `kind`, and `ui.links[kind]` supplies the text
 in whatever language the page is being read in, so no project carries translated link text of its
