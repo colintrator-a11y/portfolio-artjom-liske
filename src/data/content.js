@@ -13,6 +13,22 @@
 import { translations } from '../i18n/translations'
 
 import avatarImg from '../assets/avatar.webp'
+import aiAgentImg from '../assets/projects/autonomous-ai-agent.webp'
+import eventCheckInImg from '../assets/projects/event-check-in.webp'
+import enneagramImg from '../assets/projects/enneagram-assessment.webp'
+import aquariumImg from '../assets/projects/premium-aquarium.webp'
+import jewelleryImg from '../assets/projects/shopify-jewellery.webp'
+import vassalliImg from '../assets/projects/vassalli-listing.webp'
+import cowboyImg from '../assets/projects/cowboy-shooter.webp'
+import kungfuImg from '../assets/projects/kungfu-fighting-game.webp'
+import franchiseImg from '../assets/projects/find-a-franchise.webp'
+import twilioImg from '../assets/projects/twilio-sip.webp'
+import soFreshImg from '../assets/projects/so-fresh.webp'
+import holdRomeImg from '../assets/projects/hold-rome-hotel.webp'
+import shopifyStoreImg from '../assets/projects/shopify-store-build.webp'
+import ecommerceImg from '../assets/projects/ecommerce-website.webp'
+import wordpressImg from '../assets/projects/wordpress-website-design.webp'
+import awardImg from '../assets/projects/preferred-freelancer.webp'
 
 /*
  * Filter buttons, in the order they appear. Language-independent: the visible
@@ -35,6 +51,7 @@ export const filterKeys = [
   'api',
   'chatbot',
   'automation',
+  'games',
 ]
 
 /* Identity - the same in every language. */
@@ -123,16 +140,11 @@ export const certifications = [
  *       // hides itself, so unused keys cost nothing.
  *       tags: ['mobile', 'api'],
  *
- *       // Either a real screenshot...
  *       image: travelBookingImg,
- *       imageSize: [700, 394],   // required with `image`, and it must be the
- *                                // file's true pixel size: the card reserves
- *                                // the space from it, so a wrong number is a
- *                                // layout shift on every load.
- *
- *       // ...or a drawn scene, for a project with no screenshot on file.
- *       // The key must name a scene in `ProjectVisual.jsx`.
- *       // visual: 'shopifyTheme',
+ *       imageSize: [700, 394],   // required, and it must be the file's true
+ *                                // pixel size: the card reserves the space
+ *                                // from it, so a wrong number is a layout
+ *                                // shift on every load.
  *
  *       // Shown on the card, first three then a "+n". Proper nouns, so these
  *       // stay out of the translation files.
@@ -151,10 +163,124 @@ export const certifications = [
  *     value: 'What it was worth to the client, in one sentence.',
  *   }
  */
-const projectMedia = {}
+const projectMedia = {
+  'autonomous-ai-agent': {
+    tags: ['automation', 'api', 'frontend'],
+    image: aiAgentImg,
+    imageSize: [884, 613],
+    tech: ['Python', 'React.js', 'Artificial Intelligence', 'LLM Integration', 'REST API'],
+  },
+  'event-check-in': {
+    tags: ['mobile', 'frontend'],
+    image: eventCheckInImg,
+    imageSize: [1200, 803],
+    tech: ['React Native', 'JavaScript', 'Mobile App Design', 'User Experience Design'],
+  },
+  'enneagram-assessment': {
+    tags: ['php', 'frontend'],
+    image: enneagramImg,
+    imageSize: [768, 512],
+    tech: ['PHP', 'Laravel', 'Vue.js', 'JavaScript', 'MySQL'],
+  },
+  'premium-aquarium': {
+    tags: ['wordpress', 'frontend'],
+    image: aquariumImg,
+    imageSize: [1200, 560],
+    tech: ['WordPress', 'CMS', 'Responsive Web Design', 'User Experience Design'],
+  },
+  'shopify-jewellery': {
+    tags: ['shopify', 'ecommerce', 'frontend'],
+    image: jewelleryImg,
+    imageSize: [1200, 534],
+    tech: ['Shopify', 'Liquid', 'HTML', 'CSS', 'JavaScript'],
+  },
+  'vassalli-listing': {
+    tags: ['shopify', 'ecommerce', 'frontend'],
+    image: vassalliImg,
+    imageSize: [1200, 675],
+    tech: ['Shopify', 'JavaScript', 'HTML'],
+  },
+  'cowboy-shooter': {
+    tags: ['games', 'mobile'],
+    image: cowboyImg,
+    imageSize: [1200, 675],
+    tech: ['Unity 3D', 'C#', 'Android', 'iOS', 'Game Design'],
+  },
+  'kungfu-fighting-game': {
+    tags: ['games'],
+    image: kungfuImg,
+    imageSize: [1200, 675],
+    tech: ['Game Development', 'Game Design', 'Multiplayer'],
+  },
+  'find-a-franchise': {
+    tags: ['mobile'],
+    image: franchiseImg,
+    imageSize: [600, 433],
+    tech: ['React Native', 'iOS', 'Mobile App Design'],
+  },
+  'twilio-sip': {
+    tags: ['api', 'chatbot'],
+    image: twilioImg,
+    imageSize: [1000, 750],
+    tech: ['Twilio', 'SIP Trunking', 'VoIP', 'REST API'],
+  },
+  'so-fresh': {
+    tags: ['wordpress', 'ecommerce', 'api'],
+    image: soFreshImg,
+    imageSize: [1200, 675],
+    tech: ['WordPress', 'WooCommerce', 'API Integration', 'E-commerce'],
+  },
+  'hold-rome-hotel': {
+    tags: ['wordpress', 'frontend'],
+    image: holdRomeImg,
+    imageSize: [1200, 900],
+    tech: ['WordPress', 'HTML', 'CSS', 'Responsive Web Design'],
+  },
+  'shopify-store-build': {
+    tags: ['shopify', 'ecommerce'],
+    image: shopifyStoreImg,
+    imageSize: [1200, 800],
+    tech: ['Shopify', 'E-commerce', 'Payment Integration', 'SEO'],
+  },
+  'ecommerce-website': {
+    tags: ['ecommerce', 'php', 'wordpress'],
+    image: ecommerceImg,
+    imageSize: [1200, 675],
+    tech: ['PHP', 'WordPress', 'WooCommerce', 'Graphic Design'],
+  },
+  'wordpress-website-design': {
+    tags: ['wordpress', 'frontend'],
+    image: wordpressImg,
+    imageSize: [1200, 675],
+    tech: ['WordPress', 'HTML', 'CSS', 'SEO'],
+  },
+  'preferred-freelancer': {
+    tags: ['wordpress', 'php', 'ecommerce'],
+    image: awardImg,
+    imageSize: [1200, 857],
+    tech: ['PHP', 'WordPress', 'WooCommerce', 'Sales Solutions'],
+  },
+}
 
 /* Display order. An id here with no entry above renders nothing. */
-const projectOrder = []
+const projectOrder = [
+  'autonomous-ai-agent',
+  'event-check-in',
+  'enneagram-assessment',
+  'premium-aquarium',
+  'shopify-jewellery',
+  'vassalli-listing',
+  'cowboy-shooter',
+  'kungfu-fighting-game',
+  'find-a-franchise',
+  'twilio-sip',
+  'so-fresh',
+  'hold-rome-hotel',
+  'shopify-store-build',
+  'ecommerce-website',
+  'wordpress-website-design',
+  'preferred-freelancer',
+]
 
 const exampleMedia = {}
 

@@ -47,7 +47,6 @@ src/
     Projects.jsx         panel 05 — filterable horizontal work rail
     ProjectCard.jsx      one card on that rail
     ProjectDialog.jsx    the full record for one project
-    ProjectVisual.jsx    inline-SVG interface mockups (one scene per build)
     Process.jsx          panel 06 — six-step track
     Footer.jsx           tagline, quick links, expertise
     BackToTop.jsx        floating scroll-to-top control
@@ -149,17 +148,20 @@ profile currently records none of those.
 
 ## Adding projects
 
-**The portfolio is currently empty.** The panel, the rail, the filters and the dialog all work; there
-is simply nothing in them yet. Every control that would describe an empty rail — the `01 / 42`
-counter, the travel arrows, the filter bar, the reference-build note — stands down until there is
-something to describe, so the panel reads as empty rather than broken.
+The portfolio holds **16 projects**, all of them delivered client work. Each carries a real
+screenshot of what was built.
+
+Every control that would describe an empty rail — the `01 / 16` counter, the travel arrows, the
+filter bar, the reference-build note — stands down when there is nothing to describe, so the panel
+reads as empty rather than broken if the list is ever cleared.
 
 A project lives in two places, and both have to move together:
 
-1. **`src/data/content.js`** — the language-independent half: id, tags, image or drawn scene, and
-   the technology list. `projectMedia` is client work; `exampleMedia` is reference builds, which
-   render with a *Reference build* badge so a visitor is never led to read one as paid work. Add the
-   id to `projectOrder` / `exampleOrder` to place it.
+1. **`src/data/content.js`** — the language-independent half: id, tags, screenshot and the
+   technology list. `projectMedia` is client work; `exampleMedia` is reference builds, which render
+   with a *Reference build* badge so a visitor is never led to read one as paid work. It is empty:
+   every current project is real client work. Add the id to `projectOrder` / `exampleOrder` to place
+   it.
 2. **`src/i18n/translations.js`** — the copy, under `projects.items` (or `examples.items`), keyed by
    the same id, **in every locale**. An id present in `content.js` and missing from a locale renders
    a card with no title in that language.
@@ -175,17 +177,21 @@ Two things worth getting right:
   headless Shopify storefront is Shopify, front-end and API work at once and should appear under all
   three. A filter with no projects behind it hides itself, so unused keys cost nothing.
 
-### Images, or drawn scenes
+### Screenshots
 
-Drop screenshots into `src/assets/projects/` as WebP, import them, and point `image` at the import.
-Each renders at its own aspect ratio with `width`/`height` set from `imageSize`, so nothing is
-cropped and nothing shifts.
+Drop them into `src/assets/projects/` as WebP, import them, and point `image` at the import. Every
+project needs one: the drawn-scene fallback that used to cover a project without a screenshot has
+been removed, along with the 32 inline-SVG scenes behind it, now that every entry ships a real
+image. It is all recoverable from git history if a project ever needs it back.
 
-For a project with no screenshot on file, set `visual` instead of `image` and name one of the scenes
-in `ProjectVisual.jsx` — inline-SVG mockups of the interface a build of that kind would run in.
-Thirty-two of them are still in the repo from the previous portfolio (`ProjectScenes.jsx` and
-`ProjectScenesMore.jsx`); they are unreferenced now, so if the new projects all come with
-screenshots those two files and the `visual` branch can be deleted outright.
+The covers are prepared at a 1200px maximum width and WebP quality 82 — about 800 kB for all
+sixteen, and every card past the first three loads lazily as the rail travels. A full-page capture,
+taller than roughly 1:1.15, is cropped to its top 16:9 strip before being saved, because that is all
+a card would show of it anyway.
+
+The card frames its image at 16:9 with `object-fit: cover` anchored to the top, so a hero or a page
+header survives the crop and a centred subject may not. The dialog shows the same file at its own
+aspect ratio, uncropped.
 
 The stat in the hero counts the rail: it is `projectOrder.length + exampleOrder.length`, so it
 corrects itself as projects are added and can never disagree with the `01 / n` readout.

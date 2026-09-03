@@ -1,5 +1,4 @@
 import Icon from './ui/Icon'
-import ProjectVisual from './ProjectVisual'
 
 /**
  * One tile on the projects rail.
@@ -35,19 +34,15 @@ export default function ProjectCard({
       aria-label={`${project.title} — ${ui.viewDetails}`}
     >
       <span className="pcard__media">
-        {project.image ? (
-          <img
-            className="pcard__shot"
-            src={project.image}
-            alt=""
-            loading={eager ? 'eager' : 'lazy'}
-            decoding="async"
-            width={project.imageSize?.[0]}
-            height={project.imageSize?.[1]}
-          />
-        ) : (
-          <ProjectVisual variant={project.visual} title={project.title} fit="slice" />
-        )}
+        <img
+          className="pcard__shot"
+          src={project.image}
+          alt=""
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          width={project.imageSize?.[0]}
+          height={project.imageSize?.[1]}
+        />
         <span className="pcard__veil" aria-hidden="true" />
         <span className="pcard__index" aria-hidden="true">
           {label} {String(index + 1).padStart(2, '0')}

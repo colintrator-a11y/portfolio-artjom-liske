@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 import Icon from './ui/Icon'
-import ProjectVisual from './ProjectVisual'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])'
 
@@ -92,17 +91,13 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
         <div className="pdialog__scroll">
         <div className="pdialog__media">
           <div className="pdialog__mediaInner">
-          {project.image ? (
-            <img
-              className="pdialog__shot"
-              src={project.image}
-              alt={`Screenshot of ${project.title}`}
-              width={project.imageSize?.[0]}
-              height={project.imageSize?.[1]}
-            />
-          ) : (
-            <ProjectVisual variant={project.visual} title={project.title} />
-          )}
+          <img
+            className="pdialog__shot"
+            src={project.image}
+            alt={`Screenshot of ${project.title}`}
+            width={project.imageSize?.[0]}
+            height={project.imageSize?.[1]}
+          />
           </div>
         </div>
 

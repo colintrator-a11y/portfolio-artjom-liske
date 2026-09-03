@@ -373,8 +373,7 @@
   overflow: hidden;
 }
 
-.pcard__shot,
-.pcard__media .projectVisual {
+.pcard__shot {
   display: block;
   width: 100%;
   height: 100%;
@@ -383,12 +382,11 @@
   transition: transform 0.95s var(--ease);
 }
 
-.pcard:hover .pcard__shot,
-.pcard:hover .pcard__media .projectVisual {
+.pcard:hover .pcard__shot {
   transform: scale(1.045);
 }
 
-/* Keeps the label legible over whatever the scene happens to be. */
+/* Keeps the label legible over whatever the screenshot happens to be. */
 .pcard__veil {
   position: absolute;
   inset: 0;
@@ -401,8 +399,8 @@
   pointer-events: none;
 }
 
-/* Sits over whatever the scene happens to be - some are near-white - so it
-   carries its own background rather than trusting the veil. */
+/* Sits over whatever the screenshot happens to be - some are near-white - so
+   it carries its own background rather than trusting the veil. */
 .pcard__index {
   position: absolute;
   top: 11px;
@@ -593,8 +591,7 @@
   background: var(--paper);
 }
 
-.pdialog__shot,
-.pdialog__media .projectVisual {
+.pdialog__shot {
   display: block;
   width: 100%;
   height: auto;
@@ -819,8 +816,7 @@
     display: none;
   }
 
-  .pcard:hover .pcard__shot,
-  .pcard:hover .pcard__media .projectVisual {
+  .pcard:hover .pcard__shot {
     transform: none;
   }
 }

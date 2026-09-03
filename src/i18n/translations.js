@@ -45,6 +45,7 @@ const en = {
       api: 'APIs & Integrations',
       chatbot: 'Chatbots',
       automation: 'Automation',
+      games: 'Games',
     },
     viewDetails: 'View details',
     prevWork: 'Previous projects',
@@ -189,7 +190,232 @@ const en = {
     heading: 'Projects across web, mobile and e-commerce',
     intro:
       'Client deliveries from my freelance portfolio alongside my own reference builds, filtered by discipline. Each entry lists the technologies actually used; reference builds are marked as such.',
-    items: {},
+    items: {
+      'autonomous-ai-agent': {
+        category: 'AI & Automation',
+        title: 'Autonomous AI Agent for Workflow Automation',
+        overview:
+          'An agent platform that takes repetitive operational work off a team. Someone describes a goal in plain language; the system breaks it into steps, picks the tools each step needs, carries the actions out and records what happened.',
+        features: [
+          'Goals described in natural language, planned into steps',
+          'Tool and function calling with conversational memory',
+          'Third-party API integrations behind each action',
+          'Safety controls and a full activity log',
+        ],
+        value:
+          'Routine operational work runs unattended, and every action the agent took stays on the record.',
+      },
+      'event-check-in': {
+        category: 'Mobile Platform',
+        title: 'Real-Time Event Management & Check-In Platform',
+        overview:
+          'An event platform for organisers running events of any size: registration, attendee management, and a check-in fast enough to keep a queue moving. Built around QR and barcode scanning, with every device on the door seeing the same state.',
+        features: [
+          'QR and barcode scanning at the door',
+          'Real-time sync across every staff device',
+          'Registration and attendee management',
+          'Secure handling of attendee data',
+        ],
+        value:
+          'Shorter queues at the door, and organisers watching arrivals as they happen rather than counting them afterwards.',
+      },
+      'enneagram-assessment': {
+        category: 'Web Application',
+        title: 'Enneagram Profile Analysis — Personality Assessment',
+        overview:
+          'A personality assessment platform built on the Enneagram. Answers to an interactive questionnaire are scored as they are given and turned into a structured profile report, generated and delivered without anyone assembling it by hand.',
+        features: [
+          'Multilingual questionnaire with saved progress',
+          'Dynamic scoring into a personalised result',
+          'Downloadable PDF reports and email delivery',
+          'Admin dashboard for users, groups and results',
+        ],
+        value:
+          'A data-driven read on personality patterns and team dynamics, with no report written by hand.',
+      },
+      'premium-aquarium': {
+        category: 'WordPress & CMS',
+        title: 'Premium Aquarium Management & Corporate Website',
+        overview:
+          'A corporate site for a premium aquarium management company, presenting custom aquarium services to residential, commercial and institutional clients. Service-focused layouts, project showcases and enquiry handling, all editable from the CMS.',
+        features: [
+          'Service-focused layouts and project showcases',
+          'Customer enquiry handling built into the site',
+          'Content managed from the CMS, without a developer',
+          'A consistent experience from desktop to mobile',
+        ],
+        value:
+          'Credibility for specialised expertise, and a clear route into the services on offer.',
+      },
+      'shopify-jewellery': {
+        category: 'Shopify',
+        title: 'Shopify Jewellery Store — UI & UX',
+        overview:
+          'A jewellery storefront built for luxury: a custom Shopify theme in the brand’s own colours and typography, a product gallery with zoom on every piece, and a checkout tuned to stay out of the way.',
+        features: [
+          'Custom theme in the brand’s colours and typography',
+          'Product gallery with zoom on every piece',
+          'Homepage banner, collection grid and trending row',
+          'WhatsApp chat for instant customer support',
+        ],
+        value:
+          'A premium layout that carries the brand’s price point and earns the trust a jewellery purchase needs.',
+      },
+      'vassalli-listing': {
+        category: 'Shopify',
+        title: 'Product Listing — Vassalli',
+        overview:
+          'A clean, organised Shopify product listing for an apparel label: detailed descriptions, size options and styled visuals, structured so the catalogue reads consistently from the first product to the last.',
+        features: [
+          'Structured apparel listings with detailed descriptions',
+          'Size and variant options on every product',
+          'Consistent styling across the whole catalogue',
+          'Merchandising set up for the way shoppers browse',
+        ],
+        value:
+          'A catalogue that reads as one shop rather than a set of unrelated product pages.',
+      },
+      'cowboy-shooter': {
+        category: 'Game Development',
+        title: 'West Cowboy Fighter — Unity 3D Shooter',
+        overview:
+          'A third-person shooter set on a Wild West frontier, built in Unity 3D and published to Google Play. Missions run across a 3D desert landscape, and the gunfighter is upgraded from what each fight pays out.',
+        features: [
+          'A 3D desert frontier built in Unity',
+          'Missions that pay out upgrades and rewards',
+          'Tap-to-move controls, no combinations to memorise',
+          'Shipped to Android and iOS',
+        ],
+        value:
+          'A complete published game, from the 3D environment and combat loop through to store release.',
+      },
+      'kungfu-fighting-game': {
+        category: 'Game Development',
+        title: 'Multiplayer Fighting Game — Kungfu',
+        overview:
+          'A multiplayer fighting game with a physics-based combat system: strikes, grapples and takedowns driven by real animation and momentum rather than by memorised button combinations.',
+        features: [
+          'Physics-based strikes, grapples and takedowns',
+          'Fighter creation, from appearance to fighting style',
+          'Career mode through the ranks to a title',
+          'Multiplayer battles against friends or strangers',
+        ],
+        value:
+          'Combat that feels physical rather than scripted, which is what keeps a fighting game being played.',
+      },
+      'find-a-franchise': {
+        category: 'Mobile Application',
+        title: 'Find A Franchise',
+        overview:
+          'A mobile app carrying a current directory of franchise systems worldwide, with industry guidance alongside it. An account keeps a user’s purchases safe from a lost device and available wherever they sign in.',
+        features: [
+          'Searchable directory of franchise systems worldwide',
+          'Filtering by category, sub-category and country',
+          'Accounts that carry purchases across devices',
+          'Purchases restored on sign-in',
+        ],
+        value:
+          'Research that used to need a desk and a browser now fits in a pocket.',
+      },
+      'twilio-sip': {
+        category: 'Voice & Integration',
+        title: 'Twilio SIP Integration',
+        overview:
+          'SIP-based systems connected to Twilio’s cloud platform, so inbound and outbound voice runs over SIP trunking. The work bridges traditional PBX hardware and modern VoIP without either side needing to know about the other.',
+        features: [
+          'SIP trunking for inbound and outbound voice',
+          'Call routing and SIP authentication',
+          'Number provisioning across regions',
+          'Voice workflows that scale for enterprise use',
+        ],
+        value:
+          'Existing PBX hardware keeps working while the platform underneath it becomes cloud-scale and global.',
+      },
+      'so-fresh': {
+        category: 'E-Commerce',
+        title: 'So Fresh — Online Grocery Store',
+        overview:
+          'An online store for fresh fruit and vegetables with delivery, built on WordPress. Customised plugins, a full product catalogue and a working cart, on a secured install the owner runs themselves.',
+        features: [
+          'Fresh produce catalogue with delivery',
+          'Cart and checkout across the product range',
+          'Plugins customised to the shop’s own workflow',
+          'SSL secured and configured for production',
+        ],
+        value:
+          'A grocer selling direct online, editing the shop from the admin they already know.',
+      },
+      'hold-rome-hotel': {
+        category: 'WordPress',
+        title: 'Hold Rome Hotel Website',
+        overview:
+          'A website for a hotel in the centre of Rome, built to show what a stay actually looks like and to take the booking without sending the guest anywhere else. Availability, prices and reservations run through an integrated booking system.',
+        features: [
+          'Octorate booking system integrated into the site',
+          'Real-time availability and pricing',
+          'Rich photography of the rooms and amenities',
+          'Responsive from desktop through to phone',
+        ],
+        value:
+          'Guests book on the hotel’s own site instead of leaving for a platform that charges for the privilege.',
+      },
+      'shopify-store-build': {
+        category: 'Shopify',
+        title: 'Shopify E-Commerce Website Creation',
+        overview:
+          'A complete Shopify store for a modern online business: store setup, custom design, domain connection and the payment gateways behind it — handed over as a working shop rather than as a theme.',
+        features: [
+          'Custom store design with organised categories',
+          'Stripe and PayPal payment gateways',
+          'Domain setup and connection',
+          'SEO-friendly structure and optimised loading',
+        ],
+        value:
+          'A business selling online end to end, with nothing left for the owner to wire up.',
+      },
+      'ecommerce-website': {
+        category: 'E-Commerce',
+        title: 'eCommerce Website',
+        overview:
+          'An online store built on WordPress and PHP, with the storefront design produced in the same engagement — catalogue, product pages, and the brand work that carries them.',
+        features: [
+          'Product catalogue and detail pages',
+          'WooCommerce running the storefront',
+          'Storefront graphics produced alongside the build',
+          'Responsive from mobile to desktop',
+        ],
+        value:
+          'Design and build from one place, so the shop looks like the brand rather than like its theme.',
+      },
+      'wordpress-website-design': {
+        category: 'WordPress',
+        title: 'WordPress Website Design',
+        overview:
+          'A WordPress site built to a client’s requirements: a custom theme rather than a bought one, plugins chosen for what the site actually needed, and a layout that holds together across devices and browsers.',
+        features: [
+          'Custom theme built to the client’s branding',
+          'Contact forms, galleries and a blog section',
+          'SEO optimisation and cross-browser testing',
+          'Responsive layout with straightforward navigation',
+        ],
+        value:
+          'A site the client keeps writing in, that still looks the way it was designed a year later.',
+      },
+      'preferred-freelancer': {
+        category: 'Recognition',
+        title: 'Preferred Freelancer of the Quarter',
+        overview:
+          'Awarded by Freelancer.com and certified by their team, for outstanding performance as a Corporate Preferred Freelancer during the quarter — on the back of PHP, WordPress and WooCommerce delivery.',
+        features: [
+          'Awarded by Freelancer.com',
+          'Certified by the Freelancer.com team',
+          'For outstanding performance as a Corporate Preferred Freelancer',
+          'On PHP, WordPress and WooCommerce work',
+        ],
+        value:
+          'Independent confirmation of delivery standards, from the platform the work was delivered through.',
+      },
+    },
   },
   examples: {
     badge: 'Reference build',
@@ -281,6 +507,7 @@ const pt = {
       api: 'APIs e Integrações',
       chatbot: 'Chatbots',
       automation: 'Automação',
+      games: 'Jogos',
     },
     viewDetails: 'Ver detalhes',
     prevWork: 'Vorherige Projekte',
@@ -427,7 +654,232 @@ const pt = {
     heading: 'Projetos em web, mobile e e-commerce',
     intro:
       'Entregas a clientes do meu portfólio de freelancer, a par das minhas próprias construções de referência, filtradas por disciplina. Cada entrada indica as tecnologias realmente usadas; as construções de referência estão assinaladas como tal.',
-    items: {},
+    items: {
+      'autonomous-ai-agent': {
+        category: 'IA e Automação',
+        title: 'Agente de IA Autónomo para Automação de Processos',
+        overview:
+          'Uma plataforma de agentes que tira à equipa o trabalho operacional repetitivo. Alguém descreve um objetivo em linguagem normal; o sistema divide-o em passos, escolhe as ferramentas de cada passo, executa as ações e regista o que aconteceu.',
+        features: [
+          'Objetivos em linguagem natural, planeados em passos',
+          'Chamada de ferramentas e funções com memória de conversa',
+          'Integrações com APIs externas por trás de cada ação',
+          'Controlos de segurança e registo completo de atividade',
+        ],
+        value:
+          'O trabalho de rotina corre sem supervisão, e cada ação do agente fica registada.',
+      },
+      'event-check-in': {
+        category: 'Plataforma Mobile',
+        title: 'Plataforma de Gestão de Eventos e Check-In em Tempo Real',
+        overview:
+          'Uma plataforma para eventos de qualquer dimensão: inscrição, gestão de participantes e um check-in rápido o suficiente para a fila não parar. Assente em leitura de QR e códigos de barras, com todos os dispositivos à porta a ver o mesmo estado.',
+        features: [
+          'Leitura de QR e códigos de barras à porta',
+          'Sincronização em tempo real entre todos os dispositivos',
+          'Inscrição e gestão de participantes',
+          'Tratamento seguro dos dados dos participantes',
+        ],
+        value:
+          'Filas mais curtas à porta e uma organização que vê as chegadas a acontecer em vez de as contar depois.',
+      },
+      'enneagram-assessment': {
+        category: 'Aplicação Web',
+        title: 'Análise de Perfil Eneagrama — Avaliação de Personalidade',
+        overview:
+          'Uma plataforma de avaliação de personalidade baseada no Eneagrama. As respostas a um questionário interativo são pontuadas à medida que são dadas e transformadas num relatório de perfil estruturado, gerado e entregue sem ninguém o montar à mão.',
+        features: [
+          'Questionário multilingue com progresso guardado',
+          'Pontuação dinâmica para um resultado personalizado',
+          'Relatórios em PDF para descarregar e envio por email',
+          'Painel de administração de utilizadores, grupos e resultados',
+        ],
+        value:
+          'Uma leitura baseada em dados dos padrões de personalidade e da dinâmica de equipa, sem relatórios escritos à mão.',
+      },
+      'premium-aquarium': {
+        category: 'WordPress e CMS',
+        title: 'Gestão de Aquários Premium e Site Corporativo',
+        overview:
+          'Um site corporativo para uma empresa de gestão de aquários premium, que apresenta serviços à medida a clientes residenciais, empresariais e institucionais. Layouts centrados nos serviços, mostruário de projetos e pedidos de contacto, tudo editável a partir do CMS.',
+        features: [
+          'Layouts centrados nos serviços e mostruário de projetos',
+          'Pedidos de contacto integrados no site',
+          'Conteúdos geridos a partir do CMS, sem programador',
+          'Uma experiência consistente do computador ao telemóvel',
+        ],
+        value:
+          'Credibilidade para uma especialidade técnica e um caminho claro até aos serviços oferecidos.',
+      },
+      'shopify-jewellery': {
+        category: 'Shopify',
+        title: 'Loja de Joalharia em Shopify — UI e UX',
+        overview:
+          'Uma loja de joalharia pensada para o luxo: um tema Shopify à medida nas cores e na tipografia da marca, uma galeria com zoom em cada peça e um checkout que não se põe no caminho.',
+        features: [
+          'Tema à medida nas cores e tipografia da marca',
+          'Galeria de produto com zoom em cada peça',
+          'Banner de entrada, grelha de coleções e linha de destaques',
+          'Chat de WhatsApp para apoio imediato ao cliente',
+        ],
+        value:
+          'Um layout premium à altura do preço da marca, que constrói a confiança que a compra de joalharia exige.',
+      },
+      'vassalli-listing': {
+        category: 'Shopify',
+        title: 'Listagem de Produtos — Vassalli',
+        overview:
+          'Uma listagem de produtos Shopify limpa e organizada para uma marca de vestuário: descrições detalhadas, opções de tamanho e visuais cuidados, estruturados para o catálogo se ler de forma consistente do primeiro ao último produto.',
+        features: [
+          'Listagens de vestuário estruturadas, com descrições detalhadas',
+          'Opções de tamanho e variante em cada produto',
+          'Estilo consistente em todo o catálogo',
+          'Merchandising montado para a forma como se navega numa loja',
+        ],
+        value:
+          'Um catálogo que se lê como uma loja só, e não como páginas de produto sem relação.',
+      },
+      'cowboy-shooter': {
+        category: 'Desenvolvimento de Jogos',
+        title: 'West Cowboy Fighter — Shooter em Unity 3D',
+        overview:
+          'Um shooter na terceira pessoa numa fronteira do Faroeste, feito em Unity 3D e publicado no Google Play. As missões atravessam uma paisagem desértica em 3D, e o pistoleiro é melhorado com o que cada combate rende.',
+        features: [
+          'Uma fronteira desértica em 3D construída em Unity',
+          'Missões que rendem melhorias e recompensas',
+          'Controlo tap-to-move, sem combinações para decorar',
+          'Publicado para Android e iOS',
+        ],
+        value:
+          'Um jogo completo e publicado — do ambiente 3D e do sistema de combate até ao lançamento na loja.',
+      },
+      'kungfu-fighting-game': {
+        category: 'Desenvolvimento de Jogos',
+        title: 'Jogo de Luta Multijogador — Kungfu',
+        overview:
+          'Um jogo de luta multijogador com sistema de combate assente em física: golpes, agarres e projeções conduzidos por animação e inércia reais em vez de combinações de botões decoradas.',
+        features: [
+          'Golpes, agarres e projeções assentes em física',
+          'Criação de lutador, do aspeto ao estilo de combate',
+          'Modo carreira a subir na hierarquia até ao título',
+          'Combates multijogador contra amigos ou desconhecidos',
+        ],
+        value:
+          'Combate que se sente físico em vez de programado — é isso que mantém um jogo de luta a ser jogado.',
+      },
+      'find-a-franchise': {
+        category: 'Aplicação Móvel',
+        title: 'Find A Franchise',
+        overview:
+          'Uma aplicação móvel com um diretório atualizado de sistemas de franchising em todo o mundo, e orientação do setor a acompanhar. Uma conta protege as compras de um dispositivo perdido e mantém-nas disponíveis em qualquer sítio onde se entre.',
+        features: [
+          'Diretório pesquisável de franchising em todo o mundo',
+          'Filtros por categoria, subcategoria e país',
+          'Contas que levam as compras entre dispositivos',
+          'Compras restauradas ao iniciar sessão',
+        ],
+        value:
+          'Uma pesquisa que antes exigia secretária e navegador passa a caber no bolso.',
+      },
+      'twilio-sip': {
+        category: 'Voz e Integração',
+        title: 'Integração SIP com Twilio',
+        overview:
+          'Sistemas baseados em SIP ligados à plataforma cloud da Twilio, para que a voz de entrada e de saída corra sobre SIP trunking. O trabalho liga centrais telefónicas tradicionais a VoIP moderno sem que nenhum dos lados precise de saber do outro.',
+        features: [
+          'SIP trunking para voz de entrada e de saída',
+          'Encaminhamento de chamadas e autenticação SIP',
+          'Aprovisionamento de números em várias regiões',
+          'Fluxos de voz que escalam para uso empresarial',
+        ],
+        value:
+          'O equipamento telefónico existente continua a funcionar enquanto a plataforma por baixo passa a ser global e à escala da cloud.',
+      },
+      'so-fresh': {
+        category: 'E-Commerce',
+        title: 'So Fresh — Loja Online de Produtos Frescos',
+        overview:
+          'Uma loja online de fruta e legumes frescos com entrega, feita em WordPress. Plugins personalizados, um catálogo completo e um carrinho a funcionar, numa instalação protegida que o próprio dono gere.',
+        features: [
+          'Catálogo de produtos frescos com entrega',
+          'Carrinho e checkout em toda a gama',
+          'Plugins personalizados para o fluxo da própria loja',
+          'Protegida com SSL e configurada para produção',
+        ],
+        value:
+          'Um comerciante a vender direto online, a editar a loja a partir da administração que já conhece.',
+      },
+      'hold-rome-hotel': {
+        category: 'WordPress',
+        title: 'Site do Hotel Hold Rome',
+        overview:
+          'Um site para um hotel no centro de Roma, feito para mostrar como é mesmo uma estadia e para receber a reserva sem mandar o hóspede para outro lado. Disponibilidade, preços e reservas passam por um sistema de reservas integrado.',
+        features: [
+          'Sistema de reservas Octorate integrado no site',
+          'Disponibilidade e preços em tempo real',
+          'Fotografia cuidada dos quartos e das comodidades',
+          'Responsivo do computador ao telemóvel',
+        ],
+        value:
+          'Os hóspedes reservam no site do próprio hotel em vez de saírem para uma plataforma que cobra por isso.',
+      },
+      'shopify-store-build': {
+        category: 'Shopify',
+        title: 'Criação de Loja Online em Shopify',
+        overview:
+          'Uma loja Shopify completa para um negócio online moderno: configuração, design à medida, ligação do domínio e os meios de pagamento por trás — entregue como loja a funcionar e não como um tema.',
+        features: [
+          'Design de loja à medida com categorias organizadas',
+          'Meios de pagamento Stripe e PayPal',
+          'Domínio configurado e ligado',
+          'Estrutura preparada para SEO e carregamento otimizado',
+        ],
+        value:
+          'Um negócio a vender online de ponta a ponta, sem nada por ligar do lado do dono.',
+      },
+      'ecommerce-website': {
+        category: 'E-Commerce',
+        title: 'Site de eCommerce',
+        overview:
+          'Uma loja online feita em WordPress e PHP, com o design da loja produzido no mesmo trabalho — catálogo, páginas de produto e o trabalho de marca que os sustenta.',
+        features: [
+          'Catálogo de produtos e páginas de detalhe',
+          'WooCommerce a sustentar a loja',
+          'Grafismo produzido a par da construção',
+          'Responsivo do telemóvel ao computador',
+        ],
+        value:
+          'Design e construção no mesmo sítio, para a loja parecer a marca e não o seu tema.',
+      },
+      'wordpress-website-design': {
+        category: 'WordPress',
+        title: 'Design de Site WordPress',
+        overview:
+          'Um site WordPress feito aos requisitos do cliente: um tema à medida em vez de comprado, plugins escolhidos pelo que o site precisava mesmo, e um layout que se aguenta entre dispositivos e navegadores.',
+        features: [
+          'Tema à medida, construído sobre a marca do cliente',
+          'Formulários de contacto, galerias e uma secção de blogue',
+          'Otimização para SEO e testes em vários navegadores',
+          'Layout responsivo com navegação simples',
+        ],
+        value:
+          'Um site onde o cliente continua a escrever e que um ano depois ainda está como foi desenhado.',
+      },
+      'preferred-freelancer': {
+        category: 'Reconhecimento',
+        title: 'Freelancer Preferido do Trimestre',
+        overview:
+          'Atribuído pela Freelancer.com e certificado pela sua equipa, pelo desempenho como Corporate Preferred Freelancer durante o trimestre — com base no trabalho em PHP, WordPress e WooCommerce.',
+        features: [
+          'Atribuído pela Freelancer.com',
+          'Certificado pela equipa da Freelancer.com',
+          'Pelo desempenho como Corporate Preferred Freelancer',
+          'Sobre trabalho em PHP, WordPress e WooCommerce',
+        ],
+        value:
+          'Uma confirmação independente do nível de entrega, vinda da plataforma onde o trabalho foi feito.',
+      },
+    },
   },
   examples: {
     badge: 'Projeto de referência',
@@ -519,6 +971,7 @@ const es = {
       api: 'APIs e Integraciones',
       chatbot: 'Chatbots',
       automation: 'Automatización',
+      games: 'Juegos',
     },
     viewDetails: 'Ver detalles',
     prevWork: 'Projetos anteriores',
@@ -665,7 +1118,232 @@ const es = {
     heading: 'Proyectos en web, móvil y e-commerce',
     intro:
       'Entregas a clientes de mi portafolio freelance, junto a mis propias construcciones de referencia, filtradas por disciplina. Cada entrada indica las tecnologías realmente utilizadas; las construcciones de referencia están marcadas como tales.',
-    items: {},
+    items: {
+      'autonomous-ai-agent': {
+        category: 'IA y Automatización',
+        title: 'Agente de IA Autónomo para Automatización de Procesos',
+        overview:
+          'Una plataforma de agentes que le quita al equipo el trabajo operativo repetitivo. Alguien describe un objetivo en lenguaje normal; el sistema lo divide en pasos, elige las herramientas de cada paso, ejecuta las acciones y registra lo que ocurrió.',
+        features: [
+          'Objetivos en lenguaje natural, planificados en pasos',
+          'Llamada a herramientas y funciones con memoria de conversación',
+          'Integraciones con APIs externas detrás de cada acción',
+          'Controles de seguridad y registro completo de actividad',
+        ],
+        value:
+          'El trabajo rutinario corre sin supervisión, y cada acción del agente queda registrada.',
+      },
+      'event-check-in': {
+        category: 'Plataforma Móvil',
+        title: 'Plataforma de Gestión de Eventos y Check-In en Tiempo Real',
+        overview:
+          'Una plataforma para eventos de cualquier tamaño: inscripción, gestión de asistentes y un check-in lo bastante rápido para que la fila no se detenga. Construida sobre lectura de QR y códigos de barras, con todos los dispositivos de la puerta viendo el mismo estado.',
+        features: [
+          'Lectura de QR y códigos de barras en la puerta',
+          'Sincronización en tiempo real entre todos los dispositivos',
+          'Inscripción y gestión de asistentes',
+          'Tratamiento seguro de los datos de los asistentes',
+        ],
+        value:
+          'Filas más cortas en la puerta y una organización que ve las llegadas mientras ocurren.',
+      },
+      'enneagram-assessment': {
+        category: 'Aplicación Web',
+        title: 'Análisis de Perfil Eneagrama — Evaluación de Personalidad',
+        overview:
+          'Una plataforma de evaluación de personalidad basada en el Eneagrama. Las respuestas de un cuestionario interactivo se puntúan sobre la marcha y se convierten en un informe de perfil estructurado, generado y entregado sin que nadie lo monte a mano.',
+        features: [
+          'Cuestionario multilingüe con progreso guardado',
+          'Puntuación dinámica hacia un resultado personalizado',
+          'Informes en PDF descargables y envío por correo',
+          'Panel de administración de usuarios, grupos y resultados',
+        ],
+        value:
+          'Una lectura basada en datos de los patrones de personalidad y la dinámica de equipo, sin informes escritos a mano.',
+      },
+      'premium-aquarium': {
+        category: 'WordPress y CMS',
+        title: 'Gestión de Acuarios Premium y Sitio Corporativo',
+        overview:
+          'Un sitio corporativo para una empresa de gestión de acuarios premium, que presenta servicios a medida a clientes residenciales, comerciales e institucionales. Diseños centrados en los servicios, muestrario de proyectos y solicitudes de contacto, todo editable desde el CMS.',
+        features: [
+          'Diseños centrados en los servicios y muestrario de proyectos',
+          'Solicitudes de contacto integradas en el sitio',
+          'Contenido gestionado desde el CMS, sin desarrollador',
+          'Una experiencia consistente del escritorio al móvil',
+        ],
+        value:
+          'Credibilidad para una especialidad técnica y un camino claro hacia los servicios ofrecidos.',
+      },
+      'shopify-jewellery': {
+        category: 'Shopify',
+        title: 'Tienda de Joyería en Shopify — UI y UX',
+        overview:
+          'Una tienda de joyería pensada para el lujo: un tema de Shopify a medida en los colores y la tipografía de la marca, una galería con zoom en cada pieza y un checkout que no se interpone.',
+        features: [
+          'Tema a medida en los colores y la tipografía de la marca',
+          'Galería de producto con zoom en cada pieza',
+          'Banner de portada, cuadrícula de colecciones y fila de tendencias',
+          'Chat de WhatsApp para atención inmediata al cliente',
+        ],
+        value:
+          'Un diseño premium a la altura del precio de la marca, que genera la confianza que exige comprar joyería.',
+      },
+      'vassalli-listing': {
+        category: 'Shopify',
+        title: 'Listado de Productos — Vassalli',
+        overview:
+          'Un listado de productos Shopify limpio y organizado para una marca de ropa: descripciones detalladas, opciones de talla y visuales cuidados, estructurados para que el catálogo se lea igual del primer producto al último.',
+        features: [
+          'Listados de ropa estructurados, con descripciones detalladas',
+          'Opciones de talla y variante en cada producto',
+          'Estilo consistente en todo el catálogo',
+          'Merchandising montado según cómo navega quien compra',
+        ],
+        value:
+          'Un catálogo que se lee como una sola tienda, y no como páginas de producto sin relación.',
+      },
+      'cowboy-shooter': {
+        category: 'Desarrollo de Videojuegos',
+        title: 'West Cowboy Fighter — Shooter en Unity 3D',
+        overview:
+          'Un shooter en tercera persona en una frontera del Lejano Oeste, hecho en Unity 3D y publicado en Google Play. Las misiones recorren un paisaje desértico en 3D, y el pistolero se mejora con lo que rinde cada combate.',
+        features: [
+          'Una frontera desértica en 3D construida en Unity',
+          'Misiones que rinden mejoras y recompensas',
+          'Control tap-to-move, sin combinaciones que memorizar',
+          'Publicado para Android e iOS',
+        ],
+        value:
+          'Un juego completo y publicado: del entorno 3D y el sistema de combate hasta el lanzamiento en la tienda.',
+      },
+      'kungfu-fighting-game': {
+        category: 'Desarrollo de Videojuegos',
+        title: 'Juego de Lucha Multijugador — Kungfu',
+        overview:
+          'Un juego de lucha multijugador con un sistema de combate basado en física: golpes, agarres y derribos movidos por animación e inercia reales en lugar de por combinaciones de botones memorizadas.',
+        features: [
+          'Golpes, agarres y derribos basados en física',
+          'Creación de luchador, del aspecto al estilo de combate',
+          'Modo carrera subiendo escalafones hasta el título',
+          'Combates multijugador contra amigos o desconocidos',
+        ],
+        value:
+          'Un combate que se siente físico en vez de programado, que es lo que mantiene vivo a un juego de lucha.',
+      },
+      'find-a-franchise': {
+        category: 'Aplicación Móvil',
+        title: 'Find A Franchise',
+        overview:
+          'Una aplicación móvil con un directorio actualizado de sistemas de franquicia de todo el mundo, y orientación del sector junto a él. Una cuenta protege las compras frente a un dispositivo perdido y las mantiene disponibles allí donde se inicie sesión.',
+        features: [
+          'Directorio consultable de franquicias de todo el mundo',
+          'Filtros por categoría, subcategoría y país',
+          'Cuentas que llevan las compras entre dispositivos',
+          'Compras restauradas al iniciar sesión',
+        ],
+        value:
+          'Una búsqueda que antes pedía escritorio y navegador ahora cabe en el bolsillo.',
+      },
+      'twilio-sip': {
+        category: 'Voz e Integración',
+        title: 'Integración SIP con Twilio',
+        overview:
+          'Sistemas basados en SIP conectados a la plataforma cloud de Twilio, de modo que la voz entrante y saliente corre sobre SIP trunking. El trabajo une centralitas tradicionales con VoIP moderno sin que ninguna de las dos partes tenga que saber de la otra.',
+        features: [
+          'SIP trunking para voz entrante y saliente',
+          'Enrutamiento de llamadas y autenticación SIP',
+          'Aprovisionamiento de números en varias regiones',
+          'Flujos de voz que escalan para uso empresarial',
+        ],
+        value:
+          'El equipamiento telefónico existente sigue funcionando mientras la plataforma que hay debajo pasa a ser global y a escala cloud.',
+      },
+      'so-fresh': {
+        category: 'E-Commerce',
+        title: 'So Fresh — Tienda Online de Producto Fresco',
+        overview:
+          'Una tienda online de fruta y verdura fresca con entrega, hecha en WordPress. Plugins personalizados, un catálogo completo y un carrito funcionando, sobre una instalación asegurada que gestiona el propio dueño.',
+        features: [
+          'Catálogo de producto fresco con entrega',
+          'Carrito y checkout en toda la gama',
+          'Plugins personalizados para el flujo de la propia tienda',
+          'Asegurada con SSL y configurada para producción',
+        ],
+        value:
+          'Un comerciante vendiendo directo online, editando la tienda desde la administración que ya conoce.',
+      },
+      'hold-rome-hotel': {
+        category: 'WordPress',
+        title: 'Sitio Web del Hotel Hold Rome',
+        overview:
+          'Un sitio para un hotel en el centro de Roma, hecho para enseñar cómo es de verdad una estancia y para recibir la reserva sin mandar al huésped a otro sitio. Disponibilidad, precios y reservas pasan por un sistema de reservas integrado.',
+        features: [
+          'Sistema de reservas Octorate integrado en el sitio',
+          'Disponibilidad y precios en tiempo real',
+          'Fotografía cuidada de las habitaciones y servicios',
+          'Responsivo del escritorio al móvil',
+        ],
+        value:
+          'Los huéspedes reservan en el sitio del propio hotel en vez de irse a una plataforma que cobra por ello.',
+      },
+      'shopify-store-build': {
+        category: 'Shopify',
+        title: 'Creación de Tienda Online en Shopify',
+        overview:
+          'Una tienda Shopify completa para un negocio online moderno: configuración, diseño a medida, conexión del dominio y las pasarelas de pago detrás — entregada como tienda en funcionamiento y no como una plantilla.',
+        features: [
+          'Diseño de tienda a medida con categorías organizadas',
+          'Pasarelas de pago Stripe y PayPal',
+          'Dominio configurado y conectado',
+          'Estructura preparada para SEO y carga optimizada',
+        ],
+        value:
+          'Un negocio vendiendo online de principio a fin, sin nada que el dueño tenga que conectar.',
+      },
+      'ecommerce-website': {
+        category: 'E-Commerce',
+        title: 'Sitio de eCommerce',
+        overview:
+          'Una tienda online hecha en WordPress y PHP, con el diseño de la tienda producido en el mismo trabajo: catálogo, páginas de producto y el trabajo de marca que los sostiene.',
+        features: [
+          'Catálogo de productos y páginas de detalle',
+          'WooCommerce sosteniendo la tienda',
+          'Gráficos producidos junto a la construcción',
+          'Responsivo del móvil al escritorio',
+        ],
+        value:
+          'Diseño y construcción desde el mismo sitio, para que la tienda se parezca a la marca y no a su plantilla.',
+      },
+      'wordpress-website-design': {
+        category: 'WordPress',
+        title: 'Diseño de Sitio WordPress',
+        overview:
+          'Un sitio WordPress hecho a los requisitos del cliente: un tema a medida en vez de comprado, plugins elegidos por lo que el sitio necesitaba de verdad, y un diseño que aguanta entre dispositivos y navegadores.',
+        features: [
+          'Tema a medida, construido sobre la marca del cliente',
+          'Formularios de contacto, galerías y una sección de blog',
+          'Optimización para SEO y pruebas en varios navegadores',
+          'Diseño responsivo con navegación sencilla',
+        ],
+        value:
+          'Un sitio en el que el cliente sigue escribiendo y que un año después sigue como se diseñó.',
+      },
+      'preferred-freelancer': {
+        category: 'Reconocimiento',
+        title: 'Freelancer Preferido del Trimestre',
+        overview:
+          'Otorgado por Freelancer.com y certificado por su equipo, por el desempeño como Corporate Preferred Freelancer durante el trimestre — sobre la base del trabajo en PHP, WordPress y WooCommerce.',
+        features: [
+          'Otorgado por Freelancer.com',
+          'Certificado por el equipo de Freelancer.com',
+          'Por el desempeño como Corporate Preferred Freelancer',
+          'Sobre trabajo en PHP, WordPress y WooCommerce',
+        ],
+        value:
+          'Una confirmación independiente del nivel de entrega, desde la plataforma donde se hizo el trabajo.',
+      },
+    },
   },
   examples: {
     badge: 'Proyecto de referencia',
@@ -758,6 +1436,7 @@ const de = {
       api: 'APIs & Integrationen',
       chatbot: 'Chatbots',
       automation: 'Automatisierung',
+      games: 'Spiele',
     },
     viewDetails: 'Details ansehen',
     prevWork: 'Proyectos anteriores',
@@ -904,7 +1583,232 @@ const de = {
     heading: 'Projekte in Web, Mobile und E-Commerce',
     intro:
       'Kundenprojekte aus meinem Freelance-Portfolio, daneben meine eigenen Referenzbeispiele, nach Fachgebiet filterbar. Jeder Eintrag nennt die tatsächlich eingesetzten Technologien; Referenzbeispiele sind als solche gekennzeichnet.',
-    items: {},
+    items: {
+      'autonomous-ai-agent': {
+        category: 'KI & Automatisierung',
+        title: 'Autonomer KI-Agent für Prozessautomatisierung',
+        overview:
+          'Eine Agentenplattform, die einem Team wiederkehrende operative Arbeit abnimmt. Jemand beschreibt ein Ziel in normaler Sprache; das System zerlegt es in Schritte, wählt die nötigen Werkzeuge, führt die Aktionen aus und hält fest, was passiert ist.',
+        features: [
+          'Ziele in natürlicher Sprache, in Schritte geplant',
+          'Tool- und Function-Calling mit Gesprächsgedächtnis',
+          'Anbindung von Drittanbieter-APIs hinter jeder Aktion',
+          'Sicherheitskontrollen und vollständiges Aktivitätsprotokoll',
+        ],
+        value:
+          'Routinearbeit läuft unbeaufsichtigt, und jede Aktion des Agenten bleibt nachvollziehbar.',
+      },
+      'event-check-in': {
+        category: 'Mobile Plattform',
+        title: 'Echtzeit-Eventmanagement und Check-in-Plattform',
+        overview:
+          'Eine Eventplattform für Veranstaltungen jeder Größe: Registrierung, Gästeverwaltung und ein Check-in, der schnell genug ist, damit die Schlange nicht stehen bleibt. Aufgebaut auf QR- und Barcode-Scan, wobei jedes Gerät am Einlass denselben Stand sieht.',
+        features: [
+          'QR- und Barcode-Scan direkt am Einlass',
+          'Synchronisation in Echtzeit über alle Geräte des Teams',
+          'Registrierung und Gästeverwaltung',
+          'Sichere Verarbeitung der Teilnehmerdaten',
+        ],
+        value:
+          'Kürzere Schlangen am Einlass, und eine Organisation, die Ankünfte sieht, während sie passieren.',
+      },
+      'enneagram-assessment': {
+        category: 'Webanwendung',
+        title: 'Enneagramm-Profilanalyse — Persönlichkeitstest',
+        overview:
+          'Eine Plattform für Persönlichkeitsanalysen auf Basis des Enneagramms. Die Antworten eines interaktiven Fragebogens werden laufend ausgewertet und zu einem strukturierten Profilbericht verarbeitet, der ohne Handarbeit entsteht und zugestellt wird.',
+        features: [
+          'Mehrsprachiger Fragebogen mit gespeichertem Fortschritt',
+          'Dynamische Auswertung zu einem persönlichen Ergebnis',
+          'PDF-Berichte zum Download und Versand per E-Mail',
+          'Administrationsbereich für Nutzer, Gruppen und Ergebnisse',
+        ],
+        value:
+          'Ein datengestützter Blick auf Persönlichkeitsmuster und Teamdynamik, ganz ohne handgeschriebene Berichte.',
+      },
+      'premium-aquarium': {
+        category: 'WordPress & CMS',
+        title: 'Premium-Aquarienbetreuung und Unternehmenswebsite',
+        overview:
+          'Eine Unternehmenswebsite für einen Premium-Aquarienservice, die maßgeschneiderte Leistungen für private, gewerbliche und institutionelle Kunden präsentiert. Leistungsorientierte Layouts, Projektgalerien und Anfragen, alles aus dem CMS pflegbar.',
+        features: [
+          'Leistungsorientierte Layouts und Projektgalerien',
+          'Kundenanfragen direkt auf der Website',
+          'Inhalte aus dem CMS gepflegt, ohne Entwickler',
+          'Ein durchgängiges Erlebnis vom Desktop bis zum Smartphone',
+        ],
+        value:
+          'Glaubwürdigkeit für ein spezialisiertes Fachgebiet und ein klarer Weg zu den angebotenen Leistungen.',
+      },
+      'shopify-jewellery': {
+        category: 'Shopify',
+        title: 'Shopify-Schmuckshop — UI & UX',
+        overview:
+          'Ein Schmuck-Onlineshop für den Luxusbereich: ein eigenes Shopify-Theme in den Farben und der Typografie der Marke, eine Produktgalerie mit Zoom auf jedem Stück und ein Checkout, der sich nicht in den Weg stellt.',
+        features: [
+          'Eigenes Theme in Farben und Typografie der Marke',
+          'Produktgalerie mit Zoom auf jedem Stück',
+          'Startseiten-Banner, Kollektionsraster und Trend-Reihe',
+          'WhatsApp-Chat für sofortigen Kundensupport',
+        ],
+        value:
+          'Ein hochwertiges Layout, das dem Preisniveau der Marke entspricht und das Vertrauen schafft, das ein Schmuckkauf braucht.',
+      },
+      'vassalli-listing': {
+        category: 'Shopify',
+        title: 'Produktlisting — Vassalli',
+        overview:
+          'Ein sauberes, geordnetes Shopify-Produktlisting für ein Bekleidungslabel: ausführliche Beschreibungen, Größenauswahl und abgestimmte Bildsprache, so strukturiert, dass sich der Katalog vom ersten bis zum letzten Produkt gleich liest.',
+        features: [
+          'Strukturierte Bekleidungslistings mit ausführlichen Beschreibungen',
+          'Größen- und Variantenauswahl bei jedem Produkt',
+          'Durchgängige Gestaltung über den gesamten Katalog',
+          'Merchandising passend zur Art, wie Kunden stöbern',
+        ],
+        value:
+          'Ein Katalog, der sich wie ein einziger Shop liest und nicht wie unverbundene Produktseiten.',
+      },
+      'cowboy-shooter': {
+        category: 'Spieleentwicklung',
+        title: 'West Cowboy Fighter — Unity-3D-Shooter',
+        overview:
+          'Ein Third-Person-Shooter an der Grenze des Wilden Westens, gebaut in Unity 3D und bei Google Play veröffentlicht. Missionen führen durch eine 3D-Wüstenlandschaft, und der Revolvermann wird aus dem aufgerüstet, was jeder Kampf einbringt.',
+        features: [
+          'Eine 3D-Wüstenlandschaft, gebaut in Unity',
+          'Missionen, die Upgrades und Belohnungen einbringen',
+          'Tap-to-Move-Steuerung, ohne Kombinationen auswendig zu lernen',
+          'Veröffentlicht für Android und iOS',
+        ],
+        value:
+          'Ein fertig veröffentlichtes Spiel — von der 3D-Welt und Kampfmechanik bis zum Store-Release.',
+      },
+      'kungfu-fighting-game': {
+        category: 'Spieleentwicklung',
+        title: 'Multiplayer-Kampfspiel — Kungfu',
+        overview:
+          'Ein Multiplayer-Kampfspiel mit physikbasiertem Kampfsystem: Schläge, Griffe und Würfe, getragen von echter Animation und echtem Impuls statt von auswendig gelernten Tastenkombinationen.',
+        features: [
+          'Physikbasierte Schläge, Griffe und Würfe',
+          'Eigener Kämpfer, vom Aussehen bis zum Kampfstil',
+          'Karrieremodus durch die Ränge bis zum Titel',
+          'Multiplayer-Kämpfe gegen Freunde oder Fremde',
+        ],
+        value:
+          'Ein Kampfsystem, das sich körperlich anfühlt statt vorgeschrieben — genau das hält ein Kampfspiel am Leben.',
+      },
+      'find-a-franchise': {
+        category: 'Mobile Anwendung',
+        title: 'Find A Franchise',
+        overview:
+          'Eine mobile App mit einem aktuellen Verzeichnis von Franchisesystemen weltweit, dazu Einordnung aus der Branche. Ein Konto schützt die Käufe vor einem verlorenen Gerät und macht sie überall verfügbar, wo man sich anmeldet.',
+        features: [
+          'Durchsuchbares Verzeichnis weltweiter Franchisesysteme',
+          'Filter nach Kategorie, Unterkategorie und Land',
+          'Konten, die Käufe über Geräte hinweg mitnehmen',
+          'Käufe werden bei der Anmeldung wiederhergestellt',
+        ],
+        value:
+          'Recherche, die früher Schreibtisch und Browser brauchte, passt jetzt in die Hosentasche.',
+      },
+      'twilio-sip': {
+        category: 'Sprache & Integration',
+        title: 'Twilio-SIP-Integration',
+        overview:
+          'SIP-basierte Systeme an die Cloud-Plattform von Twilio angebunden, sodass ein- und ausgehende Sprache über SIP-Trunking läuft. Die Arbeit verbindet klassische TK-Anlagen mit moderner VoIP, ohne dass eine Seite von der anderen wissen muss.',
+        features: [
+          'SIP-Trunking für ein- und ausgehende Sprache',
+          'Anrufrouting und SIP-Authentifizierung',
+          'Rufnummernbereitstellung über Regionen hinweg',
+          'Sprach-Workflows, die für den Unternehmenseinsatz skalieren',
+        ],
+        value:
+          'Vorhandene TK-Hardware läuft weiter, während die Plattform darunter cloudweit und global wird.',
+      },
+      'so-fresh': {
+        category: 'E-Commerce',
+        title: 'So Fresh — Onlineshop für frische Lebensmittel',
+        overview:
+          'Ein Onlineshop für frisches Obst und Gemüse mit Lieferung, gebaut auf WordPress. Angepasste Plugins, ein vollständiger Produktkatalog und ein funktionierender Warenkorb, auf einer abgesicherten Installation, die der Inhaber selbst betreibt.',
+        features: [
+          'Katalog für frische Ware mit Lieferung',
+          'Warenkorb und Checkout über das gesamte Sortiment',
+          'Plugins an den Ablauf des Shops angepasst',
+          'Mit SSL abgesichert und für den Betrieb konfiguriert',
+        ],
+        value:
+          'Ein Händler, der direkt online verkauft und den Shop aus der Verwaltung pflegt, die er ohnehin kennt.',
+      },
+      'hold-rome-hotel': {
+        category: 'WordPress',
+        title: 'Website für das Hold Rome Hotel',
+        overview:
+          'Eine Website für ein Hotel im Zentrum Roms, gebaut um zu zeigen, wie ein Aufenthalt wirklich aussieht — und um die Buchung entgegenzunehmen, ohne den Gast woandershin zu schicken. Verfügbarkeit, Preise und Reservierungen laufen über ein integriertes Buchungssystem.',
+        features: [
+          'Buchungssystem Octorate in die Website integriert',
+          'Verfügbarkeit und Preise in Echtzeit',
+          'Hochwertige Bilder der Zimmer und Ausstattung',
+          'Responsiv vom Desktop bis zum Smartphone',
+        ],
+        value:
+          'Gäste buchen auf der Website des Hotels, statt zu einer Plattform zu wechseln, die dafür Provision nimmt.',
+      },
+      'shopify-store-build': {
+        category: 'Shopify',
+        title: 'Erstellung eines Shopify-Onlineshops',
+        overview:
+          'Ein vollständiger Shopify-Shop für ein modernes Onlinegeschäft: Einrichtung, eigenes Design, Domainanbindung und die Zahlungsanbieter dahinter — übergeben als laufender Shop, nicht als Theme.',
+        features: [
+          'Eigenes Shop-Design mit geordneten Kategorien',
+          'Zahlungsanbieter Stripe und PayPal',
+          'Domain eingerichtet und verbunden',
+          'SEO-freundliche Struktur und optimierte Ladezeit',
+        ],
+        value:
+          'Ein Geschäft, das durchgängig online verkauft, ohne dass der Inhaber noch etwas verkabeln muss.',
+      },
+      'ecommerce-website': {
+        category: 'E-Commerce',
+        title: 'eCommerce-Website',
+        overview:
+          'Ein Onlineshop auf WordPress und PHP, dessen Gestaltung im selben Auftrag entstanden ist — Katalog, Produktseiten und die Markenarbeit, die sie trägt.',
+        features: [
+          'Produktkatalog und Detailseiten',
+          'WooCommerce als Basis des Shops',
+          'Grafiken parallel zur Umsetzung erstellt',
+          'Responsiv vom Smartphone bis zum Desktop',
+        ],
+        value:
+          'Gestaltung und Umsetzung aus einer Hand, damit der Shop nach der Marke aussieht und nicht nach seinem Theme.',
+      },
+      'wordpress-website-design': {
+        category: 'WordPress',
+        title: 'WordPress-Website-Design',
+        overview:
+          'Eine WordPress-Website nach den Anforderungen des Kunden: ein eigenes Theme statt eines gekauften, Plugins nach dem tatsächlichen Bedarf gewählt, und ein Layout, das über Geräte und Browser hinweg zusammenhält.',
+        features: [
+          'Eigenes Theme, gebaut auf das Branding des Kunden',
+          'Kontaktformulare, Galerien und ein Blogbereich',
+          'SEO-Optimierung und Tests über alle Browser',
+          'Responsives Layout mit klarer Navigation',
+        ],
+        value:
+          'Eine Website, in der der Kunde weiterschreibt und die auch ein Jahr später noch so aussieht wie geplant.',
+      },
+      'preferred-freelancer': {
+        category: 'Auszeichnung',
+        title: 'Bevorzugter Freelancer des Quartals',
+        overview:
+          'Verliehen von Freelancer.com und vom dortigen Team bestätigt, für herausragende Leistung als Corporate Preferred Freelancer im Quartal — auf Grundlage der Arbeit mit PHP, WordPress und WooCommerce.',
+        features: [
+          'Verliehen von Freelancer.com',
+          'Bestätigt vom Team von Freelancer.com',
+          'Für herausragende Leistung als Corporate Preferred Freelancer',
+          'Für Arbeit mit PHP, WordPress und WooCommerce',
+        ],
+        value:
+          'Eine unabhängige Bestätigung der Liefertreue, von der Plattform, über die die Arbeit lief.',
+      },
+    },
   },
   examples: {
     badge: 'Referenzbeispiel',
