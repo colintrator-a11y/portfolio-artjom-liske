@@ -600,6 +600,52 @@
   background: var(--paper-sunken);
 }
 
+/*
+ * The thumbnail strip. Laid out as a row that scrolls sideways rather than
+ * wrapping, so a project with six shots does not push the dialog's own
+ * description further down the panel than the images it is describing.
+ */
+.pdialog__thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.pdialog__thumb {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper-sunken);
+  overflow: hidden;
+  opacity: 0.62;
+  transition: opacity 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.pdialog__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.pdialog__thumb:hover,
+.pdialog__thumb:focus-visible {
+  opacity: 1;
+}
+
+.pdialog__thumb.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
 .pdialog__body {
   padding: 22px clamp(20px, 3.5vw, 34px) clamp(26px, 3.5vw, 34px);
 }

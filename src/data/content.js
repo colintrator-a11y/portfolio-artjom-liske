@@ -13,22 +13,52 @@
 import { translations } from '../i18n/translations'
 
 import avatarImg from '../assets/avatar.webp'
-import aiAgentImg from '../assets/projects/autonomous-ai-agent.webp'
-import eventCheckInImg from '../assets/projects/event-check-in.webp'
-import enneagramImg from '../assets/projects/enneagram-assessment.webp'
-import aquariumImg from '../assets/projects/premium-aquarium.webp'
-import jewelleryImg from '../assets/projects/shopify-jewellery.webp'
-import vassalliImg from '../assets/projects/vassalli-listing.webp'
-import cowboyImg from '../assets/projects/cowboy-shooter.webp'
-import kungfuImg from '../assets/projects/kungfu-fighting-game.webp'
-import franchiseImg from '../assets/projects/find-a-franchise.webp'
-import twilioImg from '../assets/projects/twilio-sip.webp'
-import soFreshImg from '../assets/projects/so-fresh.webp'
-import holdRomeImg from '../assets/projects/hold-rome-hotel.webp'
-import shopifyStoreImg from '../assets/projects/shopify-store-build.webp'
-import ecommerceImg from '../assets/projects/ecommerce-website.webp'
-import wordpressImg from '../assets/projects/wordpress-website-design.webp'
-import awardImg from '../assets/projects/preferred-freelancer.webp'
+import aiAgent1 from '../assets/projects/autonomous-ai-agent-1.webp'
+import aiAgent2 from '../assets/projects/autonomous-ai-agent-2.webp'
+import aiAgent3 from '../assets/projects/autonomous-ai-agent-3.webp'
+import aiAgent4 from '../assets/projects/autonomous-ai-agent-4.webp'
+import aiAgent5 from '../assets/projects/autonomous-ai-agent-5.webp'
+import eventCheckIn1 from '../assets/projects/event-check-in-1.webp'
+import eventCheckIn2 from '../assets/projects/event-check-in-2.webp'
+import eventCheckIn3 from '../assets/projects/event-check-in-3.webp'
+import eventCheckIn4 from '../assets/projects/event-check-in-4.webp'
+import eventCheckIn5 from '../assets/projects/event-check-in-5.webp'
+import eventCheckIn6 from '../assets/projects/event-check-in-6.webp'
+import enneagram1 from '../assets/projects/enneagram-assessment-1.webp'
+import enneagram2 from '../assets/projects/enneagram-assessment-2.webp'
+import enneagram3 from '../assets/projects/enneagram-assessment-3.webp'
+import enneagram4 from '../assets/projects/enneagram-assessment-4.webp'
+import enneagram5 from '../assets/projects/enneagram-assessment-5.webp'
+import enneagram6 from '../assets/projects/enneagram-assessment-6.webp'
+import aquarium1 from '../assets/projects/premium-aquarium-1.webp'
+import aquarium2 from '../assets/projects/premium-aquarium-2.webp'
+import aquarium3 from '../assets/projects/premium-aquarium-3.webp'
+import aquarium4 from '../assets/projects/premium-aquarium-4.webp'
+import jewellery1 from '../assets/projects/shopify-jewellery-1.webp'
+import vassalli1 from '../assets/projects/vassalli-listing-1.webp'
+import vassalli2 from '../assets/projects/vassalli-listing-2.webp'
+import vassalli3 from '../assets/projects/vassalli-listing-3.webp'
+import cowboy1 from '../assets/projects/cowboy-shooter-1.webp'
+import cowboy2 from '../assets/projects/cowboy-shooter-2.webp'
+import cowboy3 from '../assets/projects/cowboy-shooter-3.webp'
+import cowboy4 from '../assets/projects/cowboy-shooter-4.webp'
+import kungfu1 from '../assets/projects/kungfu-fighting-game-1.webp'
+import kungfu2 from '../assets/projects/kungfu-fighting-game-2.webp'
+import franchise1 from '../assets/projects/find-a-franchise-1.webp'
+import franchise2 from '../assets/projects/find-a-franchise-2.webp'
+import twilio1 from '../assets/projects/twilio-sip-1.webp'
+import soFresh1 from '../assets/projects/so-fresh-1.webp'
+import soFresh2 from '../assets/projects/so-fresh-2.webp'
+import holdRome1 from '../assets/projects/hold-rome-hotel-1.webp'
+import holdRome2 from '../assets/projects/hold-rome-hotel-2.webp'
+import shopifyStore1 from '../assets/projects/shopify-store-build-1.webp'
+import shopifyStore2 from '../assets/projects/shopify-store-build-2.webp'
+import shopifyStore3 from '../assets/projects/shopify-store-build-3.webp'
+import shopifyStore4 from '../assets/projects/shopify-store-build-4.webp'
+import shopifyStore5 from '../assets/projects/shopify-store-build-5.webp'
+import ecommerce1 from '../assets/projects/ecommerce-website-1.webp'
+import wordpress1 from '../assets/projects/wordpress-website-design-1.webp'
+import award1 from '../assets/projects/preferred-freelancer-1.webp'
 
 /*
  * Filter buttons, in the order they appear. Language-independent: the visible
@@ -115,13 +145,13 @@ export const certifications = [
 ]
 
 /*
- * Projects — empty, waiting for real entries.
+ * Projects.
  *
  * Two collections, identical in shape. `projectMedia` is client work.
  * `exampleMedia` is reference builds: own demonstrations rather than paid
  * work, marked as such on the card so a visitor is never led to read one as a
- * delivery. Everything in `exampleMedia` renders with that badge; everything
- * in `projectMedia` does not.
+ * delivery. Everything currently listed is client work, so `exampleMedia` is
+ * empty.
  *
  * Each entry needs a matching block under `projects.items` (or
  * `examples.items`) in EVERY locale of `src/i18n/translations.js`, keyed by
@@ -130,33 +160,35 @@ export const certifications = [
  *
  * The shape, with everything an entry can carry:
  *
- *   import travelBookingImg from '../assets/projects/travel-booking.webp'
+ *   import shot1 from '../assets/projects/my-project-1.webp'
+ *   import shot2 from '../assets/projects/my-project-2.webp'
  *
- *   const projectMedia = {
- *     'travel-booking': {
- *       // Any subset of `filterKeys` above. Several is normal - a headless
- *       // Shopify storefront is Shopify, front-end and API work at once, and
- *       // should appear under all three. A filter with no projects behind it
- *       // hides itself, so unused keys cost nothing.
- *       tags: ['mobile', 'api'],
+ *   'my-project': {
+ *     // Any subset of `filterKeys` above. Several is normal - a headless
+ *     // Shopify storefront is Shopify, front-end and API work at once, and
+ *     // should appear under all three. A filter with no projects behind it
+ *     // hides itself, so unused keys cost nothing.
+ *     tags: ['shopify', 'ecommerce'],
  *
- *       image: travelBookingImg,
- *       imageSize: [700, 394],   // required, and it must be the file's true
- *                                // pixel size: the card reserves the space
- *                                // from it, so a wrong number is a layout
- *                                // shift on every load.
+ *     // Every screenshot the project has. The first is the cover: it is what
+ *     // the card shows, and the dialog opens on it. `size` must be the file's
+ *     // true pixel dimensions - the space is reserved from it, so a wrong
+ *     // number is a layout shift every time the image loads.
+ *     gallery: [
+ *       { src: shot1, size: [1200, 675] },
+ *       { src: shot2, size: [1200, 800] },
+ *     ],
  *
- *       // Shown on the card, first three then a "+n". Proper nouns, so these
- *       // stay out of the translation files.
- *       tech: ['React Native', 'iOS', 'Android', 'DevOps', 'REST API'],
- *     },
- *   }
+ *     // Shown on the card, first three then a "+n". Proper nouns, so these
+ *     // stay out of the translation files.
+ *     tech: ['Shopify', 'Liquid', 'CSS'],
+ *   },
  *
  * And in each locale, under `projects.items`:
  *
- *   'travel-booking': {
- *     category: 'Mobile Platform',
- *     title: 'Travel Booking & Digital Aviation Platform',
+ *   'my-project': {
+ *     category: 'Shopify',
+ *     title: 'The project',
  *     overview: 'One paragraph. The card clamps it to two lines; the dialog
  *                shows all of it.',
  *     features: ['Four short lines', 'is the usual count', '...', '...'],
@@ -166,98 +198,144 @@ export const certifications = [
 const projectMedia = {
   'autonomous-ai-agent': {
     tags: ['automation', 'api', 'frontend'],
-    image: aiAgentImg,
-    imageSize: [884, 613],
+    gallery: [
+      { src: aiAgent1, size: [884, 613] },
+      { src: aiAgent2, size: [768, 512] },
+      { src: aiAgent3, size: [792, 1037] },
+      { src: aiAgent4, size: [792, 1037] },
+      { src: aiAgent5, size: [884, 613] },
+    ],
     tech: ['Python', 'React.js', 'Artificial Intelligence', 'LLM Integration', 'REST API'],
   },
   'event-check-in': {
     tags: ['mobile', 'frontend'],
-    image: eventCheckInImg,
-    imageSize: [1200, 803],
+    gallery: [
+      { src: eventCheckIn1, size: [1200, 803] },
+      { src: eventCheckIn2, size: [1200, 832] },
+      { src: eventCheckIn3, size: [1200, 1500] },
+      { src: eventCheckIn4, size: [768, 512] },
+      { src: eventCheckIn5, size: [1200, 829] },
+      { src: eventCheckIn6, size: [1200, 1500] },
+    ],
     tech: ['React Native', 'JavaScript', 'Mobile App Design', 'User Experience Design'],
   },
   'enneagram-assessment': {
     tags: ['php', 'frontend'],
-    image: enneagramImg,
-    imageSize: [768, 512],
+    gallery: [
+      { src: enneagram1, size: [768, 512] },
+      { src: enneagram2, size: [1200, 832] },
+      { src: enneagram3, size: [1200, 1500] },
+      { src: enneagram4, size: [1200, 946] },
+      { src: enneagram5, size: [1200, 1500] },
+      { src: enneagram6, size: [1200, 832] },
+    ],
     tech: ['PHP', 'Laravel', 'Vue.js', 'JavaScript', 'MySQL'],
   },
   'premium-aquarium': {
     tags: ['wordpress', 'frontend'],
-    image: aquariumImg,
-    imageSize: [1200, 560],
+    gallery: [
+      { src: aquarium1, size: [1200, 560] },
+      { src: aquarium2, size: [1200, 585] },
+      { src: aquarium3, size: [1200, 542] },
+      { src: aquarium4, size: [1200, 574] },
+    ],
     tech: ['WordPress', 'CMS', 'Responsive Web Design', 'User Experience Design'],
   },
   'shopify-jewellery': {
     tags: ['shopify', 'ecommerce', 'frontend'],
-    image: jewelleryImg,
-    imageSize: [1200, 534],
+    gallery: [
+      { src: jewellery1, size: [1200, 534] },
+    ],
     tech: ['Shopify', 'Liquid', 'HTML', 'CSS', 'JavaScript'],
   },
   'vassalli-listing': {
     tags: ['shopify', 'ecommerce', 'frontend'],
-    image: vassalliImg,
-    imageSize: [1200, 675],
+    gallery: [
+      { src: vassalli1, size: [1200, 675] },
+      { src: vassalli2, size: [1200, 675] },
+      { src: vassalli3, size: [1200, 675] },
+    ],
     tech: ['Shopify', 'JavaScript', 'HTML'],
   },
   'cowboy-shooter': {
     tags: ['games', 'mobile'],
-    image: cowboyImg,
-    imageSize: [1200, 675],
+    gallery: [
+      { src: cowboy1, size: [1200, 675] },
+      { src: cowboy2, size: [1200, 676] },
+      { src: cowboy3, size: [1200, 635] },
+      { src: cowboy4, size: [1200, 675] },
+    ],
     tech: ['Unity 3D', 'C#', 'Android', 'iOS', 'Game Design'],
   },
   'kungfu-fighting-game': {
     tags: ['games'],
-    image: kungfuImg,
-    imageSize: [1200, 675],
+    gallery: [
+      { src: kungfu1, size: [1200, 675] },
+      { src: kungfu2, size: [1200, 675] },
+    ],
     tech: ['Game Development', 'Game Design', 'Multiplayer'],
   },
   'find-a-franchise': {
     tags: ['mobile'],
-    image: franchiseImg,
-    imageSize: [600, 433],
+    gallery: [
+      { src: franchise1, size: [600, 433] },
+      { src: franchise2, size: [1200, 1500] },
+    ],
     tech: ['React Native', 'iOS', 'Mobile App Design'],
   },
   'twilio-sip': {
     tags: ['api', 'chatbot'],
-    image: twilioImg,
-    imageSize: [1000, 750],
+    gallery: [
+      { src: twilio1, size: [1000, 750] },
+    ],
     tech: ['Twilio', 'SIP Trunking', 'VoIP', 'REST API'],
   },
   'so-fresh': {
     tags: ['wordpress', 'ecommerce', 'api'],
-    image: soFreshImg,
-    imageSize: [1200, 675],
+    gallery: [
+      { src: soFresh1, size: [1200, 1500] },
+      { src: soFresh2, size: [600, 433] },
+    ],
     tech: ['WordPress', 'WooCommerce', 'API Integration', 'E-commerce'],
   },
   'hold-rome-hotel': {
     tags: ['wordpress', 'frontend'],
-    image: holdRomeImg,
-    imageSize: [1200, 900],
+    gallery: [
+      { src: holdRome1, size: [1200, 900] },
+      { src: holdRome2, size: [1200, 900] },
+    ],
     tech: ['WordPress', 'HTML', 'CSS', 'Responsive Web Design'],
   },
   'shopify-store-build': {
     tags: ['shopify', 'ecommerce'],
-    image: shopifyStoreImg,
-    imageSize: [1200, 800],
+    gallery: [
+      { src: shopifyStore1, size: [1200, 800] },
+      { src: shopifyStore2, size: [1200, 800] },
+      { src: shopifyStore3, size: [1200, 800] },
+      { src: shopifyStore4, size: [1200, 800] },
+      { src: shopifyStore5, size: [1200, 800] },
+    ],
     tech: ['Shopify', 'E-commerce', 'Payment Integration', 'SEO'],
   },
   'ecommerce-website': {
     tags: ['ecommerce', 'php', 'wordpress'],
-    image: ecommerceImg,
-    imageSize: [1200, 675],
+    gallery: [
+      { src: ecommerce1, size: [1200, 1500] },
+    ],
     tech: ['PHP', 'WordPress', 'WooCommerce', 'Graphic Design'],
   },
   'wordpress-website-design': {
     tags: ['wordpress', 'frontend'],
-    image: wordpressImg,
-    imageSize: [1200, 675],
+    gallery: [
+      { src: wordpress1, size: [1200, 1500] },
+    ],
     tech: ['WordPress', 'HTML', 'CSS', 'SEO'],
   },
   'preferred-freelancer': {
     tags: ['wordpress', 'php', 'ecommerce'],
-    image: awardImg,
-    imageSize: [1200, 857],
+    gallery: [
+      { src: award1, size: [1200, 857] },
+    ],
     tech: ['PHP', 'WordPress', 'WooCommerce', 'Sales Solutions'],
   },
 }
@@ -361,7 +439,14 @@ export function buildContent(lang) {
       intro: t.projects.intro,
       note: t.examples.note,
       items: [
-        ...projectOrder.map((id) => ({ id, ...projectMedia[id], ...t.projects.items[id] })),
+        ...projectOrder.map((id) => ({
+          id,
+          ...projectMedia[id],
+          // The card shows one image; the dialog shows the whole gallery.
+          image: projectMedia[id].gallery[0].src,
+          imageSize: projectMedia[id].gallery[0].size,
+          ...t.projects.items[id],
+        })),
         ...exampleOrder.map((id) => ({
           id,
           reference: true,

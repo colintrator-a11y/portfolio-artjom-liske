@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import Icon from './ui/Icon'
@@ -10,6 +10,11 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [ta
  *
  * Everything the old full-width rows carried lives here - overview, stack,
  * features and business value - so shortening the page cost no content.
+ *
+ * The card shows one image; this shows every screenshot the project has. One
+ * is displayed at a time with a strip of thumbnails under it, rather than the
+ * lot stacked vertically: a project with six shots would otherwise push its
+ * own description a screen and a half down the dialog.
  *
  * Modal behaviour is done properly rather than approximately: the page behind
  * cannot scroll, Tab is trapped inside, Escape closes, and focus returns to
@@ -25,6 +30,12 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [ta
 export default function ProjectDialog({ project, label, index, badge, ui, onClose }) {
   const panelRef = useRef(null)
   const closeRef = useRef(null)
+  const [shot, setShot] = useState(0)
+
+  // The dialog mounts fresh for each project, so the gallery starts at the
+  // cover without anything having to reset it.
+  const gallery = project.gallery ?? [{ src: project.image, size: project.imageSize }]
+  const current = gallery[Math.min(shot, gallery.length - 1)]
 
   useEffect(() => {
     const opener = document.activeElement
@@ -91,13 +102,31 @@ export default function ProjectDialog({ project, label, index, badge, ui, onClos
         <div className="pdialog__scroll">
         <div className="pdialog__media">
           <div className="pdialog__mediaInner">
-          <img
-            className="pdialog__shot"
-            src={project.image}
-            alt={`Screenshot of ${project.title}`}
-            width={project.imageSize?.[0]}
-            height={project.imageSize?.[1]}
-          />
+            <img
+              className="pdialog__shot"
+              src={current.src}
+              alt={`${ui.screenshot} ${shot + 1} — ${project.title}`}
+              width={current.size?.[0]}
+              height={current.size?.[1]}
+            />
+
+            {/* Only worth drawing when there is more than one to choose from. */}
+            {gallery.length > 1 ? (
+              <div className="pdialog__thumbs" role="group" aria-label={ui.screenshot}>
+                {gallery.map((item, i) => (
+                  <button
+                    key={item.src}
+                    type="button"
+                    className={`pdialog__thumb ${i === shot ? 'is-active' : ''}`.trim()}
+                    aria-label={`${ui.screenshot} ${i + 1}`}
+                    aria-current={i === shot ? 'true' : undefined}
+                    onClick={() => setShot(i)}
+                  >
+                    <img src={item.src} alt="" loading="lazy" decoding="async" />
+                  </button>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
 

@@ -157,7 +157,7 @@ reads as empty rather than broken if the list is ever cleared.
 
 A project lives in two places, and both have to move together:
 
-1. **`src/data/content.js`** — the language-independent half: id, tags, screenshot and the
+1. **`src/data/content.js`** — the language-independent half: id, tags, gallery and the
    technology list. `projectMedia` is client work; `exampleMedia` is reference builds, which render
    with a *Reference build* badge so a visitor is never led to read one as paid work. It is empty:
    every current project is real client work. Add the id to `projectOrder` / `exampleOrder` to place
@@ -179,19 +179,32 @@ Two things worth getting right:
 
 ### Screenshots
 
-Drop them into `src/assets/projects/` as WebP, import them, and point `image` at the import. Every
-project needs one: the drawn-scene fallback that used to cover a project without a screenshot has
-been removed, along with the 32 inline-SVG scenes behind it, now that every entry ships a real
-image. It is all recoverable from git history if a project ever needs it back.
+Every project carries a **gallery**: every screenshot it has, in `src/assets/projects/` as WebP,
+named `<slug>-1.webp`, `<slug>-2.webp` and so on. The 16 projects hold 46 images between them.
 
-The covers are prepared at a 1200px maximum width and WebP quality 82 — about 800 kB for all
-sixteen, and every card past the first three loads lazily as the rail travels. A full-page capture,
-taller than roughly 1:1.15, is cropped to its top 16:9 strip before being saved, because that is all
-a card would show of it anyway.
+**The first shot is the cover.** It is what the card shows and what the dialog opens on, and it is
+derived rather than declared — `buildContent` reads `gallery[0]`, so the card and the dialog can
+never disagree about which image leads.
 
-The card frames its image at 16:9 with `object-fit: cover` anchored to the top, so a hero or a page
-header survives the crop and a centred subject may not. The dialog shows the same file at its own
-aspect ratio, uncropped.
+- **On the card**, one image, framed at 16:9 with `object-fit: cover` anchored to the top. A hero or
+  a page header survives that crop; a centred subject may not, which is worth keeping in mind when
+  ordering the gallery.
+- **In the dialog**, all of them: one shown at a time with a thumbnail strip beneath. Stacking six
+  screenshots vertically would push a project's own description a screen and a half down the panel.
+  A project with a single image shows no strip at all.
+
+Nothing in a gallery loads until its dialog is opened — the dialog only mounts when a card is
+clicked — so 2.7 MB of screenshots costs a visitor nothing until they ask for one.
+
+Images are prepared at a 1200px maximum width and WebP quality 82. Anything taller than 1500px is
+trimmed to that rather than shrunk, so what survives stays readable instead of becoming an
+illegible strip.
+
+`size` must be the file's true pixel dimensions: the space is reserved from it, so a wrong number is
+a layout shift every time the image loads.
+
+The drawn-scene fallback that used to cover a project without a screenshot is gone, along with the
+32 inline-SVG scenes behind it. It is recoverable from git history if a project ever needs it.
 
 The stat in the hero counts the rail: it is `projectOrder.length + exampleOrder.length`, so it
 corrects itself as projects are added and can never disagree with the `01 / n` readout.
