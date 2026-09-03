@@ -147,8 +147,8 @@ profile currently records none of those.
 
 ## Adding projects
 
-The portfolio holds **16 projects**, all of them delivered client work. Each carries a real
-screenshot of what was built.
+The portfolio holds **30 projects**, all of them delivered client work — five pages of six. Each
+carries a real screenshot of what was built.
 
 Every control that would describe an empty rail — the `01 / 16` counter, the travel arrows, the
 filter bar, the reference-build note — stands down when there is nothing to describe, so the panel
@@ -179,7 +179,12 @@ Two things worth getting right:
 ### Screenshots
 
 Every project carries a **gallery**: every screenshot it has, in `src/assets/projects/` as WebP,
-named `<slug>-1.webp`, `<slug>-2.webp` and so on. The 16 projects hold 46 images between them.
+named `<slug>-1.webp`, `<slug>-2.webp` and so on. The 30 projects hold 65 images between them.
+
+**Two supplied covers were not the work, and were not used.** 4th Street Pet Hospital shipped an
+AI-generated mockup of a site that actually exists, and Safeway Foundation shipped a stock Node.js
+logo — for a project whose recorded stack is PHP and Laravel. Both lead with their real site capture
+instead. A portfolio of delivered work should show the delivered work.
 
 **The first shot is the cover.** It is what the card shows and what the dialog opens on, and it is
 derived rather than declared — `buildContent` reads `gallery[0]`, so the card and the dialog can

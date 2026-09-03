@@ -418,6 +418,202 @@ const en = {
         value:
           'Independent confirmation of delivery standards, from the platform the work was delivered through.',
       },
+      'ai-tutoring-app': {
+        category: 'Mobile App',
+        title: 'AI Tutoring App — Google Gemini',
+        overview:
+          'A Flutter study assistant built on Google Gemini: homework solved from a photo, exams prepared, lecture notes scanned and summarised, and a tutor to argue with when the material is not going in.',
+        features: [
+          'Tutor chat, mentor bot and debate practice',
+          'Problems solved from a photograph',
+          'Lecture notes scanned and summarised',
+          'Study plans, progress tracking and a parental view',
+        ],
+        value:
+          'One app instead of a shelf of study tools, with the tutor available at the hour the homework is actually being done.',
+      },
+      'autofit-fitness': {
+        category: 'Mobile App',
+        title: 'AutoFit — Fitness App',
+        overview:
+          'A fitness and lifestyle app built around a content library, so a routine stays correct and professional on the way to a goal. Shipped to both stores, with a web admin panel behind it.',
+        features: [
+          'Content library behind every routine',
+          'One Flutter codebase for Android and iOS',
+          'Web admin panel for the programme',
+          'Published to Google Play and the App Store',
+        ],
+        value:
+          'A trainer’s method reaches clients as a product rather than as a folder of PDFs.',
+      },
+      'axolon-erp': {
+        category: 'Enterprise Application',
+        title: 'Axolon ERP',
+        overview:
+          'An ERP platform that takes a business past traditional accounting software: operations across the whole organisation in one place, with the real-time visibility needed to decide quickly. In production with companies in the UAE and beyond.',
+        features: [
+          'Operations consolidated across departments',
+          'Real-time visibility for faster decisions',
+          'Isolated spreadsheets replaced by one system',
+          'Native iOS and Android alongside Xamarin',
+        ],
+        value:
+          'Departments stop reconciling each other’s spreadsheets and start reading the same numbers.',
+      },
+      'bright-and-fit': {
+        category: 'Mobile App',
+        title: 'Bright & Fit — Fitness App',
+        overview:
+          'A fitness programme app for a professional model and certified personal trainer, delivering a programme she developed with a medical team to help women reach their goals.',
+        features: [
+          'The trainer’s own programme, delivered in app',
+          'Built for iOS and Android',
+          'Structured around a medically developed plan',
+          'Published to the App Store',
+        ],
+        value:
+          'A programme that used to need the trainer in the room now travels with the client.',
+      },
+      'piece-of-dates': {
+        category: 'Mobile App & E-Commerce',
+        title: 'Piece of Dates — Marketplace',
+        overview:
+          'A mobile marketplace for dates serving two audiences at once: individuals ordering for themselves with courier delivery, and bulk buyers ordering for distribution, whose orders are processed with a date factory and distributed in Makkah and Madinah.',
+        features: [
+          'Personal orders with courier delivery',
+          'Bulk ordering for distribution',
+          'Orders processed with the factory',
+          'Distribution inside the Haram area and around it',
+        ],
+        value:
+          'Two very different kinds of buyer served by one product, without either being made to use the other’s flow.',
+      },
+      'blublonc-footwear': {
+        category: 'Shopify',
+        title: 'BluBlonc — Women’s Footwear Store',
+        overview:
+          'A premium Shopify store for a European-crafted women’s footwear brand: collections built and organised, and a homepage assembled from custom sections carrying lifestyle imagery and video.',
+        features: [
+          'Flats, loafers and boots built as collections',
+          'Custom homepage sections with video',
+          'Fully responsive with smooth navigation',
+          'Brand-consistent layout across every device',
+        ],
+        value:
+          'A storefront that looks made for the brand rather than bought for it.',
+      },
+      'french-appeal': {
+        category: 'Shopify',
+        title: 'French Appeal — Shopify Store',
+        overview:
+          'A Shopify store for a committed wardrobe brand built with its own community and positioned against fast fashion — bilingual, searchable, and set up so a customer can reach a person from any product page.',
+        features: [
+          'Bilingual storefront in French and English',
+          'Motion theme, customised throughout',
+          'WhatsApp API for direct contact',
+          'Trust badges on the product pages',
+        ],
+        value:
+          'A slow-fashion brand reads as one on its own site, in both of the languages its customers use.',
+      },
+      'hiketron': {
+        category: 'Shopify',
+        title: 'Hiketron — Home & Personal Care Store',
+        overview:
+          'A Shopify store for luxurious home and personal-care products — skin care, hair care, detergent and soap — with loyalty, gift cards and every payment method the customer might reach for.',
+        features: [
+          'Empire theme customised for the catalogue',
+          'Gift cards and a Smile.io loyalty programme',
+          'Live chat on the storefront',
+          'PayPal, Shopify Pay, Google Pay and Amazon Pay',
+        ],
+        value:
+          'Repeat custom is designed in, rather than hoped for after the first order.',
+      },
+      'luxor-linens': {
+        category: 'Shopify',
+        title: 'Luxor Linens — Shopify Store',
+        overview:
+          'A Shopify store for a luxury bedroom-linens and bath-essentials brand, with a page builder for the marketing team, email automation behind it and order tracking in front of it.',
+        features: [
+          'Mega menu across a deep catalogue',
+          'Shogun page builder for the marketing team',
+          'Klaviyo email marketing and order tracking',
+          'PayPal, Shopify Pay and Amazon Pay',
+        ],
+        value:
+          'The marketing team builds its own pages, and the customer can see where the order is.',
+      },
+      'pet-hospital': {
+        category: 'WordPress',
+        title: '4th Street Pet Hospital',
+        overview:
+          'A responsive website for a veterinary hospital: services, staff profiles, appointment information and contact forms, arranged so a worried pet owner finds the number or the opening hours without hunting.',
+        features: [
+          'Service pages with clear navigation',
+          'Staff profiles and hospital galleries',
+          'Appointment information and contact forms',
+          'Fast and responsive on a phone',
+        ],
+        value:
+          'An owner looking for help at an awkward hour finds what they need on the first screen.',
+      },
+      'goldfields': {
+        category: 'Website',
+        title: 'Goldfields Real Estate',
+        overview:
+          'A website for a Kalgoorlie estate agency whose pitch is honesty: appraisals priced on recent evidence rather than optimism, and a frank conversation about what a seller actually wants.',
+        features: [
+          'Listings presented for buyers and sellers',
+          'Appraisal approach explained up front',
+          'Agency profile and contact routes',
+          'Responsive across desktop and mobile',
+        ],
+        value:
+          'A business that sells on straight talking has a site that sounds like it.',
+      },
+      'onroad-driving': {
+        category: 'Web Application',
+        title: 'Onroad — Driving Theory Platform',
+        overview:
+          'A free online driving-theory platform. The whole course is available at no charge and worked through at the learner’s own pace, from a phone, a tablet or a desk.',
+        features: [
+          'The full theory course, free to use',
+          'Learners work at their own pace',
+          'Bilingual in Spanish and English',
+          'Responsive across every device',
+        ],
+        value:
+          'The theory stops being a barrier of cost, and becomes something to do on a bus.',
+      },
+      'safeway-foundation': {
+        category: 'Website',
+        title: 'Safeway Foundation',
+        overview:
+          'A website for a foundation working to better the lives of people in its own neighbourhoods, which has committed over $50 million toward hunger relief across the communities it serves.',
+        features: [
+          'Programmes and neighbourhoods presented clearly',
+          'Routes to volunteer, donate and get funded',
+          'Local stories of impact',
+          'Built on PHP and Laravel over MySQL',
+        ],
+        value:
+          'A foundation’s work is legible to the neighbourhoods it is for, and to the people who fund it.',
+      },
+      'sheepdog-ag': {
+        category: 'WordPress',
+        title: 'Sheepdog.ag — Flock Management',
+        overview:
+          'An informational site for a flock-management app, designed in Figma and built in WordPress. It presents the app’s functionality — an app built on the same engagement.',
+        features: [
+          'Designed in Figma, built in WordPress',
+          'Presents the app’s functionality',
+          'Store links for both platforms',
+          'Editable by the client afterwards',
+        ],
+        value:
+          'The app and the site that explains it come from one place, so neither describes something the other does not do.',
+      },
     },
   },
   examples: {
@@ -884,6 +1080,202 @@ const pt = {
         ],
         value:
           'Uma confirmação independente do nível de entrega, vinda da plataforma onde o trabalho foi feito.',
+      },
+      'ai-tutoring-app': {
+        category: 'Aplicação Móvel',
+        title: 'App de Explicações com IA — Google Gemini',
+        overview:
+          'Um assistente de estudo em Flutter assente no Google Gemini: exercícios resolvidos a partir de uma fotografia, exames preparados, apontamentos digitalizados e resumidos, e um explicador para quando a matéria não entra.',
+        features: [
+          'Chat de explicação, mentor e treino de debate',
+          'Exercícios resolvidos a partir de uma fotografia',
+          'Apontamentos digitalizados e resumidos',
+          'Planos de estudo, progresso e acesso para os pais',
+        ],
+        value:
+          'Uma aplicação em vez de uma prateleira de ferramentas, disponível à hora a que os trabalhos são mesmo feitos.',
+      },
+      'autofit-fitness': {
+        category: 'Aplicação Móvel',
+        title: 'AutoFit — Aplicação de Fitness',
+        overview:
+          'Uma aplicação de fitness e estilo de vida construída à volta de uma biblioteca de conteúdos, para a rotina se manter correta e profissional a caminho do objetivo. Publicada nas duas lojas, com um painel de administração web por trás.',
+        features: [
+          'Biblioteca de conteúdos por trás de cada rotina',
+          'Uma base de código Flutter para Android e iOS',
+          'Painel de administração web para o programa',
+          'Publicada no Google Play e na App Store',
+        ],
+        value:
+          'O método de um treinador chega aos clientes como produto e não como uma pasta de PDFs.',
+      },
+      'axolon-erp': {
+        category: 'Aplicação Empresarial',
+        title: 'Axolon ERP',
+        overview:
+          'Uma plataforma ERP que leva um negócio para além do software de contabilidade tradicional: as operações de toda a organização num só sítio, com a visibilidade em tempo real que decisões rápidas exigem. Em produção em empresas nos Emirados e não só.',
+        features: [
+          'Operações consolidadas entre departamentos',
+          'Visibilidade em tempo real para decidir mais depressa',
+          'Folhas de cálculo isoladas substituídas por um sistema',
+          'iOS e Android nativos a par de Xamarin',
+        ],
+        value:
+          'Os departamentos deixam de reconciliar as folhas uns dos outros e passam a ler os mesmos números.',
+      },
+      'bright-and-fit': {
+        category: 'Aplicação Móvel',
+        title: 'Bright & Fit — Aplicação de Fitness',
+        overview:
+          'Uma aplicação de programa para uma modelo profissional e personal trainer certificada, que entrega um programa desenvolvido com uma equipa médica para ajudar mulheres a chegar aos seus objetivos.',
+        features: [
+          'O programa da própria treinadora, dentro da app',
+          'Construída para iOS e Android',
+          'Assente num plano desenvolvido com apoio médico',
+          'Publicada na App Store',
+        ],
+        value:
+          'Um programa que antes exigia a treinadora na sala passa a viajar com a cliente.',
+      },
+      'piece-of-dates': {
+        category: 'Aplicação Móvel e E-Commerce',
+        title: 'Piece of Dates — Marketplace',
+        overview:
+          'Um marketplace móvel de tâmaras a servir dois públicos ao mesmo tempo: particulares que encomendam para si com entrega por estafeta, e compradores a granel que encomendam para distribuição — pedidos processados com uma fábrica e distribuídos em Meca e Medina.',
+        features: [
+          'Encomendas pessoais com entrega por estafeta',
+          'Encomendas a granel para distribuição',
+          'Pedidos processados com a fábrica',
+          'Distribuição dentro da área do Haram e em redor',
+        ],
+        value:
+          'Dois tipos muito diferentes de comprador servidos por um só produto, sem obrigar nenhum ao percurso do outro.',
+      },
+      'blublonc-footwear': {
+        category: 'Shopify',
+        title: 'BluBlonc — Loja de Calçado Feminino',
+        overview:
+          'Uma loja Shopify premium para uma marca de calçado feminino de fabrico europeu: coleções construídas e organizadas, e uma página inicial montada a partir de secções próprias com imagem de estilo de vida e vídeo.',
+        features: [
+          'Rasos, mocassins e botas construídos como coleções',
+          'Secções próprias na página inicial, com vídeo',
+          'Totalmente responsiva e de navegação fluida',
+          'Layout consistente com a marca em todos os dispositivos',
+        ],
+        value:
+          'Uma loja que parece feita para a marca e não comprada por ela.',
+      },
+      'french-appeal': {
+        category: 'Shopify',
+        title: 'French Appeal — Loja Shopify',
+        overview:
+          'Uma loja Shopify para uma marca que constrói o seu guarda-roupa com a própria comunidade e se posiciona contra a fast fashion — bilingue, encontrável, e montada para o cliente chegar a uma pessoa a partir de qualquer página de produto.',
+        features: [
+          'Loja bilingue em francês e inglês',
+          'Tema Motion, personalizado de ponta a ponta',
+          'API do WhatsApp para contacto direto',
+          'Selos de confiança nas páginas de produto',
+        ],
+        value:
+          'Uma marca de moda lenta parece-o no seu próprio site, nas duas línguas dos seus clientes.',
+      },
+      'hiketron': {
+        category: 'Shopify',
+        title: 'Hiketron — Casa e Cuidado Pessoal',
+        overview:
+          'Uma loja Shopify para produtos de casa e cuidado pessoal de gama alta — pele, cabelo, detergente e sabão — com fidelização, cartões-presente e todos os meios de pagamento a que um cliente possa querer chegar.',
+        features: [
+          'Tema Empire personalizado para o catálogo',
+          'Cartões-presente e programa de fidelização Smile.io',
+          'Chat ao vivo na loja',
+          'PayPal, Shopify Pay, Google Pay e Amazon Pay',
+        ],
+        value:
+          'A recompra está desenhada de raiz, em vez de ser esperada depois da primeira encomenda.',
+      },
+      'luxor-linens': {
+        category: 'Shopify',
+        title: 'Luxor Linens — Loja Shopify',
+        overview:
+          'Uma loja Shopify para uma marca de luxo de roupa de cama e têxteis de banho, com um construtor de páginas para o marketing, automação de email por trás e seguimento de encomendas à frente.',
+        features: [
+          'Mega menu sobre um catálogo profundo',
+          'Construtor de páginas Shogun para o marketing',
+          'Email marketing Klaviyo e seguimento de encomendas',
+          'PayPal, Shopify Pay e Amazon Pay',
+        ],
+        value:
+          'O marketing constrói as suas páginas sozinho, e o cliente vê onde está a encomenda.',
+      },
+      'pet-hospital': {
+        category: 'WordPress',
+        title: '4th Street Pet Hospital',
+        overview:
+          'Um site responsivo para um hospital veterinário: serviços, perfis da equipa, informação de marcações e formulários de contacto, dispostos para que um dono preocupado encontre o número ou o horário sem procurar.',
+        features: [
+          'Páginas de serviços com navegação clara',
+          'Perfis da equipa e galerias do hospital',
+          'Informação de marcações e formulários de contacto',
+          'Rápido e responsivo no telemóvel',
+        ],
+        value:
+          'Quem procura ajuda a uma hora difícil encontra o essencial no primeiro ecrã.',
+      },
+      'goldfields': {
+        category: 'Website',
+        title: 'Goldfields Real Estate',
+        overview:
+          'Um site para uma imobiliária de Kalgoorlie cuja promessa é a honestidade: avaliações assentes em evidência recente e não em otimismo, e uma conversa franca sobre o que o vendedor quer mesmo.',
+        features: [
+          'Imóveis apresentados para compradores e vendedores',
+          'O método de avaliação explicado à partida',
+          'Perfil da agência e formas de contacto',
+          'Responsivo do computador ao telemóvel',
+        ],
+        value:
+          'Um negócio que vive de falar claro passa a ter um site que soa assim.',
+      },
+      'onroad-driving': {
+        category: 'Aplicação Web',
+        title: 'Onroad — Plataforma de Teoria de Condução',
+        overview:
+          'Uma plataforma online gratuita de teoria de condução. O curso completo está disponível sem custo e é feito ao ritmo de cada um — a partir do telemóvel, do tablet ou da secretária.',
+        features: [
+          'O curso teórico completo, gratuito',
+          'Cada um avança ao seu ritmo',
+          'Bilingue em espanhol e inglês',
+          'Responsivo em qualquer dispositivo',
+        ],
+        value:
+          'A teoria deixa de ser uma barreira de custo e passa a ser algo para fazer no autocarro.',
+      },
+      'safeway-foundation': {
+        category: 'Website',
+        title: 'Safeway Foundation',
+        overview:
+          'Um site para uma fundação dedicada a melhorar a vida das pessoas nos seus próprios bairros, que comprometeu mais de 50 milhões de dólares no combate à fome nas comunidades que serve.',
+        features: [
+          'Programas e bairros apresentados com clareza',
+          'Caminhos para ajudar, doar e ser financiado',
+          'Histórias locais de impacto',
+          'Construído em PHP e Laravel sobre MySQL',
+        ],
+        value:
+          'O trabalho de uma fundação torna-se legível para os bairros a que se destina e para quem o financia.',
+      },
+      'sheepdog-ag': {
+        category: 'WordPress',
+        title: 'Sheepdog.ag — Gestão de Rebanhos',
+        overview:
+          'Um site informativo para uma aplicação de gestão de rebanhos, desenhado em Figma e construído em WordPress. Apresenta as funcionalidades da aplicação — uma aplicação feita no mesmo trabalho.',
+        features: [
+          'Desenhado em Figma, construído em WordPress',
+          'Apresenta as funcionalidades da aplicação',
+          'Ligações para as lojas das duas plataformas',
+          'Editável pelo cliente depois de entregue',
+        ],
+        value:
+          'A aplicação e o site que a explica vêm do mesmo sítio, para nenhum descrever o que o outro não faz.',
       },
     },
   },
@@ -1352,6 +1744,202 @@ const es = {
         value:
           'Una confirmación independiente del nivel de entrega, desde la plataforma donde se hizo el trabajo.',
       },
+      'ai-tutoring-app': {
+        category: 'Aplicación Móvil',
+        title: 'App de Tutoría con IA — Google Gemini',
+        overview:
+          'Un asistente de estudio en Flutter sobre Google Gemini: ejercicios resueltos desde una fotografía, exámenes preparados, apuntes escaneados y resumidos, y un tutor para cuando la materia no entra.',
+        features: [
+          'Chat de tutoría, mentor y práctica de debate',
+          'Ejercicios resueltos desde una fotografía',
+          'Apuntes escaneados y resumidos',
+          'Planes de estudio, progreso y acceso para madres y padres',
+        ],
+        value:
+          'Una aplicación en lugar de un estante de herramientas, disponible a la hora a la que de verdad se hacen los deberes.',
+      },
+      'autofit-fitness': {
+        category: 'Aplicación Móvil',
+        title: 'AutoFit — Aplicación de Fitness',
+        overview:
+          'Una aplicación de fitness y estilo de vida construida alrededor de una biblioteca de contenidos, para que la rutina siga siendo correcta y profesional camino del objetivo. Publicada en ambas tiendas, con un panel de administración web detrás.',
+        features: [
+          'Biblioteca de contenidos detrás de cada rutina',
+          'Una sola base de código Flutter para Android e iOS',
+          'Panel de administración web para el programa',
+          'Publicada en Google Play y en la App Store',
+        ],
+        value:
+          'El método de un entrenador llega a sus clientes como producto y no como una carpeta de PDFs.',
+      },
+      'axolon-erp': {
+        category: 'Aplicación Empresarial',
+        title: 'Axolon ERP',
+        overview:
+          'Una plataforma ERP que lleva a un negocio más allá del software de contabilidad tradicional: las operaciones de toda la organización en un sitio, con la visibilidad en tiempo real que exigen las decisiones rápidas. En producción en empresas de los Emiratos y de otros países.',
+        features: [
+          'Operaciones consolidadas entre departamentos',
+          'Visibilidad en tiempo real para decidir antes',
+          'Hojas de cálculo aisladas sustituidas por un sistema',
+          'iOS y Android nativos junto a Xamarin',
+        ],
+        value:
+          'Los departamentos dejan de cuadrar las hojas de los demás y pasan a leer las mismas cifras.',
+      },
+      'bright-and-fit': {
+        category: 'Aplicación Móvil',
+        title: 'Bright & Fit — Aplicación de Fitness',
+        overview:
+          'Una aplicación de programa para una modelo profesional y entrenadora personal certificada, que entrega un programa desarrollado con un equipo médico para ayudar a mujeres a alcanzar sus objetivos.',
+        features: [
+          'El programa de la propia entrenadora, en la app',
+          'Construida para iOS y Android',
+          'Basada en un plan desarrollado con apoyo médico',
+          'Publicada en la App Store',
+        ],
+        value:
+          'Un programa que antes necesitaba a la entrenadora en la sala ahora viaja con la clienta.',
+      },
+      'piece-of-dates': {
+        category: 'Aplicación Móvil y E-Commerce',
+        title: 'Piece of Dates — Marketplace',
+        overview:
+          'Un marketplace móvil de dátiles que atiende a dos públicos a la vez: particulares que piden para sí con entrega por mensajería, y compradores al por mayor que piden para distribución — pedidos procesados con una fábrica y repartidos en La Meca y Medina.',
+        features: [
+          'Pedidos personales con entrega por mensajería',
+          'Pedidos al por mayor para distribución',
+          'Pedidos procesados con la fábrica',
+          'Reparto dentro del área del Haram y sus alrededores',
+        ],
+        value:
+          'Dos compradores muy distintos atendidos por un solo producto, sin obligar a ninguno al recorrido del otro.',
+      },
+      'blublonc-footwear': {
+        category: 'Shopify',
+        title: 'BluBlonc — Tienda de Calzado Femenino',
+        overview:
+          'Una tienda Shopify premium para una marca de calzado femenino de fabricación europea: colecciones construidas y ordenadas, y una portada montada con secciones propias con imagen de estilo de vida y vídeo.',
+        features: [
+          'Planos, mocasines y botas construidos como colecciones',
+          'Secciones propias en la portada, con vídeo',
+          'Totalmente responsiva y de navegación fluida',
+          'Diseño coherente con la marca en todos los dispositivos',
+        ],
+        value:
+          'Una tienda que parece hecha para la marca y no comprada por ella.',
+      },
+      'french-appeal': {
+        category: 'Shopify',
+        title: 'French Appeal — Tienda Shopify',
+        overview:
+          'Una tienda Shopify para una marca que construye su vestuario junto a su comunidad y se sitúa en las antípodas de la fast fashion — bilingüe, localizable, y montada para que el cliente llegue a una persona desde cualquier página de producto.',
+        features: [
+          'Tienda bilingüe en francés e inglés',
+          'Tema Motion, personalizado de principio a fin',
+          'API de WhatsApp para contacto directo',
+          'Sellos de confianza en las páginas de producto',
+        ],
+        value:
+          'Una marca de moda lenta lo parece en su propia web, en los dos idiomas de su clientela.',
+      },
+      'hiketron': {
+        category: 'Shopify',
+        title: 'Hiketron — Hogar y Cuidado Personal',
+        overview:
+          'Una tienda Shopify para productos de hogar y cuidado personal de gama alta — piel, cabello, detergente y jabón — con fidelización, tarjetas regalo y todos los métodos de pago a los que un cliente pueda recurrir.',
+        features: [
+          'Tema Empire personalizado para el catálogo',
+          'Tarjetas regalo y programa de fidelización Smile.io',
+          'Chat en vivo en la tienda',
+          'PayPal, Shopify Pay, Google Pay y Amazon Pay',
+        ],
+        value:
+          'La recompra está diseñada desde el principio, en lugar de esperarse tras el primer pedido.',
+      },
+      'luxor-linens': {
+        category: 'Shopify',
+        title: 'Luxor Linens — Tienda Shopify',
+        overview:
+          'Una tienda Shopify para una marca de lujo de ropa de cama y textil de baño, con un constructor de páginas para marketing, automatización de correo detrás y seguimiento de pedidos delante.',
+        features: [
+          'Mega menú sobre un catálogo profundo',
+          'Constructor de páginas Shogun para marketing',
+          'Email marketing con Klaviyo y seguimiento de pedidos',
+          'PayPal, Shopify Pay y Amazon Pay',
+        ],
+        value:
+          'Marketing construye sus propias páginas, y el cliente ve dónde está su pedido.',
+      },
+      'pet-hospital': {
+        category: 'WordPress',
+        title: '4th Street Pet Hospital',
+        overview:
+          'Un sitio responsivo para un hospital veterinario: servicios, perfiles del equipo, información de citas y formularios de contacto, dispuestos para que un dueño preocupado encuentre el teléfono o el horario sin buscar.',
+        features: [
+          'Páginas de servicios con navegación clara',
+          'Perfiles del equipo y galerías del hospital',
+          'Información de citas y formularios de contacto',
+          'Rápido y responsivo en el móvil',
+        ],
+        value:
+          'Quien busca ayuda a una hora incómoda encuentra lo necesario en la primera pantalla.',
+      },
+      'goldfields': {
+        category: 'Sitio Web',
+        title: 'Goldfields Real Estate',
+        overview:
+          'Un sitio para una inmobiliaria de Kalgoorlie cuya promesa es la honestidad: tasaciones basadas en evidencia reciente y no en optimismo, y una conversación franca sobre lo que el vendedor quiere de verdad.',
+        features: [
+          'Inmuebles presentados para compradores y vendedores',
+          'El método de tasación explicado de entrada',
+          'Perfil de la agencia y vías de contacto',
+          'Responsivo del escritorio al móvil',
+        ],
+        value:
+          'Un negocio que vive de hablar claro tiene una web que suena igual.',
+      },
+      'onroad-driving': {
+        category: 'Aplicación Web',
+        title: 'Onroad — Plataforma de Teórica de Conducir',
+        overview:
+          'Una plataforma online gratuita de teórica de conducir. El curso completo está disponible sin coste y se hace al ritmo de cada cual — desde el móvil, la tablet o el escritorio.',
+        features: [
+          'El curso teórico completo, gratis',
+          'Cada persona avanza a su ritmo',
+          'Bilingüe en español e inglés',
+          'Responsivo en cualquier dispositivo',
+        ],
+        value:
+          'La teórica deja de ser una barrera de coste y pasa a ser algo que hacer en el autobús.',
+      },
+      'safeway-foundation': {
+        category: 'Sitio Web',
+        title: 'Safeway Foundation',
+        overview:
+          'Un sitio para una fundación dedicada a mejorar la vida de las personas de sus propios barrios, que ha comprometido más de 50 millones de dólares contra el hambre en las comunidades a las que sirve.',
+        features: [
+          'Programas y barrios presentados con claridad',
+          'Vías para ayudar, donar y recibir financiación',
+          'Historias locales de impacto',
+          'Construido en PHP y Laravel sobre MySQL',
+        ],
+        value:
+          'El trabajo de una fundación se vuelve legible para los barrios a los que va dirigido y para quienes lo financian.',
+      },
+      'sheepdog-ag': {
+        category: 'WordPress',
+        title: 'Sheepdog.ag — Gestión de Rebaños',
+        overview:
+          'Un sitio informativo para una aplicación de gestión de rebaños, diseñado en Figma y construido en WordPress. Presenta las funciones de la aplicación — una aplicación hecha en el mismo trabajo.',
+        features: [
+          'Diseñado en Figma, construido en WordPress',
+          'Presenta las funciones de la aplicación',
+          'Enlaces a las tiendas de ambas plataformas',
+          'Editable por el cliente después de la entrega',
+        ],
+        value:
+          'La aplicación y el sitio que la explica salen del mismo sitio, para que ninguno describa lo que el otro no hace.',
+      },
     },
   },
   examples: {
@@ -1819,6 +2407,202 @@ const de = {
         ],
         value:
           'Eine unabhängige Bestätigung der Liefertreue, von der Plattform, über die die Arbeit lief.',
+      },
+      'ai-tutoring-app': {
+        category: 'Mobile-App',
+        title: 'KI-Lern-App — Google Gemini',
+        overview:
+          'Ein Lernassistent in Flutter auf Basis von Google Gemini: Hausaufgaben werden aus einem Foto gelöst, Prüfungen vorbereitet, Vorlesungsnotizen eingescannt und zusammengefasst — und ein Tutor steht bereit, wenn der Stoff nicht sitzt.',
+        features: [
+          'Tutor-Chat, Mentor-Bot und Debattentraining',
+          'Aufgaben aus einem Foto gelöst',
+          'Vorlesungsnotizen gescannt und zusammengefasst',
+          'Lernpläne, Fortschritt und ein Elternzugang',
+        ],
+        value:
+          'Eine App statt eines Regals voller Lernwerkzeuge — verfügbar zu der Stunde, in der die Hausaufgaben tatsächlich gemacht werden.',
+      },
+      'autofit-fitness': {
+        category: 'Mobile-App',
+        title: 'AutoFit — Fitness-App',
+        overview:
+          'Eine Fitness- und Lifestyle-App rund um eine Inhaltsbibliothek, damit die Routine auf dem Weg zum Ziel korrekt und professionell bleibt. In beiden Stores veröffentlicht, mit einem Web-Adminbereich dahinter.',
+        features: [
+          'Inhaltsbibliothek hinter jeder Routine',
+          'Eine Flutter-Codebasis für Android und iOS',
+          'Web-Adminbereich für das Programm',
+          'Veröffentlicht bei Google Play und im App Store',
+        ],
+        value:
+          'Die Methode eines Trainers erreicht Kunden als Produkt statt als Ordner voller PDFs.',
+      },
+      'axolon-erp': {
+        category: 'Unternehmensanwendung',
+        title: 'Axolon ERP',
+        overview:
+          'Eine ERP-Plattform, die ein Unternehmen über klassische Buchhaltungssoftware hinausbringt: Abläufe der gesamten Organisation an einem Ort, mit der Sicht in Echtzeit, die schnelle Entscheidungen braucht. Im Einsatz bei Unternehmen in den VAE und darüber hinaus.',
+        features: [
+          'Abläufe über Abteilungen hinweg zusammengeführt',
+          'Echtzeit-Sicht für schnellere Entscheidungen',
+          'Isolierte Tabellen durch ein System ersetzt',
+          'Natives iOS und Android neben Xamarin',
+        ],
+        value:
+          'Abteilungen gleichen nicht mehr gegenseitig Tabellen ab, sondern lesen dieselben Zahlen.',
+      },
+      'bright-and-fit': {
+        category: 'Mobile-App',
+        title: 'Bright & Fit — Fitness-App',
+        overview:
+          'Eine Programm-App für ein professionelles Model und zertifizierte Personal Trainerin, die ein gemeinsam mit einem Ärzteteam entwickeltes Programm ausliefert und Frauen zu ihren Zielen begleitet.',
+        features: [
+          'Das eigene Programm der Trainerin, in der App',
+          'Für iOS und Android gebaut',
+          'Aufgebaut auf einem medizinisch entwickelten Plan',
+          'Im App Store veröffentlicht',
+        ],
+        value:
+          'Ein Programm, das bisher die Trainerin im Raum brauchte, reist jetzt mit der Kundin mit.',
+      },
+      'piece-of-dates': {
+        category: 'Mobile-App & E-Commerce',
+        title: 'Piece of Dates — Marktplatz',
+        overview:
+          'Ein mobiler Marktplatz für Datteln, der zwei Zielgruppen zugleich bedient: Privatkunden bestellen für sich mit Kurierlieferung, Großabnehmer bestellen zur Verteilung — deren Aufträge laufen über eine Dattelfabrik und werden in Mekka und Medina verteilt.',
+        features: [
+          'Privatbestellungen mit Kurierlieferung',
+          'Großbestellungen zur Verteilung',
+          'Aufträge über die Fabrik abgewickelt',
+          'Verteilung im Haram-Bereich und darum herum',
+        ],
+        value:
+          'Zwei sehr verschiedene Käufergruppen in einem Produkt, ohne dass eine den Ablauf der anderen benutzen muss.',
+      },
+      'blublonc-footwear': {
+        category: 'Shopify',
+        title: 'BluBlonc — Damenschuh-Shop',
+        overview:
+          'Ein Premium-Shopify-Shop für eine Damenschuhmarke aus europäischer Fertigung: Kollektionen aufgebaut und geordnet, und eine Startseite aus eigenen Abschnitten mit Lifestyle-Bildern und Video.',
+        features: [
+          'Flats, Loafer und Stiefel als Kollektionen aufgebaut',
+          'Eigene Startseiten-Abschnitte mit Video',
+          'Vollständig responsiv mit klarer Navigation',
+          'Markenkonsistentes Layout auf jedem Gerät',
+        ],
+        value:
+          'Ein Shop, der für die Marke gemacht aussieht statt für sie gekauft.',
+      },
+      'french-appeal': {
+        category: 'Shopify',
+        title: 'French Appeal — Shopify-Shop',
+        overview:
+          'Ein Shopify-Shop für eine Marke, die ihre Garderobe gemeinsam mit ihrer Community entwickelt und sich bewusst gegen Fast Fashion stellt — zweisprachig, auffindbar, und so gebaut, dass Kunden von jeder Produktseite aus einen Menschen erreichen.',
+        features: [
+          'Zweisprachiger Shop auf Französisch und Englisch',
+          'Motion-Theme, durchgängig angepasst',
+          'WhatsApp-API für den direkten Kontakt',
+          'Vertrauenssiegel auf den Produktseiten',
+        ],
+        value:
+          'Eine Slow-Fashion-Marke wirkt auf der eigenen Seite wie eine — in beiden Sprachen ihrer Kundschaft.',
+      },
+      'hiketron': {
+        category: 'Shopify',
+        title: 'Hiketron — Haus- und Körperpflege',
+        overview:
+          'Ein Shopify-Shop für hochwertige Haus- und Körperpflegeprodukte — Haut- und Haarpflege, Waschmittel und Seife — mit Treueprogramm, Geschenkkarten und jeder Zahlart, nach der ein Kunde greifen könnte.',
+        features: [
+          'Empire-Theme für den Katalog angepasst',
+          'Geschenkkarten und Smile.io-Treueprogramm',
+          'Live-Chat im Shop',
+          'PayPal, Shopify Pay, Google Pay und Amazon Pay',
+        ],
+        value:
+          'Wiederkäufe sind eingeplant statt nach der ersten Bestellung erhofft.',
+      },
+      'luxor-linens': {
+        category: 'Shopify',
+        title: 'Luxor Linens — Shopify-Shop',
+        overview:
+          'Ein Shopify-Shop für eine Luxusmarke für Bettwäsche und Badtextilien, mit einem Seitenbaukasten für das Marketing, E-Mail-Automatisierung dahinter und Sendungsverfolgung davor.',
+        features: [
+          'Mega-Menü über einen tiefen Katalog',
+          'Shogun-Seitenbaukasten für das Marketing',
+          'Klaviyo-E-Mail-Marketing und Sendungsverfolgung',
+          'PayPal, Shopify Pay und Amazon Pay',
+        ],
+        value:
+          'Das Marketing baut seine Seiten selbst, und der Kunde sieht, wo die Bestellung ist.',
+      },
+      'pet-hospital': {
+        category: 'WordPress',
+        title: '4th Street Pet Hospital',
+        overview:
+          'Eine responsive Website für eine Tierklinik: Leistungen, Teamprofile, Termininformationen und Kontaktformulare — so angeordnet, dass ein besorgter Tierhalter Nummer und Öffnungszeiten nicht suchen muss.',
+        features: [
+          'Leistungsseiten mit klarer Navigation',
+          'Teamprofile und Klinikgalerien',
+          'Termininformationen und Kontaktformulare',
+          'Schnell und responsiv auf dem Smartphone',
+        ],
+        value:
+          'Wer zu einer ungünstigen Stunde Hilfe sucht, findet das Nötige auf dem ersten Bildschirm.',
+      },
+      'goldfields': {
+        category: 'Website',
+        title: 'Goldfields Real Estate',
+        overview:
+          'Eine Website für einen Immobilienmakler in Kalgoorlie, dessen Versprechen Ehrlichkeit ist: Bewertungen auf Basis aktueller Vergleichswerte statt Optimismus, und ein offenes Gespräch darüber, was Verkäufer wirklich wollen.',
+        features: [
+          'Angebote für Käufer und Verkäufer aufbereitet',
+          'Das Bewertungsvorgehen von vornherein erklärt',
+          'Profil der Agentur und Wege zur Kontaktaufnahme',
+          'Responsiv vom Desktop bis zum Smartphone',
+        ],
+        value:
+          'Ein Geschäft, das von Klartext lebt, hat eine Seite, die auch so klingt.',
+      },
+      'onroad-driving': {
+        category: 'Webanwendung',
+        title: 'Onroad — Plattform für die Führerscheintheorie',
+        overview:
+          'Eine kostenlose Online-Plattform für die Führerscheintheorie. Der komplette Kurs steht ohne Gebühr bereit und wird im eigenen Tempo durchgearbeitet — vom Smartphone, vom Tablet oder vom Schreibtisch aus.',
+        features: [
+          'Der komplette Theoriekurs, kostenfrei',
+          'Lernende arbeiten im eigenen Tempo',
+          'Zweisprachig auf Spanisch und Englisch',
+          'Responsiv auf jedem Gerät',
+        ],
+        value:
+          'Die Theorie ist keine Kostenhürde mehr, sondern etwas für die Busfahrt.',
+      },
+      'safeway-foundation': {
+        category: 'Website',
+        title: 'Safeway Foundation',
+        overview:
+          'Eine Website für eine Stiftung, die das Leben der Menschen in ihren eigenen Nachbarschaften verbessert und über 50 Millionen Dollar für die Hungerhilfe in ihren Gemeinden zugesagt hat.',
+        features: [
+          'Programme und Nachbarschaften klar dargestellt',
+          'Wege zum Helfen, Spenden und Fördern',
+          'Geschichten der Wirkung vor Ort',
+          'Gebaut mit PHP und Laravel auf MySQL',
+        ],
+        value:
+          'Die Arbeit einer Stiftung wird für die Nachbarschaften lesbar, für die sie gedacht ist — und für die, die sie finanzieren.',
+      },
+      'sheepdog-ag': {
+        category: 'WordPress',
+        title: 'Sheepdog.ag — Herdenmanagement',
+        overview:
+          'Eine Informationsseite für eine App zum Herdenmanagement, in Figma gestaltet und in WordPress gebaut. Sie stellt die Funktionen der App dar — einer App aus demselben Auftrag.',
+        features: [
+          'In Figma gestaltet, in WordPress gebaut',
+          'Stellt die Funktionen der App dar',
+          'Store-Links für beide Plattformen',
+          'Danach vom Kunden selbst pflegbar',
+        ],
+        value:
+          'App und erklärende Seite kommen aus einer Hand, sodass keine etwas beschreibt, was die andere nicht kann.',
       },
     },
   },

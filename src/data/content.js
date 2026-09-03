@@ -66,6 +66,27 @@ import soFresh2Anim from '../assets/projects/so-fresh-2-anim.webp'
 import franchise1Card from '../assets/projects/find-a-franchise-1-card.webp'
 import kungfu1Card from '../assets/projects/kungfu-fighting-game-1-card.webp'
 import soFresh2Card from '../assets/projects/so-fresh-2-card.webp'
+import tutor1 from '../assets/projects/ai-tutoring-app-1.webp'
+import tutor2 from '../assets/projects/ai-tutoring-app-2.webp'
+import tutor3 from '../assets/projects/ai-tutoring-app-3.webp'
+import tutor4 from '../assets/projects/ai-tutoring-app-4.webp'
+import tutor5 from '../assets/projects/ai-tutoring-app-5.webp'
+import autofit1 from '../assets/projects/autofit-fitness-1.webp'
+import autofit1Anim from '../assets/projects/autofit-fitness-1-anim.webp'
+import autofit1Card from '../assets/projects/autofit-fitness-1-card.webp'
+import axolon1 from '../assets/projects/axolon-erp-1.webp'
+import brightFit1 from '../assets/projects/bright-and-fit-1.webp'
+import dates1 from '../assets/projects/piece-of-dates-1.webp'
+import blublonc1 from '../assets/projects/blublonc-footwear-1.webp'
+import blublonc2 from '../assets/projects/blublonc-footwear-2.webp'
+import french1 from '../assets/projects/french-appeal-1.webp'
+import hiketron1 from '../assets/projects/hiketron-1.webp'
+import luxor1 from '../assets/projects/luxor-linens-1.webp'
+import petHospital1 from '../assets/projects/pet-hospital-1.webp'
+import goldfields1 from '../assets/projects/goldfields-1.webp'
+import onroad1 from '../assets/projects/onroad-driving-1.webp'
+import safeway1 from '../assets/projects/safeway-foundation-1.webp'
+import sheepdog1 from '../assets/projects/sheepdog-ag-1.webp'
 
 /*
  * Filter buttons, in the order they appear. Language-independent: the visible
@@ -345,25 +366,142 @@ const projectMedia = {
     ],
     tech: ['PHP', 'WordPress', 'WooCommerce', 'Sales Solutions'],
   },
+  'ai-tutoring-app': {
+    tags: ['mobile', 'api'],
+    gallery: [
+      { src: tutor1, size: [1200, 675] },
+      { src: tutor2, size: [1200, 675] },
+      { src: tutor3, size: [1200, 675] },
+      { src: tutor4, size: [1200, 675] },
+      { src: tutor5, size: [640, 480] },
+    ],
+    tech: ['Flutter', 'Dart', 'Google Gemini API', 'Android', 'Figma'],
+  },
+  'autofit-fitness': {
+    tags: ['mobile'],
+    gallery: [
+      { src: autofit1, size: [768, 576], anim: autofit1Anim, animSize: [768, 576], card: autofit1Card, cardSize: [560, 420] },
+    ],
+    tech: ['Flutter', 'Android', 'iOS'],
+  },
+  'axolon-erp': {
+    tags: ['mobile', 'api'],
+    gallery: [
+      { src: axolon1, size: [1200, 918] },
+    ],
+    tech: ['Objective-C', 'Swift', 'iOS', 'Android', 'Xamarin'],
+  },
+  'bright-and-fit': {
+    tags: ['mobile'],
+    gallery: [
+      { src: brightFit1, size: [768, 1344] },
+    ],
+    tech: ['iOS', 'Android', 'Mobile App Development'],
+  },
+  'piece-of-dates': {
+    tags: ['mobile', 'ecommerce'],
+    gallery: [
+      { src: dates1, size: [1200, 960] },
+    ],
+    tech: ['Swift', 'iOS', 'Android', 'React Native', 'Flutter'],
+  },
+  'blublonc-footwear': {
+    tags: ['shopify', 'ecommerce', 'frontend'],
+    gallery: [
+      { src: blublonc1, size: [1200, 993] },
+      { src: blublonc2, size: [1200, 1500] },
+    ],
+    tech: ['Shopify', 'E-commerce', 'Web Design'],
+  },
+  'french-appeal': {
+    tags: ['shopify', 'ecommerce', 'api'],
+    gallery: [
+      { src: french1, size: [1200, 1500] },
+    ],
+    tech: ['Shopify', 'Liquid', 'SEO', 'API Integration'],
+  },
+  'hiketron': {
+    tags: ['shopify', 'ecommerce'],
+    gallery: [
+      { src: hiketron1, size: [1200, 1500] },
+    ],
+    tech: ['Shopify', 'Empire Theme', 'Shopify Templates'],
+  },
+  'luxor-linens': {
+    tags: ['shopify', 'ecommerce', 'api'],
+    gallery: [
+      { src: luxor1, size: [1200, 1500] },
+    ],
+    tech: ['Shopify', 'PayPal API', 'Klaviyo', 'Shogun'],
+  },
+  'pet-hospital': {
+    tags: ['wordpress', 'frontend'],
+    gallery: [
+      { src: petHospital1, size: [1200, 1500] },
+    ],
+    tech: ['WordPress', 'CMS', 'Web Design', 'Responsive Web Design'],
+  },
+  'goldfields': {
+    tags: ['frontend'],
+    gallery: [
+      { src: goldfields1, size: [1200, 1500] },
+    ],
+    tech: ['Web Design', 'Web Development'],
+  },
+  'onroad-driving': {
+    tags: ['frontend', 'php', 'api'],
+    gallery: [
+      { src: onroad1, size: [1200, 1500] },
+    ],
+    tech: ['React.js', 'Node.js', 'PHP', 'MongoDB'],
+  },
+  'safeway-foundation': {
+    tags: ['php', 'frontend'],
+    gallery: [
+      { src: safeway1, size: [1200, 1500] },
+    ],
+    tech: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'Web Design'],
+  },
+  'sheepdog-ag': {
+    tags: ['wordpress', 'frontend'],
+    gallery: [
+      { src: sheepdog1, size: [1200, 602] },
+    ],
+    tech: ['WordPress', 'Figma', 'Web Design'],
+  },
 }
 
 /* Display order. An id here with no entry above renders nothing. */
 const projectOrder = [
   'autonomous-ai-agent',
+  'ai-tutoring-app',
   'event-check-in',
+  'axolon-erp',
   'enneagram-assessment',
-  'premium-aquarium',
+  'onroad-driving',
+  'luxor-linens',
+  'hiketron',
+  'french-appeal',
+  'blublonc-footwear',
   'shopify-jewellery',
   'vassalli-listing',
-  'cowboy-shooter',
-  'kungfu-fighting-game',
-  'find-a-franchise',
-  'twilio-sip',
-  'so-fresh',
+  'premium-aquarium',
+  'pet-hospital',
+  'sheepdog-ag',
   'hold-rome-hotel',
-  'shopify-store-build',
+  'so-fresh',
+  'goldfields',
+  'safeway-foundation',
   'ecommerce-website',
   'wordpress-website-design',
+  'shopify-store-build',
+  'piece-of-dates',
+  'bright-and-fit',
+  'autofit-fitness',
+  'find-a-franchise',
+  'cowboy-shooter',
+  'kungfu-fighting-game',
+  'twilio-sip',
   'preferred-freelancer',
 ]
 
