@@ -586,6 +586,21 @@ const projectOrder = [
   'preferred-freelancer',
 ]
 
+/*
+ * Link-first ordering. A project a visitor can open and use themselves carries
+ * more weight than one they can only read about, so every project with a live
+ * site, store listing or admin panel leads the grid - and, because the grid
+ * pages six at a time, they lead page one of every filter too, not just page
+ * one of "All work".
+ *
+ * Sorted rather than hand-ordered: `projectOrder` above stays the editorial
+ * sequence, and adding a link to a project promotes it on its own. The sort is
+ * stable, so within each half that sequence is preserved exactly.
+ */
+const linkedFirst = (id) => (projectMedia[id].links?.length ? 0 : 1)
+
+const displayOrder = [...projectOrder].sort((a, b) => linkedFirst(a) - linkedFirst(b))
+
 const exampleMedia = {}
 
 const exampleOrder = []
@@ -665,7 +680,7 @@ export function buildContent(lang) {
       intro: t.projects.intro,
       note: t.examples.note,
       items: [
-        ...projectOrder.map((id) => {
+        ...displayOrder.map((id) => {
           const shots = projectMedia[id].gallery
           /*
            * The card shows one image; the dialog shows the whole gallery.
